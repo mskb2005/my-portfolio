@@ -151,9 +151,7 @@ footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:rela
 const texts=["BSc Computer Science Student","Learning Tech • Coding • AI","Still Learning, Still Building"];
 let ti=0,ci=0,del=false;
 function type(){let cur=texts[ti];document.getElementById("typing").textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);if(!del&&ci==cur.length){del=true;setTimeout(type,1200);return}if(del&&ci==0){del=false;ti=(ti+1)%texts.length}setTimeout(type,del?40:80);} type();
-<span id="liveStatus">Loading...</span> • <span id="slClock">--:--:--</span>
-setInterval(updateSmartStatus, 1000);
-updateSmartStatus();,"Practising coding...","Learning AI little by little...","Working on a small project..."];let si=0;setInterval(()=>{document.getElementById("liveStatus").textContent=statuses[si];si=(si+1)%statuses.length},3000);
+const statuses=["Learning and building...","Practising coding...","Learning AI little by little...","Working on a small project..."];let si=0;setInterval(()=>{document.getElementById("liveStatus").textContent=statuses[si];si=(si+1)%statuses.length},3000);
 const codeLines=["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];let li=0,char=0;function termType(){let line=codeLines[li];document.getElementById("termText").textContent=line.slice(0,++char);if(char>=line.length){setTimeout(()=>{li=(li+1)%codeLines.length;char=0},1200)}setTimeout(termType,55)}termType();
 const quotes=["\"First, try to understand the problem. Then, try to solve it.\"","\"I'm still learning. Every day, a little more.\"","\"Mistakes teach me more than success.\"","\"From Valaichenai, learning step by step.\"","\"I'm still learning, and I want to do my best.\""];let qi=0;setInterval(()=>{document.getElementById("quoteBox").textContent=quotes[qi];qi=(qi+1)%quotes.length},5000);document.getElementById("quoteBox").textContent=quotes[0];
 function askName(){let n=prompt("What's your name?");if(n){alert("Welcome "+n+"! Appreciate it,Thanks for visiting ❤️")}}
