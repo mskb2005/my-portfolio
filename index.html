@@ -1,48 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Muhammad Shakeeb | AI Engineer</title>
+<title>Muhammad Shakeeb | Portfolio</title>
 <style>
-body{background:#05010f;color:#fff;font-family:sans-serif;text-align:center;padding:30px 16px;margin:0}
-img{width:170px;height:170px;object-fit:cover;border-radius:50%;border:4px solid #a855f7;box-shadow:0 0 40px #a855f7}
-h1{font-size:36px;background:linear-gradient(90deg,#a855f7,#22d3ee,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:18px 0 5px}
-.sub{color:#cbd5e1;font-size:15px}
-.btn{display:inline-block;background:#fff;color:#000;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:800;margin:8px 4px}
-.btn2{background:#a855f7;color:#fff}
-.card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:20px;border-radius:20px;margin:16px auto;max-width:520px;text-align:left}
-.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;margin:8px 0 14px}
-.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#a855f7,#22d3ee)}
-.proj{background:#000;border:1px solid #22c55e;border-radius:14px;padding:14px;font-family:monospace;color:#4ade80;font-size:14px;line-height:1.6}
-.quote{background:rgba(250,204,21,.1);border:1px solid #facc15;border-radius:16px;padding:16px;text-align:center;color:#fde68a;font-style:italic}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#05010f;color:white;overflow-x:hidden}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0}
+.o1{width:300px;height:300px;background:#7c3aed;top:-50px;left:-50px}
+.o2{width:280px;height:280px;background:#06b6d4;bottom:10%;right:-80px}
+nav{position:fixed;top:0;width:100%;z-index:99;display:flex;justify-content:center;gap:14px;padding:14px;background:rgba(0,0,0,.65);backdrop-filter:blur(12px);flex-wrap:wrap}
+nav a{color:#5eead4;text-decoration:none;font-weight:700;font-size:13px}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:95px 20px 40px;position:relative;z-index:1}
+.photo-wrap{width:210px;height:210px;border-radius:50%;padding:6px;background:linear-gradient(45deg,#a855f7,#06b6d4,#ec4899,#facc15);background-size:300% 300%;cursor:pointer}
+.photo-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid #05010f}
+h1{font-size:50px;line-height:1.05;margin:20px 0 8px;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.typing{color:#facc15;font-size:20px;font-weight:700;min-height:28px}
+.badge{margin-top:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:10px 18px;border-radius:999px;font-size:14px}
+.live-dot{display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;margin-right:6px}
+.btns{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+.btn{padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:800;border:none;cursor:pointer;font-size:15px}
+.btn-w{background:white;color:black}.btn-b{background:#0ea5e9;color:white}.btn-y{background:#facc15;color:black}
+section{max-width:900px;margin:30px auto;padding:0 20px;position:relative;z-index:1}
+.card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px;margin-bottom:24px;backdrop-filter:blur(10px)}
+.card h2{color:#5eead4;font-size:28px;margin-bottom:14px}
+.card p{line-height:1.7;color:#e2e8f0;font-size:17px}
+.edu{border-left:4px solid #22d3ee;padding-left:16px;margin:18px 0}
+.edu b{color:#facc15;font-size:18px}.edu span{color:#cbd5e1}
+.official{display:inline-block;margin-top:8px;background:#111827;border:1px solid #22d3ee;color:#67e8f9;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700}
+.bar-bg{background:rgba(255,255,255,.1);border-radius:999px;height:14px;margin:8px 0 16px;overflow:hidden}
+.bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#a855f7,#22d3ee);width:0;transition:1.5s}
+.project{background:rgba(255,255,255,.06);border-radius:18px;padding:18px;margin-top:14px}
+.project b{color:#facc15;font-size:18px}
+.terminal{background:#000;border:1px solid #22c55e;border-radius:16px;padding:18px;text-align:left;font-family:monospace;font-size:14px;line-height:1.6;min-height:130px;color:#4ade80}
+.quote-box{margin-top:14px;background:rgba(250,204,21,.1);border:1px solid #facc15;border-radius:16px;padding:16px;text-align:center;color:#fde68a;font-style:italic;font-size:17px;min-height:60px}
+.ai-card{border:2px solid #a855f7 !important;background:rgba(168,85,247,.12) !important}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.quick button{background:#1e293b;color:#a5f3fc;border:1px solid #a855f7;padding:9px 14px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
+.chat{background:#0f172a;border-radius:16px;padding:14px;margin-top:14px;max-height:260px;overflow-y:auto;text-align:left}
+.msg{padding:9px 12px;border-radius:14px;margin:8px 0;font-size:14px;line-height:1.5}
+.ai{background:#1e293b;color:#a5f3fc}
+.you{background:#2563eb;color:white;text-align:right}
+input{width:100%;padding:13px;border-radius:999px;border:1px solid #475569;background:#020617;color:white;outline:none;margin-top:10px}
+.contact a{display:block;text-align:center;padding:15px;border-radius:16px;margin-top:12px;text-decoration:none;font-weight:800;color:white}
+footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:relative;z-index:1}
 </style>
 </head>
 <body>
-<img src="IMG-20261120-WA0055.jpg">
-<h1>Muhammad Shakeeb</h1>
-<p class="sub">IT Student | Future AI Engineer | Sri Lanka 🇱🇰</p>
-<a class="btn" href="#about">About Me</a>
-<a class="btn btn2" href="#projects">My Work</a>
+<div class="orb o1"></div><div class="orb o2"></div>
+<nav><a href="#about">About</a><a href="#ai">Shakeeb AI</a><a href="#live">LIVE</a><a href="#edu">Education</a><a href="#skills">Skills</a><a href="#cv">CV</a><a href="#contact">Contact</a></nav>
 
-<div class="card" id="about"><h2>👋 About Me</h2><p>Hi! I'm Shakeeb. I love computers, AI and building cool websites. My dream is to become an AI Engineer and build apps that help people.</p></div>
-
-<div class="card"><h2>⚡ My Skills</h2>
-<p>HTML - 90%</p><div class="bar"><div class="fill" style="width:90%"></div></div>
-<p>Python - 75%</p><div class="bar"><div class="fill" style="width:75%"></div></div>
-<p>AI / ChatGPT - 85%</p><div class="bar"><div class="fill" style="width:85%"></div></div>
-<p>Web Design - 80%</p><div class="bar"><div class="fill" style="width:80%"></div></div>
+<div class="hero">
+  <div class="photo-wrap" onclick="tapPhoto()"><img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb"></div>
+  <h1>Muhammad<br>Shakeeb 👋</h1>
+  <div class="typing" id="typing"></div>
+  <div class="badge">📍 Valaichenai, Batticaloa & Maradana, Colombo — Sri Lanka</div>
+  <div class="badge" style="border-color:#22c55e;color:#86efac"><span class="live-dot"></span><span id="liveStatus">Learning and building...</span></div>
+  <div class="btns">
+    <button class="btn btn-y" onclick="askName()">👋 Tell Me Your Name</button>
+    <button class="btn btn-w" onclick="hireMe()">🤝 Work With Me</button>
+    <a class="btn btn-b" href="https://github.com/mskb2005" target="_blank">GitHub ↗</a>
+  </div>
 </div>
 
-<div class="card" id="projects"><h2>🚀 My Projects</h2>
-<p><b style="color:#facc15">1. My Portfolio Website</b><br>This website! Built with HTML & GitHub Pages.</p>
-<p><b style="color:#facc15">2. AI Chat Assistant</b><br>Learning to build AI apps with Python.</p>
-<p><b style="color:#facc15">3. Coming Soon...</b><br>Something big is loading...</p>
-<div class="proj">> Hello, I'm Shakeeb<br>> Learning AI...<br>> Future: AI Engineer ✅<br>> Status: Building dreams...</div>
+<section id="about"><div class="card">
+<h2>👨‍💻 About Me</h2>
+<p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
+<p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
+<p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
+<p style="color:#5eead4;font-style:italic;font-size:20px;text-align:center">"I'm still learning, and I want to do my best."</p>
+</div></section>
+
+<section id="ai"><div class="card ai-card">
+<h2>🤖 Ask Shakeeb AI — About Me Only</h2>
+<p>This AI only answers about <b style="color:#facc15">my education, my skills, my projects, and how to contact me.</b> Tap a button or type your question:</p>
+<div class="quick">
+<button onclick="quickAsk('education')">🎓 My Education?</button>
+<button onclick="quickAsk('skills')">💻 My Skills?</button>
+<button onclick="quickAsk('projects')">🚀 My Projects?</button>
+<button onclick="quickAsk('contact')">📩 How to contact?</button>
 </div>
+<div class="chat" id="chat"><div class="msg ai">👋 Hi! I'm Shakeeb AI. I can only tell you about Shakeeb's education, skills, projects, and contact. Try tapping a button above 👆</div></div>
+<input id="qInput" placeholder="Type here... e.g. what is your education?" onkeypress="if(event.key==='Enter') askAI()">
+<button class="btn btn-b" style="width:100%;margin-top:10px" onclick="askAI()">Ask AI →</button>
+<p style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center">This AI is only for information about Shakeeb. For other topics, please ask Shakeeb directly.</p>
+</div></section>
 
-<div class="card"><div class="quote">"Don't wait for opportunity. Create it."<br>- Shakeeb</div></div>
+<section id="live"><div class="card">
+<h2>🔴 LIVE — What I'm Doing</h2>
+<div class="terminal" id="terminal">$ shakeeb@portfolio:~$ <span id="termText"></span><span>▌</span></div>
+<div class="quote-box" id="quoteBox">Loading...</div>
+</div></section>
 
-<div class="card"><h2>📩 Contact</h2><p>GitHub: mskb2005<br>Location: Kosgama, Sri Lanka</p><a class="btn" href="https://github.com/mskb2005">Visit My GitHub</a></div>
-<p style="color:#64748b;font-size:13px">Made with ❤️ by Shakeeb • 2026</p>
+<section id="edu"><div class="card">
+<h2>🎓 Education Journey</h2>
+<div class="edu"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL)<br>Also studying Chemistry & Physics</span><br><a class="official" href="https://ou.ac.lk" target="_blank">🌐 Visit Official OUSL Website → ou.ac.lk</a></div>
+<div class="edu"><b>Completed — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="official" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Visit Official CASED Website →</a></div>
+<div class="edu"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
+</div></section>
+
+<section id="skills"><div class="card">
+<h2>📊 What I'm Learning</h2>
+<p style="font-size:14px;color:#94a3b8;margin-bottom:12px">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
+<p>C — My Strongest, I know a little more in this one</p><div class="bar-bg"><div class="bar" data-w="90%"></div></div>
+<p>HTML & CSS</p><div class="bar-bg"><div class="bar" data-w="85%"></div></div>
+<p>Python</p><div class="bar-bg"><div class="bar" data-w="75%"></div></div>
+<p>Java</p><div class="bar-bg"><div class="bar" data-w="70%"></div></div>
+<p>AI & Machine Learning — Learning</p><div class="bar-bg"><div class="bar" data-w="65%"></div></div>
+</div></section>
+
+<section id="projects"><div class="card">
+<h2>🚀 My Projects</h2>
+<div class="project"><b>1. This Website</b><p>You are seeing it right now. Built from my phone, while learning.</p></div>
+<div class="project"><b>2. AI Learning Projects</b><p>Small experiments while learning AI and coding.</p></div>
+<div class="project"><b>3. Next Project — Coming Soon...</b><p>I'm planning something new. I'll share it when it's ready.</p></div>
+</div></section>
+
+<section id="cv"><div class="card" style="text-align:center;border:2px solid #facc15">
+<h2>📄 My CV</h2>
+<p>Want to know more about me? Here is a quick summary.</p>
+<br>
+<p style="text-align:left"><b>Name:</b> Muhammad Shakeeb<br>
+<b>Education:</b> BSc Computer Science - OUSL (Ongoing)<br>
+<b>Diploma:</b> Diploma in IT & AI - CASED Institute<br>
+<b>Skills:</b> C (Know a little more), HTML & CSS, Python, Java, AI Basics<br>
+<b>Location:</b> Valaichenai, Batticaloa & Maradana, Colombo<br>
+<b>Email:</b> mgmshakeeb2005@gmail.com</p>
+<br>
+<a class="btn btn-y" href="https://wa.me/94700000000" target="_blank" style="display:inline-block">📩 Ask Me For Full CV on WhatsApp</a>
+<br><br>
+<p style="font-size:13px;color:#94a3b8">Full PDF CV coming soon. For now, contact me and I'll send it.</p>
+</div></section>
+
+<section id="contact"><div class="card">
+<h2>📩 Let's Connect!</h2>
+<p>Available in Valaichenai, Batticaloa & Maradana, Colombo.</p>
+<div class="contact">
+<a style="background:white;color:black" href="https://wa.me/94700000000" target="_blank">💬 WhatsApp Me</a>
+<a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
+<a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/" target="_blank">💼 LinkedIn</a>
+<a style="background:#14b8a6" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
+<a style="background:#14b8a6" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
+</div>
+</div></section>
+
+<footer>Made with ❤️ by Muhammad Shakeeb • 2026<br>Valaichenai • Batticaloa • Colombo</footer>
+
+<script>
+const texts=["BSc Computer Science Student","Learning Tech • Coding • AI","Still Learning, Still Building"];
+let ti=0,ci=0,del=false;
+function type(){let cur=texts[ti];document.getElementById("typing").textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);if(!del&&ci==cur.length){del=true;setTimeout(type,1200);return}if(del&&ci==0){del=false;ti=(ti+1)%texts.length}setTimeout(type,del?40:80);} type();
+const statuses=["Learning and building...","Practising coding...","Learning AI little by little...","Working on a small project..."];let si=0;setInterval(()=>{document.getElementById("liveStatus").textContent=statuses[si];si=(si+1)%statuses.length},3000);
+const codeLines=["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];let li=0,char=0;function termType(){let line=codeLines[li];document.getElementById("termText").textContent=line.slice(0,++char);if(char>=line.length){setTimeout(()=>{li=(li+1)%codeLines.length;char=0},1200)}setTimeout(termType,55)}termType();
+const quotes=["\"First, try to understand the problem. Then, try to solve it.\"","\"I'm still learning. Every day, a little more.\"","\"Mistakes teach me more than success.\"","\"From Valaichenai, learning step by step.\"","\"I'm still learning, and I want to do my best.\""];let qi=0;setInterval(()=>{document.getElementById("quoteBox").textContent=quotes[qi];qi=(qi+1)%quotes.length},5000);document.getElementById("quoteBox").textContent=quotes[0];
+function askName(){let n=prompt("What's your name?");if(n){alert("Welcome "+n+"! Thanks for visiting ❤️")}}
+function tapPhoto(){alert("Hey! Thanks for visiting my site 😊")}
+function hireMe(){alert("Thank you! Please contact Shakeeb on WhatsApp or Email. He will reply soon 😊")}
+function getAnswer(q){
+q=q.toLowerCase();
+if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes("school")||q.includes("cased")||q.includes("ousl")||q.includes("diploma")||q.includes("degree")) return "📚 Shakeeb's Education: 1) Now: BSc in Computer Science at Open University of Sri Lanka (OUSL) - also studying Chemistry & Physics. 2) Completed: Diploma in IT & AI from CASED Institute. 3) School: BT/BC Annoor National School, Valaichenai.";
+if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("java")||q.includes("can you")||q.includes("do")) return "💻 Shakeeb's Skills: C - he knows a little more in this one than the others. Also HTML & CSS, Python, Java, and AI / Machine Learning basics. He is still learning and improving every day.";
+if(q.includes("project")) return "🚀 Shakeeb's Projects: 1) This website - built from his phone while learning. 2) Small AI learning projects. 3) Next project coming soon.";
+if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")) return "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp via the button below, GitHub mskb2005. He is in Valaichenai, Batticaloa & Maradana, Colombo.";
+if(q.includes("who")||q.includes("about")||q.includes("name")) return "👋 Shakeeb is Muhammad Shakeeb from Valaichenai, Batticaloa. A Computer Science student at OUSL, still learning coding and AI.";
+if(q.includes("where")||q.includes("live")||q.includes("from")) return "📍 Shakeeb is from Valaichenai, Batticaloa, Sri Lanka. Also available in Maradana, Colombo.";
+return "I'm Shakeeb AI, and I only answer about Shakeeb. Please ask about: His Education, Skills, Projects, or Contact. Tap a button above 👆";
+}
+function quickAsk(t){document.getElementById("qInput").value=t;askAI();}
+function askAI(){let inp=document.getElementById("qInput");let q=inp.value;if(!q) return;let chat=document.getElementById("chat");chat.innerHTML+="<div class='msg you'>"+q+"</div>";chat.innerHTML+="<div class='msg ai'>🤖 "+getAnswer(q)+"</div>";chat.scrollTop=chat.scrollHeight;inp.value="";}
+window.addEventListener("scroll",()=>{document.querySelectorAll(".bar").forEach(b=>{let r=b.getBoundingClientRect();if(r.top<window.innerHeight) b.style.width=b.dataset.w})});
+setTimeout(()=>{document.querySelectorAll(".bar").forEach(b=>b.style.width=b.dataset.w)},800);
+</script>
 </body>
 </html>
