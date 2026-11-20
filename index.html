@@ -151,7 +151,31 @@ footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:rela
 const texts=["BSc Computer Science Student","Learning Tech • Coding • AI","Still Learning, Still Building"];
 let ti=0,ci=0,del=false;
 function type(){let cur=texts[ti];document.getElementById("typing").textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);if(!del&&ci==cur.length){del=true;setTimeout(type,1200);return}if(del&&ci==0){del=false;ti=(ti+1)%texts.length}setTimeout(type,del?40:80);} type();
-updateSmartStatus(),"Practising coding...","Learning AI little by little...","Working on a small project..."];let si=0;setInterval(()=>{document.getElementById("liveStatus").textContent=statuses[si];si=(si+1)%statuses.length},3000);
+function updateSmartStatus(){
+  try{
+    var el = document.getElementById("liveStatus");
+    var clock = document.getElementById("slClock");
+    if(!el) return;
+    var now = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Colombo"}));
+    var h = now.getHours();
+    if(clock){
+      clock.textContent = now.toLocaleTimeString("en-LK", {timeZone: "Asia/Colombo", hour: '2-digit', minute: '2-digit', second: '2-digit'}) + " SL";
+    }
+    var msg = "";
+    if(h>=0 && h<5) msg = "😴 Probably coding late or sleeping";
+    else if(h>=5 && h<7) msg = "🌅 Just woke up, starting the day";
+    else if(h>=7 && h<10) msg = "📚 Studying & learning";
+    else if(h>=10 && h<13) msg = "💻 Studying & building projects";
+    else if(h>=13 && h<14) msg = "🍛 Lunch break";
+    else if(h>=14 && h<17) msg = "💻 Working on projects / Practising coding";
+    else if(h>=17 && h<19) msg = "🌇 Evening break, planning next step";
+    else if(h>=19 && h<22) msg = "💻 Coding & learning AI";
+    else msg = "🌙 Winding down, still thinking about code";
+    el.textContent = msg;
+  }catch(e){ console.log(e); }
+}
+setInterval(updateSmartStatus, 1000);
+updateSmartStatus();,"Practising coding...","Learning AI little by little...","Working on a small project..."];let si=0;setInterval(()=>{document.getElementById("liveStatus").textContent=statuses[si];si=(si+1)%statuses.length},3000);
 const codeLines=["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];let li=0,char=0;function termType(){let line=codeLines[li];document.getElementById("termText").textContent=line.slice(0,++char);if(char>=line.length){setTimeout(()=>{li=(li+1)%codeLines.length;char=0},1200)}setTimeout(termType,55)}termType();
 const quotes=["\"First, try to understand the problem. Then, try to solve it.\"","\"I'm still learning. Every day, a little more.\"","\"Mistakes teach me more than success.\"","\"From Valaichenai, learning step by step.\"","\"I'm still learning, and I want to do my best.\""];let qi=0;setInterval(()=>{document.getElementById("quoteBox").textContent=quotes[qi];qi=(qi+1)%quotes.length},5000);document.getElementById("quoteBox").textContent=quotes[0];
 function askName(){let n=prompt("What's your name?");if(n){alert("Welcome "+n+"! Appreciate it,Thanks for visiting ❤️")}}
