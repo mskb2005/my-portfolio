@@ -154,7 +154,7 @@ function type(){let cur=texts[ti];document.getElementById("typing").textContent=
 const statuses=["Learning and building...","Practising coding...","Learning AI little by little...","Working on a small project..."];let si=0;setInterval(()=>{document.getElementById("liveStatus").textContent=statuses[si];si=(si+1)%statuses.length},3000);
 const codeLines=["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];let li=0,char=0;function termType(){let line=codeLines[li];document.getElementById("termText").textContent=line.slice(0,++char);if(char>=line.length){setTimeout(()=>{li=(li+1)%codeLines.length;char=0},1200)}setTimeout(termType,55)}termType();
 const quotes=["\"First, try to understand the problem. Then, try to solve it.\"","\"I'm still learning. Every day, a little more.\"","\"Mistakes teach me more than success.\"","\"From Valaichenai, learning step by step.\"","\"I'm still learning, and I want to do my best.\""];let qi=0;setInterval(()=>{document.getElementById("quoteBox").textContent=quotes[qi];qi=(qi+1)%quotes.length},5000);document.getElementById("quoteBox").textContent=quotes[0];
-function askName(){let n=prompt("What's your name?");if(n){alert("Welcome "+n+"! Thanks for visiting ❤️")}}
+function askName(){let n=prompt("What's your name?");if(n){alert("Welcome "+n+"! Appreciate it,Thanks for visiting ❤️")}}
 function tapPhoto(){alert("Hey! Thanks for visiting my site 😊")}
 function hireMe(){alert("Thank you! Please contact Shakeeb on WhatsApp or Email. He will reply soon 😊")}
 function getAnswer(q){
@@ -163,9 +163,9 @@ if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes(
 if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("java")||q.includes("can you")||q.includes("do")) return "💻 Shakeeb's Skills: C - he knows a little more in this one than the others. Also HTML & CSS, Python, Java, and AI / Machine Learning basics. He is still learning and improving every day.";
 if(q.includes("project")) return "🚀 Shakeeb's Projects: 1) This website - built from his phone while learning. 2) Small AI learning projects. 3) Next project coming soon.";
 if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")) return "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp via the button below, GitHub mskb2005. He is in Valaichenai, Batticaloa & Maradana, Colombo.";
-if(q.includes("who")||q.includes("about")||q.includes("name")) return "👋 Shakeeb is Muhammad Shakeeb from Valaichenai, Batticaloa. A Computer Science student at OUSL, still learning coding and AI.";
+if(q.includes("who")||q.includes("about")||q.includes("name")) return "👋 He is Muhammad Shakeeb from Valaichenai, Batticaloa. A Computer Science student at OUSL, still learning coding and AI.";
 if(q.includes("where")||q.includes("live")||q.includes("from")) return "📍 Shakeeb is from Valaichenai, Batticaloa, Sri Lanka. Also available in Maradana, Colombo.";
-return "I'm Shakeeb AI, and I only answer about Shakeeb. Please ask about: His Education, Skills, Projects, or Contact. Tap a button above 👆";
+return "I'm Portfolio AI, and I only answer about Shakeeb. Please ask about: His Education, Skills, Projects, or Contact. Tap a button above 👆";
 }
 function quickAsk(t){document.getElementById("qInput").value=t;askAI();}
 function askAI(){let inp=document.getElementById("qInput");let q=inp.value;if(!q) return;let chat=document.getElementById("chat");chat.innerHTML+="<div class='msg you'>"+q+"</div>";chat.innerHTML+="<div class='msg ai'>🤖 "+getAnswer(q)+"</div>";chat.scrollTop=chat.scrollHeight;inp.value="";}
