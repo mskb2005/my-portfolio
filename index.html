@@ -149,7 +149,7 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:var(--text);backg
     <div class="profile-meta">
       <h1>Muhammad Shakeeb</h1>
       <p class="profile-role" id="subRole"></p>
-      <p class="profile-goal">Seeking entry-level internships in Full Stack, QA, Quantitative Dev, or CS/AI • Remote or Hybrid (Batticaloa / Colombo).</p>
+            <p class="profile-goal">Primarily seeking Full Stack &amp; QA internships; also open to Quantitative Dev, AI/CS, or Knowledge Management roles • Remote or Hybrid (Batticaloa / Colombo).</p>
       <div class="loc-tag">📍 Valaichenai, Batticaloa &amp; Maradana, Colombo • <span id="osActivity">Loading...</span></div>
     </div>
   </div>
@@ -433,10 +433,11 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:var(--text);backg
   </div>
   <div class="panel">
     <h2>CV Summary</h2>
-    <p><b>Name:</b> Muhammad Shakeeb<br>
+        <p><b>Name:</b> Muhammad Shakeeb<br>
     <b>Education:</b> BSc Computer Science (Major) + Chemistry &amp; Physics — Open University of Sri Lanka (OUSL)<br>
     <b>Diploma:</b> Diploma in IT &amp; AI — CASED Institute (2026)<br>
     <b>Core Languages &amp; Areas:</b> C, HTML &amp; CSS, Python, Java, JavaScript, AI Fundamentals<br>
+    <b>Target Internships:</b> Primary focus on Full Stack Development &amp; Quality Assurance (QA); also open to Quantitative Dev, AI/CS, and Knowledge Management roles<br>
     <b>Availability:</b> Remote or Hybrid (Batticaloa / Colombo)<br>
     <b>Email:</b> mgmshakeeb2005@gmail.com</p>
     <a class="link-pill green" href="https://wa.me/94726958015" target="_blank" rel="noopener noreferrer" style="margin-top:14px">📩 Request Full CV on WhatsApp →</a>
@@ -571,9 +572,9 @@ function replyAI(raw){
       chips: [["🛠️ Skills","skills"],["🚀 Projects","projects"],["📩 Contact","contact"]]
     };
   }
-  if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("css")||q.includes("java")||mentionsC(q)||q.includes("intern")){
+    if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("css")||q.includes("java")||mentionsC(q)||q.includes("intern")||q.includes("quant")||q.includes("qa")||q.includes("full stack")||q.includes("knowledge")){
     return {
-      text: "🛠️ Shakeeb's Skills & Focus: Strongest foundation in C, hands-on HTML & CSS builds, active practice in Python, Java, and JavaScript, plus IT & AI fundamentals from CASED. Seeking internships in Full Stack, QA, Quantitative Dev, or CS/AI (remote or hybrid in Batticaloa / Colombo).",
+      text: "🛠️ Shakeeb's Skills & Focus: Strongest foundation in C, hands-on HTML & CSS builds, active practice in Python, Java, and JavaScript, plus IT & AI fundamentals from CASED. Primarily seeking Full Stack and QA internships, while also open to Quantitative Dev, AI/CS, and Knowledge Management roles (remote or hybrid in Batticaloa / Colombo).",
       chips: [["🚀 Projects","projects"],["🎓 Education","education"],["📩 Contact","contact"]]
     };
   }
