@@ -211,8 +211,29 @@ html,body{width:100%;height:100%;overflow:hidden;color:#f8fafc;background:radial
 <div class="win" id="win-live" data-id="live">
   <div class="win-bar"><div class="win-title">🔴 Live Feed</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('live')">_</button><button class="win-btn close-btn" onclick="closeWin('live')">✕</button></div></div>
   <div class="win-body">
-    <h2>What I'm Doing Right Now</h2>
+    <h2>Live Mode & Logic</h2>
     <div class="term-box">$ shakeeb@os:~$ <span id="osTerm"></span><span>▌</span></div>
+
+    <div class="p-box">
+      <b>Daily Focus Mode <span id="focusSlotTag" style="font-size:12px;color:#7dd3fc"></span></b>
+      <div class="ai-chips" style="margin-top:8px">
+        <button onclick="setFocusMode(0, true)">🎯 Deep Focus</button>
+        <button onclick="setFocusMode(1, true)">🛠️ Build & Debug</button>
+        <button onclick="setFocusMode(2, true)">💼 Remote / Hybrid</button>
+      </div>
+      <p id="focusDesc" style="margin-top:6px">Loading focus mode...</p>
+    </div>
+
+    <div class="p-box">
+      <b>Mini Logic Challenge (Auto-rotates every 20m)</b>
+      <p id="logicQ" style="margin-top:6px;color:#fef08a;font-family:monospace">Loading challenge...</p>
+      <div style="margin-top:8px">
+        <button class="link-pill green" style="cursor:pointer" onclick="toggleLogicAns()">💡 Show / Hide Answer</button>
+        <button class="link-pill" style="cursor:pointer" onclick="nextLogicManual()">↻ Next Puzzle</button>
+      </div>
+      <p id="logicA" style="display:none;margin-top:8px;color:#86efac;font-size:13.5px"></p>
+    </div>
+
     <div class="note-box" id="osQuote">Loading...</div>
   </div>
 </div>
@@ -552,6 +573,78 @@ function runAI(){
     }
   }, 26);
 }
+const focusModes = [
+  { label: "Deep Focus", text: "Studying core concepts and practising clean logic without distractions." },
+  { label: "Build & Debug", text: "Testing small ideas, tracing errors step by step, and improving code." },
+  { label: "Remote / Hybrid Ready", text: "Open to remote internships as well as hybrid work in Batticaloa or Colombo." }
+];
+
+const logicChallenges = [
+  {
+    q: "What prints in C? int x = 5; printf(\"%d\", x++ + 2);",
+    a: "Prints 7 — x++ uses 5 first in the expression (5 + 2 = 7), then increments x to 6 afterward."
+  },
+  {
+    q: "Logic check: If A is true and B is false, what is !(A && B) || B?",
+    a: "True — A && B is false, !(false) is true, and true || false evaluates to true."
+  },
+  {
+    q: "Python / list thinking: What is the length of [1, [2, 3], 4]?",
+    a: "3 — the inner list [2, 3] counts as a single element inside the outer list."
+  },
+  {
+    q: "Loop trace: A loop runs from i = 0 while i < 4, adding i to sum (starts at 0). Final sum?",
+    a: "6 — i takes values 0, 1, 2, 3, and 0 + 1 + 2 + 3 = 6."
+  }
+];
+
+let manualFocusIdx = null;
+let logicOffset = 0;
+
+function setFocusMode(idx, manual = false){
+  if(manual) manualFocusIdx = idx;
+  const mode = focusModes[idx % focusModes.length];
+  const tag = document.getElementById("focusSlotTag");
+  const desc = document.getElementById("focusDesc");
+  if(tag) tag.textContent = manual ? "• (Manual override)" : "• (Auto 20m)";
+  if(desc) desc.textContent = mode.label + ": " + mode.text;
+}
+
+function renderLogic(slot){
+  const item = logicChallenges[(slot + logicOffset) % logicChallenges.length];
+  const qEl = document.getElementById("logicQ");
+  const aEl = document.getElementById("logicA");
+  if(qEl) qEl.textContent = item.q;
+  if(aEl){
+    aEl.textContent = item.a;
+    aEl.style.display = "none";
+  }
+}
+
+function toggleLogicAns(){
+  const aEl = document.getElementById("logicA");
+  if(!aEl) return;
+  aEl.style.display = aEl.style.display === "none" ? "block" : "none";
+}
+
+function nextLogicManual(){
+  logicOffset += 1;
+  const slot = Math.floor(Date.now() / (20 * 60 * 1000));
+  renderLogic(slot);
+}
+
+let lastSlot = -1;
+function syncTwentyMinFeed(){
+  const slot = Math.floor(Date.now() / (20 * 60 * 1000));
+  if(slot !== lastSlot){
+    lastSlot = slot;
+    if(manualFocusIdx === null) setFocusMode(slot, false);
+    renderLogic(slot);
+  }
+}
+
+syncTwentyMinFeed();
+setInterval(syncTwentyMinFeed, 30000);
 </script>
 </body>
 </html>
