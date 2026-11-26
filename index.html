@@ -3,567 +3,480 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Muhammad Shakeeb | Interactive Portfolio</title>
+<title>ShakeebOS | Muhammad Shakeeb</title>
 <style>
 :root{
-  --bg:#03040a;
-  --cyan:#22d3ee;
-  --violet:#a855f7;
+  --wall1:#0f172a;
+  --wall2:#1e1b4b;
+  --cyan:#38bdf8;
+  --violet:#c084fc;
   --amber:#facc15;
-  --emerald:#34d399;
-  --rose:#fb7185;
-  --ease:cubic-bezier(0.19, 1, 0.22, 1);
+  --mint:#4ade80;
+  --winBg:rgba(15,23,42,.92);
+  --winBorder:rgba(148,163,184,.25);
+  --spring:cubic-bezier(0.18, 0.9, 0.32, 1.15);
+  --smooth:cubic-bezier(0.22, 1, 0.36, 1);
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;background:var(--bg);color:#f8fafc;overflow:hidden;user-select:none}
+html,body{width:100%;height:100%;overflow:hidden;color:#f8fafc;background:radial-gradient(circle at 20% 20%,#1d4ed833,transparent 45%),radial-gradient(circle at 80% 75%,#9333ea33,transparent 45%),linear-gradient(145deg,var(--wall1),var(--wall2))}
 
-/* Live Particle Canvas */
-#cosmos{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+/* Subtle Dot Grid Wallpaper */
+.wallpaper{position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.11) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
 
-/* Finger-Tap Shockwave Portal */
-.ripple{
-  position:fixed;width:24px;height:24px;border-radius:50%;
-  border:2px solid var(--cyan);box-shadow:0 0 24px rgba(34,211,238,.65),inset 0 0 18px rgba(168,85,247,.35);
-  transform:translate(-50%,-50%) scale(.2);opacity:.95;
-  pointer-events:none;z-index:90;
-  animation:shockwave .72s var(--ease) forwards;
-}
-@keyframes shockwave{
-  to{transform:translate(-50%,-50%) scale(14);opacity:0}
-}
+/* Top OS Menu Bar */
+.menubar{position:fixed;top:0;left:0;right:0;height:38px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(2,6,23,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);font-size:12.5px}
+.os-name{font-weight:800;color:var(--cyan);display:flex;align-items:center;gap:6px;cursor:pointer}
+.os-clock{font-family:monospace;color:#e2e8f0;font-weight:700}
 
-/* HUD Top Bar */
-.hud-top{
-  position:fixed;top:12px;left:12px;right:12px;z-index:40;
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:10px 16px;border-radius:999px;
-  background:rgba(9,13,26,.62);backdrop-filter:blur(18px);
-  border:1px solid rgba(148,163,184,.18);
-}
-.hud-brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;cursor:pointer;letter-spacing:.3px}
-.pulse{width:9px;height:9px;border-radius:50%;background:var(--emerald);box-shadow:0 0 12px var(--emerald)}
-.hud-meta{font-size:11.5px;color:#cbd5e1;font-family:monospace;white-space:nowrap}
+/* Desktop App Icons Grid */
+.desktop{position:relative;z-index:2;height:100dvh;padding:50px 14px 78px;overflow-y:auto}
+.profile-strip{display:flex;align-items:center;gap:14px;background:rgba(15,23,42,.72);border:1px solid var(--winBorder);border-radius:20px;padding:12px 16px;margin-bottom:16px;backdrop-filter:blur(12px)}
+.profile-strip img{width:62px;height:62px;border-radius:16px;object-fit:cover;border:2px solid var(--cyan);cursor:pointer}
+.profile-strip h1{font-size:19px;line-height:1.15;color:#fff}
+.profile-strip p{font-size:12.5px;color:var(--amber);font-weight:700;margin-top:3px;min-height:18px}
+.loc-tag{font-size:11.5px;color:#cbd5e1;margin-top:3px}
 
-/* 3D Perspective Stage */
-.world{
-  position:relative;width:100%;height:100dvh;
-  perspective:1350px;overflow:hidden;z-index:2;
-  padding:74px 14px 86px;
-}
-.panel{
-  position:absolute;top:74px;left:14px;right:14px;bottom:86px;
-  max-width:860px;margin:0 auto;overflow-y:auto;
-  padding:6px 4px 28px;scrollbar-width:none;
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:12px;max-width:680px;margin:0 auto}
+.app-icon{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid transparent;cursor:pointer;transition:transform .25s var(--spring),background .2s ease,border-color .2s ease}
+.app-icon:hover{background:rgba(255,255,255,.09);border-color:rgba(56,189,248,.35)}
+.app-icon:active{transform:scale(.9)}
+.glyph{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:22px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.app-icon span{font-size:11.5px;font-weight:700;color:#f1f5f9;line-height:1.2}
+
+/* Draggable / Pop-Up OS Window */
+.win{
+  position:fixed;top:48px;left:10px;right:10px;bottom:70px;
+  max-width:760px;margin:0 auto;z-index:30;
+  background:var(--winBg);backdrop-filter:blur(20px);
+  border:1px solid var(--winBorder);border-radius:22px;
+  box-shadow:0 26px 65px rgba(0,0,0,.65);
+  display:flex;flex-direction:column;overflow:hidden;
   opacity:0;visibility:hidden;
-  transform:translate3d(0,42px,-180px) rotateX(14deg) scale(.92);
-  transform-origin:50% 35%;
-  transition:
-    transform .68s var(--ease),
-    opacity .45s ease,
-    visibility 0s linear .68s;
+  transform:translate3d(0,36px,0) scale(.86);
+  transition:transform .44s var(--spring),opacity .28s ease,visibility 0s linear .44s;
 }
-.panel::-webkit-scrollbar{display:none}
-.panel.active{
+.win.open{
   opacity:1;visibility:visible;
-  transform:translate3d(var(--px,0px),var(--py,0px),0px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg)) scale(1);
-  transition:
-    transform .68s var(--ease),
-    opacity .45s ease,
-    visibility 0s;
+  transform:translate3d(var(--wx,0px),var(--wy,0px),0) scale(1);
+  transition:transform .44s var(--spring),opacity .28s ease,visibility 0s;
 }
-.panel.active.tilting{transition:transform .08s linear,opacity .45s ease}
+.win.dragging{transition:none !important}
 
-/* Staggered Elements */
-.panel .stagger{opacity:0;transform:translateY(20px) scale(.98);transition:transform .55s var(--ease),opacity .45s ease}
-.panel.active .stagger{opacity:1;transform:translateY(0) scale(1)}
-.panel.active .stagger:nth-child(1){transition-delay:.05s}
-.panel.active .stagger:nth-child(2){transition-delay:.11s}
-.panel.active .stagger:nth-child(3){transition-delay:.17s}
-.panel.active .stagger:nth-child(4){transition-delay:.23s}
-.panel.active .stagger:nth-child(5){transition-delay:.29s}
+.win-bar{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(2,6,23,.75);border-bottom:1px solid rgba(255,255,255,.1);cursor:grab;touch-action:none}
+.win-bar:active{cursor:grabbing}
+.win-title{font-size:13.5px;font-weight:800;color:var(--cyan)}
+.win-controls{display:flex;gap:7px}
+.win-btn{border:none;border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:800;cursor:pointer}
+.min-btn{background:#334155;color:#f8fafc}
+.close-btn{background:#ef4444;color:#fff}
 
-/* Hero Orbital Layout */
-.hero-stage{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px}
-.orbit-ring{
-  position:relative;width:184px;height:184px;display:grid;place-items:center;cursor:pointer;
-}
-.orbit-ring::before{
-  content:"";position:absolute;inset:-6px;border-radius:50%;
-  background:conic-gradient(from 0deg,var(--cyan),var(--violet),var(--amber),var(--cyan));
-  animation:spinRing 7s linear infinite;
-  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
-  mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
-}
-@keyframes spinRing{to{transform:rotate(360deg)}}
-.orbit-ring img{width:166px;height:166px;border-radius:50%;object-fit:cover;border:3px solid #090d1a;box-shadow:0 0 35px rgba(34,211,238,.25)}
+.win-body{padding:18px;overflow-y:auto;flex:1;line-height:1.65;font-size:14.5px;color:#e2e8f0}
+.win-body h2{color:var(--amber);font-size:20px;margin-bottom:10px}
+.edu-box{border-left:3px solid var(--cyan);padding-left:12px;margin:12px 0}
+.edu-box b{color:var(--mint);font-size:15.5px}
+.link-pill{display:inline-block;margin-top:8px;margin-right:8px;padding:7px 13px;border-radius:999px;text-decoration:none;font-size:12px;font-weight:700;background:#0f172a;border:1px solid var(--cyan);color:#7dd3fc}
+.link-pill.green{border-color:var(--mint);color:#86efac}
 
-h1{font-size:clamp(34px,8.5vw,54px);line-height:1.05;margin:16px 0 8px;background:linear-gradient(110deg,#ffffff 15%,#67e8f9 55%,#c4b5fd 95%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.role-rotator{color:var(--amber);font-size:17px;font-weight:700;min-height:26px}
-.pill-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
-.pill{padding:8px 14px;border-radius:999px;font-size:12.5px;background:rgba(15,23,42,.72);border:1px solid rgba(148,163,184,.22);backdrop-filter:blur(10px)}
-.pill.live{border-color:rgba(52,211,153,.5);color:#a7f3d0}
+.s-row{margin:11px 0}
+.s-top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px}
+.s-track{height:10px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+.s-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .85s var(--smooth)}
 
-.cta-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:20px}
-.act{
-  padding:12px 19px;border-radius:999px;border:none;cursor:pointer;text-decoration:none;
-  font-weight:800;font-size:13.5px;transition:transform .25s var(--ease),box-shadow .25s var(--ease);
-}
-.act:active{transform:scale(.93)}
-.act-gold{background:var(--amber);color:#05070f;box-shadow:0 8px 24px rgba(250,204,21,.25)}
-.act-grad{background:linear-gradient(135deg,var(--violet),var(--cyan));color:#fff;box-shadow:0 8px 24px rgba(124,58,237,.35)}
-.act-light{background:#f8fafc;color:#05070f}
-.act-sky{background:#0284c7;color:#fff}
+.p-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-top:12px}
+.p-box b{color:var(--amber);font-size:15.5px;display:block;margin-bottom:4px}
 
-/* Glass Surface Cards */
-.surface{
-  background:rgba(10,15,30,.68);backdrop-filter:blur(16px);
-  border:1px solid rgba(148,163,184,.18);border-radius:24px;
-  padding:22px;margin-bottom:14px;box-shadow:0 20px 50px rgba(0,0,0,.45);
-}
-.surface h2{font-size:22px;color:var(--cyan);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.surface p{font-size:15px;line-height:1.68;color:#e2e8f0}
+.term-box{background:#020617;border:1px solid var(--mint);border-radius:14px;padding:14px;font-family:monospace;font-size:13px;color:var(--mint);min-height:84px}
+.note-box{margin-top:12px;padding:12px;border-radius:14px;background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.4);color:#fef08a;font-style:italic;text-align:center}
 
-.milestone{border-left:3px solid var(--cyan);padding-left:14px;margin:14px 0}
-.milestone b{color:var(--amber);font-size:16.5px}
-.milestone span{color:#cbd5e1;font-size:14px}
+/* Portfolio AI inside Window */
+.ai-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.ai-chips button{background:#1e293b;color:#7dd3fc;border:1px solid var(--violet);padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+.chat-box{height:195px;overflow-y:auto;background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+.m{padding:8px 12px;border-radius:12px;font-size:13px;max-width:88%;animation:pop .22s var(--smooth)}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.m-ai{background:#1e293b;color:#bae6fd;align-self:flex-start}
+.m-me{background:#0284c7;color:#fff;align-self:flex-end}
+.follow-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.follow-row button{background:rgba(74,222,128,.14);color:#86efac;border:1px solid rgba(74,222,128,.45);padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:700;cursor:pointer}
+.send-row{display:flex;gap:7px;margin-top:9px}
+.send-row input{flex:1;padding:10px 14px;border-radius:999px;border:1px solid #475569;background:#020617;color:#fff;outline:none;font-size:13.5px}
+.send-row button{padding:10px 16px;border-radius:999px;border:none;background:var(--amber);color:#05070f;font-weight:800;cursor:pointer}
 
-.chip-link{
-  display:inline-block;margin-top:10px;margin-right:8px;padding:8px 14px;border-radius:999px;
-  text-decoration:none;font-size:12.5px;font-weight:700;
-  background:rgba(15,23,42,.9);border:1px solid rgba(34,211,238,.55);color:#67e8f9;
-  transition:transform .2s var(--ease);
-}
-.chip-link:active{transform:scale(.94)}
-.chip-link.demo{border-color:rgba(52,211,153,.65);color:#6ee7b7}
+.c-list a{display:block;text-align:center;padding:12px;border-radius:14px;margin-top:9px;text-decoration:none;font-weight:800;color:#fff;font-size:13.5px}
 
-.skill-item{margin:12px 0}
-.skill-head{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-bottom:5px}
-.meter{height:11px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
-.meter-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--violet),var(--cyan));transition:width .95s var(--ease)}
-
-.proj-card{padding:16px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);margin-top:12px}
-.proj-card b{color:var(--amber);font-size:16.5px;display:block;margin-bottom:4px}
-
-.console{background:#02050d;border:1px solid rgba(52,211,153,.5);border-radius:16px;padding:15px;font-family:monospace;font-size:13px;line-height:1.6;color:#4ade80;min-height:96px}
-.thought{margin-top:12px;padding:14px;border-radius:16px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.4);color:#fef08a;font-style:italic;text-align:center;font-size:15px}
-
-/* Portfolio AI */
-.ai-box{border-color:rgba(168,85,247,.55) !important}
-.prompt-row{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
-.prompt-row button{background:rgba(30,41,59,.9);color:#a5f3fc;border:1px solid rgba(168,85,247,.6);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
-.stream-log{height:215px;overflow-y:auto;background:#030712;border:1px solid rgba(148,163,184,.16);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;margin-top:8px}
-.bubble{padding:9px 13px;border-radius:14px;font-size:13.5px;line-height:1.5;max-width:88%;animation:rise .26s var(--ease)}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.b-ai{background:#1e293b;color:#bae6fd;align-self:flex-start}
-.b-user{background:#2563eb;color:#fff;align-self:flex-end}
-.next-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.next-chips button{background:rgba(52,211,153,.12);color:#6ee7b7;border:1px solid rgba(52,211,153,.45);padding:6px 11px;border-radius:999px;font-size:11.5px;font-weight:700;cursor:pointer}
-.ask-bar{display:flex;gap:8px;margin-top:10px}
-.ask-bar input{flex:1;padding:11px 15px;border-radius:999px;border:1px solid #475569;background:#020617;color:#fff;outline:none;font-size:14px}
-
-.connect-stack a{display:block;text-align:center;padding:13px;border-radius:16px;margin-top:10px;text-decoration:none;font-weight:800;color:#fff;font-size:14px}
-
-/* Bottom Floating Capsule Dock */
-.dock-shell{position:fixed;bottom:12px;left:12px;right:12px;z-index:40;display:flex;justify-content:center;pointer-events:none}
-.dock-bar{
-  pointer-events:auto;display:flex;gap:5px;padding:7px 9px;border-radius:999px;
-  background:rgba(9,13,26,.82);backdrop-filter:blur(18px);
-  border:1px solid rgba(148,163,184,.2);max-width:100%;overflow-x:auto;scrollbar-width:none;
-  box-shadow:0 14px 36px rgba(0,0,0,.6);
-}
-.dock-bar::-webkit-scrollbar{display:none}
-.dock-bar button{
-  background:none;border:none;color:#cbd5e1;padding:8px 12px;border-radius:999px;
-  font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .28s var(--ease);
-}
-.dock-bar button.active{background:linear-gradient(120deg,var(--violet),var(--cyan));color:#fff;transform:translateY(-1px)}
-
-.ai-orb-btn{
-  position:fixed;right:14px;bottom:74px;z-index:35;
-  padding:10px 15px;border-radius:999px;border:none;cursor:pointer;
-  font-weight:800;font-size:12px;color:#fff;
-  background:linear-gradient(135deg,var(--violet),var(--cyan));
-  box-shadow:0 10px 26px rgba(124,58,237,.45);transition:transform .25s var(--ease),opacity .25s ease;
-}
-.ai-orb-btn.gone{opacity:0;pointer-events:none;transform:translateY(12px)}
+/* Bottom Taskbar */
+.taskbar{position:fixed;bottom:10px;left:10px;right:10px;z-index:50;display:flex;justify-content:center;pointer-events:none}
+.taskbar-inner{pointer-events:auto;display:flex;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(2,6,23,.84);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);max-width:100%;overflow-x:auto;scrollbar-width:none}
+.taskbar-inner::-webkit-scrollbar{display:none}
+.tb-item{background:rgba(255,255,255,.07);border:1px solid transparent;color:#e2e8f0;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.tb-item.focused{background:linear-gradient(90deg,#0284c7,#9333ea);color:#fff}
+</style>
 </style>
 </head>
 <body>
 
-<canvas id="cosmos"></canvas>
+<div class="wallpaper"></div>
 
-<header class="hud-top">
-  <div class="hud-brand" onclick="switchPanel('home')"><span class="pulse"></span><span>Shakeeb.3D</span></div>
-  <div class="hud-meta" id="hudStatus">1/8 • HOME • SWIPE ⇄</div>
+<header class="menubar">
+  <div class="os-name" onclick="minimizeAll()">🖥️ ShakeebOS v2.6</div>
+  <div class="os-clock" id="menuClock">--:--:-- SL</div>
 </header>
 
-<button class="ai-orb-btn" id="aiOrb" onclick="switchPanel('ai')">✨ Portfolio AI</button>
-
-<main class="world" id="world">
-
-  <!-- 1. HOME -->
-  <section class="panel active" data-panel="home" data-tag="HOME">
-    <div class="hero-stage">
-      <div class="orbit-ring stagger" onclick="tapAvatar()"><img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb"></div>
-      <h1 class="stagger">Hi, I'm Shakeeb 👋</h1>
-      <div class="role-rotator stagger" id="roleText"></div>
-      <div class="pill-row stagger">
-        <div class="pill">📍 Valaichenai, Batticaloa & Maradana, Colombo — Sri Lanka</div>
-        <div class="pill live"><span id="liveActivity">Loading...</span> • <span id="slTime">--:--:--</span></div>
-      </div>
-      <div class="cta-grid stagger">
-        <button class="act act-gold" onclick="greetVisitor()">👋 Tell Me Your Name</button>
-        <button class="act act-grad" onclick="switchPanel('ai')">🤖 Ask Portfolio AI</button>
-        <button class="act act-light" onclick="openCollab()">🤝 Work With Me</button>
-        <a class="act act-sky" href="https://github.com/mskb2005" target="_blank">GitHub ↗</a>
-      </div>
+<main class="desktop" id="desktop">
+  <div class="profile-strip" onclick="openWin('about')">
+    <img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb" onclick="event.stopPropagation();alert('Hey! Thanks for visiting ShakeebOS 😊')">
+    <div>
+      <h1>Muhammad Shakeeb</h1>
+      <p id="subRole"></p>
+      <div class="loc-tag">📍 Valaichenai, Batticaloa & Maradana, Colombo • <span id="osActivity">Loading...</span></div>
     </div>
-  </section>
+  </div>
 
-  <!-- 2. ABOUT -->
-  <section class="panel" data-panel="about" data-tag="ABOUT">
-    <div class="surface stagger">
-      <h2>👨‍💻 About Me</h2>
-      <p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
-      <p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
-      <p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
-      <p style="color:var(--cyan);font-style:italic;font-size:18px;text-align:center">"I'm still learning, and I want to do my best."</p>
+  <div class="icon-grid">
+    <div class="app-icon" onclick="openWin('about')">
+      <div class="glyph" style="background:linear-gradient(135deg,#2563eb,#38bdf8)">👨‍💻</div>
+      <span>About.app</span>
     </div>
-  </section>
-
-  <!-- 3. PORTFOLIO AI -->
-  <section class="panel" data-panel="ai" data-tag="AI">
-    <div class="surface ai-box stagger">
-      <h2>🤖 Ask Portfolio AI — About Me Only</h2>
-      <p>This AI only answers about <b style="color:var(--amber)">my education, my skills, my projects, and how to contact me.</b></p>
-      <div class="prompt-row">
-        <button onclick="askPreset('education')">🎓 Education</button>
-        <button onclick="askPreset('skills')">💻 Skills</button>
-        <button onclick="askPreset('projects')">🚀 Projects</button>
-        <button onclick="askPreset('contact')">📩 Contact</button>
-      </div>
-      <div class="stream-log" id="aiLog">
-        <div class="bubble b-ai">👋 Hi! I'm Portfolio AI. Ask me about Shakeeb's education, skills, projects, or contact.</div>
-      </div>
-      <div class="next-chips" id="nextChips">
-        <button onclick="askPreset('education')">🎓 OUSL & CASED</button>
-        <button onclick="askPreset('projects')">🌍 3D Globe Repo</button>
-        <button onclick="askPreset('skills')">⚡ Strongest Skill</button>
-      </div>
-      <div class="ask-bar">
-        <input id="aiInput" placeholder="Ask about Shakeeb..." onkeypress="if(event.key==='Enter') sendQuestion()">
-        <button class="act act-sky" onclick="sendQuestion()">Ask</button>
-      </div>
+    <div class="app-icon" onclick="openWin('ai')">
+      <div class="glyph" style="background:linear-gradient(135deg,#9333ea,#ec4899)">🤖</div>
+      <span>Portfolio AI</span>
     </div>
-  </section>
-
-  <!-- 4. LIVE -->
-  <section class="panel" data-panel="live" data-tag="LIVE">
-    <div class="surface stagger">
-      <h2>🔴 LIVE — What I'm Doing</h2>
-      <div class="console">$ shakeeb@portfolio:~$ <span id="cmdLine"></span><span>▌</span></div>
-      <div class="thought" id="thoughtBox">Loading...</div>
+    <div class="app-icon" onclick="openWin('live')">
+      <div class="glyph" style="background:linear-gradient(135deg,#059669,#34d399)">🔴</div>
+      <span>Live Feed</span>
     </div>
-  </section>
-
-  <!-- 5. EDUCATION -->
-  <section class="panel" data-panel="edu" data-tag="EDU">
-    <div class="surface stagger">
-      <h2>🎓 Education Journey</h2>
-      <div class="milestone"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL)<br>Also studying Chemistry & Physics</span><br><a class="chip-link" href="https://ou.ac.lk" target="_blank">🌐 Official OUSL Site → ou.ac.lk</a></div>
-      <div class="milestone"><b>Completed (2026) — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="chip-link" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Official CASED Link →</a></div>
-      <div class="milestone"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
+    <div class="app-icon" onclick="openWin('edu')">
+      <div class="glyph" style="background:linear-gradient(135deg,#0284c7,#6366f1)">🎓</div>
+      <span>Education</span>
     </div>
-  </section>
-
-  <!-- 6. SKILLS -->
-  <section class="panel" data-panel="skills" data-tag="SKILLS">
-    <div class="surface stagger">
-      <h2>📊 What I'm Learning</h2>
-      <p style="font-size:13px;color:#94a3b8;margin-bottom:10px">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
-      <div class="skill-item"><div class="skill-head"><span>C (Strongest)</span><span>90%</span></div><div class="meter"><div class="meter-fill" data-w="90%"></div></div></div>
-      <div class="skill-item"><div class="skill-head"><span>HTML & CSS</span><span>85%</span></div><div class="meter"><div class="meter-fill" data-w="85%"></div></div></div>
-      <div class="skill-item"><div class="skill-head"><span>Python</span><span>75%</span></div><div class="meter"><div class="meter-fill" data-w="75%"></div></div></div>
-      <div class="skill-item"><div class="skill-head"><span>Java</span><span>70%</span></div><div class="meter"><div class="meter-fill" data-w="70%"></div></div></div>
-      <div class="skill-item"><div class="skill-head"><span>AI & Machine Learning</span><span>65%</span></div><div class="meter"><div class="meter-fill" data-w="65%"></div></div></div>
-      <div class="skill-item"><div class="skill-head"><span>JavaScript</span><span>60%</span></div><div class="meter"><div class="meter-fill" data-w="60%"></div></div></div>
+    <div class="app-icon" onclick="openWin('skills')">
+      <div class="glyph" style="background:linear-gradient(135deg,#d97706,#facc15)">📊</div>
+      <span>Skills.exe</span>
     </div>
-  </section>
-
-  <!-- 7. PROJECTS -->
-  <section class="panel" data-panel="projects" data-tag="PROJECTS">
-    <div class="surface stagger">
-      <h2>🚀 My Projects</h2>
-      <div class="proj-card">
-        <b>1. 3D Interactive World Globe</b>
-        <p>Interactive 3D globe built with HTML, CSS & JS featuring 197 countries & capitals, touch spin/zoom, map modes, and distance tools.</p>
-        <a class="chip-link" href="https://github.com/mskb2005/easing-playground" target="_blank">💻 Source Code →</a>
-        <a class="chip-link demo" href="https://mskb2005.github.io/easing-playground/" target="_blank">🌐 Live Demo →</a>
-      </div>
-      <div class="proj-card">
-        <b>2. This Portfolio Website</b>
-        <p>Built from my phone with 3D stage transitions, warp particles, finger shockwaves, and Portfolio AI.</p>
-        <a class="chip-link" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 Source Code →</a>
-      </div>
-      <div class="proj-card">
-        <b>3. AI & Coding Experiments</b>
-        <p>Small hands-on projects in C, Python, and AI while learning every day.</p>
-        <a class="chip-link" href="https://github.com/mskb2005" target="_blank">💻 View GitHub →</a>
-      </div>
+    <div class="app-icon" onclick="openWin('projects')">
+      <div class="glyph" style="background:linear-gradient(135deg,#7c3aed,#22d3ee)">🚀</div>
+      <span>Projects</span>
     </div>
-  </section>
-
-  <!-- 8. CV & CONTACT -->
-  <section class="panel" data-panel="contact" data-tag="CONTACT">
-    <div class="surface stagger" style="border-color:rgba(250,204,21,.45)">
-      <h2>📄 My CV Summary</h2>
-      <p><b>Name:</b> Muhammad Shakeeb<br>
-      <b>Education:</b> BSc Computer Science (Major) + Chemistry & Physics — OUSL<br>
-      <b>Diploma:</b> Diploma in IT & AI — CASED Institute (2026)<br>
-      <b>Skills:</b> C (Strongest), HTML & CSS, Python, Java, AI Basics<br>
-      <b>Location:</b> Valaichenai, Batticaloa & Maradana, Colombo<br>
-      <b>Email:</b> mgmshakeeb2005@gmail.com</p>
-      <a class="act act-gold" href="https://wa.me/94726958015" target="_blank" style="display:inline-block;margin-top:14px">📩 Ask For Full CV on WhatsApp</a>
+    <div class="app-icon" onclick="openWin('cv')">
+      <div class="glyph" style="background:linear-gradient(135deg,#ea580c,#fbbf24)">📄</div>
+      <span>CV.pdf</span>
     </div>
-    <div class="surface stagger">
-      <h2>📩 Let's Connect!</h2>
-      <div class="connect-stack">
-        <a style="background:#f8fafc;color:#05070f" href="https://wa.me/94726958015" target="_blank">💬 WhatsApp Me</a>
-        <a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
-        <a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank">💼 LinkedIn</a>
-        <a style="background:#0d9488" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
-        <a style="background:#0284c7" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
-      </div>
+    <div class="app-icon" onclick="openWin('contact')">
+      <div class="glyph" style="background:linear-gradient(135deg,#0d9488,#38bdf8)">📩</div>
+      <span>Connect</span>
     </div>
-  </section>
-
+  </div>
 </main>
 
-<nav class="dock-shell">
-  <div class="dock-bar" id="dockBar">
-    <button data-go="home" class="active">Home</button>
-    <button data-go="about">About</button>
-    <button data-go="ai">Portfolio AI</button>
-    <button data-go="live">Live</button>
-    <button data-go="edu">Education</button>
-    <button data-go="skills">Skills</button>
-    <button data-go="projects">Projects</button>
-    <button data-go="contact">CV & Contact</button>
+<!-- WINDOW 1: ABOUT -->
+<div class="win" id="win-about" data-id="about">
+  <div class="win-bar"><div class="win-title">👨‍💻 About.app</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('about')">_</button><button class="win-btn close-btn" onclick="closeWin('about')">✕</button></div></div>
+  <div class="win-body">
+    <h2>About Muhammad Shakeeb</h2>
+    <p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
+    <p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
+    <p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
+    <p style="color:var(--cyan);font-style:italic;text-align:center">"I'm still learning, and I want to do my best."</p>
   </div>
-</nav>
+</div>
+
+<!-- WINDOW 2: PORTFOLIO AI -->
+<div class="win" id="win-ai" data-id="ai">
+  <div class="win-bar"><div class="win-title">🤖 Portfolio AI — Shakeeb Only</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('ai')">_</button><button class="win-btn close-btn" onclick="closeWin('ai')">✕</button></div></div>
+  <div class="win-body">
+    <h2>Ask Portfolio AI</h2>
+    <p style="font-size:13px;color:#cbd5e1">Answers only about <b style="color:var(--amber)">Shakeeb's education, skills, projects, and contact</b>.</p>
+    <div class="ai-chips">
+      <button onclick="presetQ('education')">🎓 Education</button>
+      <button onclick="presetQ('skills')">💻 Skills</button>
+      <button onclick="presetQ('projects')">🚀 Projects</button>
+      <button onclick="presetQ('contact')">📩 Contact</button>
+    </div>
+    <div class="chat-box" id="osChat">
+      <div class="m m-ai">👋 Hi! I'm Portfolio AI inside ShakeebOS. Ask about Shakeeb's education, skills, projects, or contact.</div>
+    </div>
+    <div class="follow-row" id="osFollow">
+      <button onclick="presetQ('education')">🎓 OUSL & CASED</button>
+      <button onclick="presetQ('projects')">🌍 3D Globe Repo</button>
+      <button onclick="presetQ('skills')">⚡ Strongest Skill</button>
+    </div>
+    <div class="send-row">
+      <input id="osInput" placeholder="Type your question..." onkeypress="if(event.key==='Enter') runAI()">
+      <button onclick="runAI()">Ask</button>
+    </div>
+  </div>
+</div>
+
+<!-- WINDOW 3: LIVE -->
+<div class="win" id="win-live" data-id="live">
+  <div class="win-bar"><div class="win-title">🔴 Live Feed</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('live')">_</button><button class="win-btn close-btn" onclick="closeWin('live')">✕</button></div></div>
+  <div class="win-body">
+    <h2>What I'm Doing Right Now</h2>
+    <div class="term-box">$ shakeeb@os:~$ <span id="osTerm"></span><span>▌</span></div>
+    <div class="note-box" id="osQuote">Loading...</div>
+  </div>
+</div>
+
+<!-- WINDOW 4: EDUCATION -->
+<div class="win" id="win-edu" data-id="edu">
+  <div class="win-bar"><div class="win-title">🎓 Education</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('edu')">_</button><button class="win-btn close-btn" onclick="closeWin('edu')">✕</button></div></div>
+  <div class="win-body">
+    <h2>Education Journey</h2>
+    <div class="edu-box"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL) — Major in CS with Chemistry & Physics</span><br><a class="link-pill" href="https://ou.ac.lk" target="_blank">🌐 Official OUSL → ou.ac.lk</a></div>
+    <div class="edu-box"><b>Completed (2026) — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="link-pill" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Official CASED →</a></div>
+    <div class="edu-box"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
+  </div>
+</div>
+
+<!-- WINDOW 5: SKILLS -->
+<div class="win" id="win-skills" data-id="skills">
+  <div class="win-bar"><div class="win-title">📊 Skills.exe</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('skills')">_</button><button class="win-btn close-btn" onclick="closeWin('skills')">✕</button></div></div>
+  <div class="win-body">
+    <h2>What I'm Learning</h2>
+    <p style="font-size:12.5px;color:#94a3b8">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
+    <div class="s-row"><div class="s-top"><span>C (Strongest)</span><span>90%</span></div><div class="s-track"><div class="s-fill" data-w="90%"></div></div></div>
+    <div class="s-row"><div class="s-top"><span>HTML & CSS</span><span>85%</span></div><div class="s-track"><div class="s-fill" data-w="85%"></div></div></div>
+    <div class="s-row"><div class="s-top"><span>Python</span><span>75%</span></div><div class="s-track"><div class="s-fill" data-w="75%"></div></div></div>
+    <div class="s-row"><div class="s-top"><span>Java</span><span>70%</span></div><div class="s-track"><div class="s-fill" data-w="70%"></div></div></div>
+    <div class="s-row"><div class="s-top"><span>AI & Machine Learning</span><span>65%</span></div><div class="s-track"><div class="s-fill" data-w="65%"></div></div></div>
+    <div class="s-row"><div class="s-top"><span>JavaScript</span><span>60%</span></div><div class="s-track"><div class="s-fill" data-w="60%"></div></div></div>
+  </div>
+</div>
+
+<!-- WINDOW 6: PROJECTS -->
+<div class="win" id="win-projects" data-id="projects">
+  <div class="win-bar"><div class="win-title">🚀 Projects</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('projects')">_</button><button class="win-btn close-btn" onclick="closeWin('projects')">✕</button></div></div>
+  <div class="win-body">
+    <h2>My Projects</h2>
+    <div class="p-box">
+      <b>1. 3D Interactive World Globe</b>
+      <p>Interactive 3D globe with 197 countries & capitals, touch spin/zoom, map modes, and distance measurement.</p>
+      <a class="link-pill" href="https://github.com/mskb2005/easing-playground" target="_blank">💻 Source Code →</a>
+      <a class="link-pill green" href="https://mskb2005.github.io/easing-playground/" target="_blank">🌐 Live Demo →</a>
+    </div>
+    <div class="p-box">
+      <b>2. This Portfolio Website</b>
+      <p>Built from my phone as a desktop-window OS interface with Portfolio AI.</p>
+      <a class="link-pill" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 Source Code →</a>
+    </div>
+    <div class="p-box">
+      <b>3. AI & Coding Experiments</b>
+      <p>Small projects while learning C, Python, and AI step by step.</p>
+      <a class="link-pill" href="https://github.com/mskb2005" target="_blank">💻 View GitHub →</a>
+    </div>
+  </div>
+</div>
+
+<!-- WINDOW 7: CV -->
+<div class="win" id="win-cv" data-id="cv">
+  <div class="win-bar"><div class="win-title">📄 CV.pdf</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('cv')">_</button><button class="win-btn close-btn" onclick="closeWin('cv')">✕</button></div></div>
+  <div class="win-body">
+    <h2>CV Summary</h2>
+    <p><b>Name:</b> Muhammad Shakeeb<br>
+    <b>Education:</b> BSc Computer Science (Major) + Chemistry & Physics — OUSL<br>
+    <b>Diploma:</b> Diploma in IT & AI — CASED Institute (2026)<br>
+    <b>Skills:</b> C (Strongest), HTML & CSS, Python, Java, AI Basics<br>
+    <b>Location:</b> Valaichenai, Batticaloa & Maradana, Colombo<br>
+    <b>Email:</b> mgmshakeeb2005@gmail.com</p>
+    <a class="link-pill green" href="https://wa.me/94726958015" target="_blank" style="margin-top:14px">📩 Request Full CV on WhatsApp →</a>
+  </div>
+</div>
+
+<!-- WINDOW 8: CONTACT -->
+<div class="win" id="win-contact" data-id="contact">
+  <div class="win-bar"><div class="win-title">📩 Connect</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('contact')">_</button><button class="win-btn close-btn" onclick="closeWin('contact')">✕</button></div></div>
+  <div class="win-body">
+    <h2>Let's Connect!</h2>
+    <p style="font-size:13px;color:#cbd5e1">Available in Valaichenai, Batticaloa & Maradana, Colombo.</p>
+    <div class="c-list">
+      <a style="background:#f8fafc;color:#05070f" href="https://wa.me/94726958015" target="_blank">💬 WhatsApp Me</a>
+      <a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
+      <a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank">💼 LinkedIn</a>
+      <a style="background:#0d9488" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
+      <a style="background:#0284c7" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
+    </div>
+  </div>
+</div>
+
+<div class="taskbar">
+  <div class="taskbar-inner" id="taskbarInner">
+    <button class="tb-item" onclick="minimizeAll()">🖥️ Desktop</button>
+  </div>
+</div>
 
 <script>
-// 1. Interactive Warp-Speed Particle Canvas
-const canvas = document.getElementById("cosmos");
-const ctx = canvas.getContext("2d");
-let w, h, warpBoost = 1;
-const stars = [];
+const titles = {
+  about: "👨‍💻 About",
+  ai: "🤖 AI",
+  live: "🔴 Live",
+  edu: "🎓 Edu",
+  skills: "📊 Skills",
+  projects: "🚀 Projects",
+  cv: "📄 CV",
+  contact: "📩 Connect"
+};
 
-function resizeCanvas(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+let zTop = 32;
+const openSet = new Set();
 
-for(let i = 0; i < 85; i++){
-  stars.push({
-    x: Math.random() * window.innerWidth,
-    y: Math.random() * window.innerHeight,
-    r: Math.random() * 2.2 + 0.6,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5,
-    hue: [188, 270, 48, 160][i % 4]
+function animateSkillBars(){
+  document.querySelectorAll(".s-fill").forEach(el => {
+    el.style.width = "0";
+    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.width = el.dataset.w; }));
   });
 }
 
-let pointer = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.4 };
-window.addEventListener("pointermove", e => { pointer.x = e.clientX; pointer.y = e.clientY; }, {passive:true});
+function renderTaskbar(){
+  const bar = document.getElementById("taskbarInner");
+  bar.innerHTML = '<button class="tb-item" onclick="minimizeAll()">🖥️ Desktop</button>';
+  openSet.forEach(id => {
+    const win = document.getElementById("win-" + id);
+    const btn = document.createElement("button");
+    btn.className = "tb-item" + (win && win.dataset.focused === "1" ? " focused" : "");
+    btn.textContent = titles[id] || id;
+    btn.onclick = () => openWin(id);
+    bar.appendChild(btn);
+  });
+}
 
-function drawCosmos(){
-  ctx.clearRect(0, 0, w, h);
-  for(const s of stars){
-    const dx = pointer.x - s.x;
-    const dy = pointer.y - s.y;
-    const dist = Math.hypot(dx, dy) || 1;
-    if(dist < 170){
-      s.vx += (dx / dist) * 0.035;
-      s.vy += (dy / dist) * 0.035;
-    }
-    s.x += s.vx * warpBoost;
-    s.y += s.vy * warpBoost;
-    s.vx *= 0.985;
-    s.vy *= 0.985;
+function focusWin(id){
+  document.querySelectorAll(".win").forEach(w => { w.dataset.focused = "0"; });
+  const win = document.getElementById("win-" + id);
+  if(!win) return;
+  zTop += 1;
+  win.style.zIndex = zTop;
+  win.dataset.focused = "1";
+  renderTaskbar();
+}
 
-    if(s.x < 0) s.x = w;
-    if(s.x > w) s.x = 0;
-    if(s.y < 0) s.y = h;
-    if(s.y > h) s.y = 0;
-
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-    ctx.fillStyle = `hsla(${s.hue}, 90%, 68%, 0.72)`;
-    ctx.fill();
+function openWin(id){
+  const win = document.getElementById("win-" + id);
+  if(!win) return;
+  openSet.add(id);
+  if(!win.style.getPropertyValue("--wx")){
+    win.style.setProperty("--wx", "0px");
+    win.style.setProperty("--wy", "0px");
   }
-  if(warpBoost > 1) warpBoost = Math.max(1, warpBoost - 0.08);
-  requestAnimationFrame(drawCosmos);
-}
-drawCosmos();
-
-// 2. Finger-Tap Shockwave Ripple
-window.addEventListener("pointerdown", e => {
-  const el = document.createElement("div");
-  el.className = "ripple";
-  el.style.left = e.clientX + "px";
-  el.style.top = e.clientY + "px";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 750);
-}, {passive:true});
-
-// 3. 3D Stage Switching + Swipe
-const panels = Array.from(document.querySelectorAll(".panel"));
-const dockBtns = Array.from(document.querySelectorAll("#dockBar button"));
-const hudStatus = document.getElementById("hudStatus");
-const aiOrb = document.getElementById("aiOrb");
-let activeIndex = 0;
-
-function fillSkillMeters(){
-  document.querySelectorAll(".meter-fill").forEach(m => {
-    m.style.width = "0";
-    requestAnimationFrame(() => requestAnimationFrame(() => { m.style.width = m.dataset.w; }));
-  });
+  win.classList.add("open");
+  focusWin(id);
+  if(id === "skills") animateSkillBars();
 }
 
-function switchPanel(name){
-  const idx = panels.findIndex(p => p.dataset.panel === name);
-  if(idx === -1) return;
-  activeIndex = idx;
-  warpBoost = 5.2;
-
-  panels.forEach((p, i) => {
-    p.classList.toggle("active", i === idx);
-    if(i === idx){
-      p.scrollTop = 0;
-      p.style.setProperty("--px", "0px");
-      p.style.setProperty("--py", "0px");
-      p.style.setProperty("--tx", "0deg");
-      p.style.setProperty("--ty", "0deg");
-    }
-  });
-
-  dockBtns.forEach((b, i) => {
-    const on = i === idx;
-    b.classList.toggle("active", on);
-    if(on) b.scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
-  });
-
-  hudStatus.textContent = `${idx + 1}/${panels.length} • ${panels[idx].dataset.tag} • SWIPE ⇄`;
-  aiOrb.classList.toggle("gone", name === "ai");
-  if(name === "skills") fillSkillMeters();
+function closeWin(id){
+  const win = document.getElementById("win-" + id);
+  if(!win) return;
+  win.classList.remove("open");
+  win.dataset.focused = "0";
+  openSet.delete(id);
+  renderTaskbar();
 }
 
-dockBtns.forEach(b => b.addEventListener("click", () => switchPanel(b.dataset.go)));
+function minimizeAll(){
+  document.querySelectorAll(".win").forEach(w => {
+    w.classList.remove("open");
+    w.dataset.focused = "0";
+  });
+  renderTaskbar();
+}
 
-let startX = 0, startY = 0;
-const world = document.getElementById("world");
-world.addEventListener("touchstart", e => {
-  if(e.touches.length !== 1) return;
-  startX = e.touches[0].clientX;
-  startY = e.touches[0].clientY;
-}, {passive:true});
+// Draggable Window Title Bars (Touch + Mouse)
+document.querySelectorAll(".win").forEach(win => {
+  const id = win.dataset.id;
+  const bar = win.querySelector(".win-bar");
+  win.addEventListener("pointerdown", () => focusWin(id), {passive:true});
 
-world.addEventListener("touchend", e => {
-  if(!e.changedTouches.length) return;
-  const dx = e.changedTouches[0].clientX - startX;
-  const dy = e.changedTouches[0].clientY - startY;
-  if(Math.abs(dx) > 68 && Math.abs(dx) > Math.abs(dy) * 1.45){
-    if(dx < 0 && activeIndex < panels.length - 1) switchPanel(panels[activeIndex + 1].dataset.panel);
-    if(dx > 0 && activeIndex > 0) switchPanel(panels[activeIndex - 1].dataset.panel);
+  let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+
+  bar.addEventListener("pointerdown", e => {
+    if(e.target.closest("button")) return;
+    dragging = true;
+    win.classList.add("dragging");
+    ox = parseFloat(win.style.getPropertyValue("--wx")) || 0;
+    oy = parseFloat(win.style.getPropertyValue("--wy")) || 0;
+    sx = e.clientX;
+    sy = e.clientY;
+    bar.setPointerCapture(e.pointerId);
+    focusWin(id);
+  });
+
+  bar.addEventListener("pointermove", e => {
+    if(!dragging) return;
+    const nx = Math.max(-140, Math.min(140, ox + (e.clientX - sx)));
+    const ny = Math.max(-24, Math.min(180, oy + (e.clientY - sy)));
+    win.style.setProperty("--wx", nx + "px");
+    win.style.setProperty("--wy", ny + "px");
+  });
+
+  function endDrag(){
+    if(!dragging) return;
+    dragging = false;
+    win.classList.remove("dragging");
   }
-}, {passive:true});
+  bar.addEventListener("pointerup", endDrag);
+  bar.addEventListener("pointercancel", endDrag);
+});
 
-// 4. Phone Gyroscope / Pointer Subtle 3D Depth
-function applyStageTilt(nx, ny){
-  const cur = panels[activeIndex];
-  if(!cur) return;
-  cur.classList.add("tilting");
-  cur.style.setProperty("--px", `${(nx * 8).toFixed(1)}px`);
-  cur.style.setProperty("--py", `${(ny * 6).toFixed(1)}px`);
-  cur.style.setProperty("--tx", `${(-ny * 3.5).toFixed(2)}deg`);
-  cur.style.setProperty("--ty", `${(nx * 4).toFixed(2)}deg`);
-  clearTimeout(cur._tiltTimer);
-  cur._tiltTimer = setTimeout(() => cur.classList.remove("tilting"), 140);
+// Sub-role Typing & Sri Lanka Menu Clock
+const subRoles = ["BSc CS Student (OUSL)","Diploma IT & AI (CASED)","C • HTML/CSS • Python • Java"];
+let srI = 0, scI = 0, sDel = false;
+function typeSubRole(){
+  const txt = subRoles[srI];
+  document.getElementById("subRole").textContent = sDel ? txt.slice(0,--scI) : txt.slice(0,++scI);
+  if(!sDel && scI === txt.length){ sDel = true; setTimeout(typeSubRole, 1200); return; }
+  if(sDel && scI === 0){ sDel = false; srI = (srI + 1) % subRoles.length; }
+  setTimeout(typeSubRole, sDel ? 38 : 75);
 }
+typeSubRole();
 
-window.addEventListener("deviceorientation", e => {
-  if(e.gamma == null || e.beta == null) return;
-  const nx = Math.max(-1, Math.min(1, e.gamma / 28));
-  const ny = Math.max(-1, Math.min(1, (e.beta - 45) / 28));
-  applyStageTilt(nx, ny);
-}, {passive:true});
-
-// 5. Role Typing, Sri Lanka Clock, Terminal & Quotes
-const roles = ["BSc Computer Science Student","Learning Tech • Coding • AI","Still Learning, Still Building"];
-let rIdx = 0, cIdx = 0, removing = false;
-function typeRole(){
-  const word = roles[rIdx];
-  document.getElementById("roleText").textContent = removing ? word.slice(0,--cIdx) : word.slice(0,++cIdx);
-  if(!removing && cIdx === word.length){ removing = true; setTimeout(typeRole, 1200); return; }
-  if(removing && cIdx === 0){ removing = false; rIdx = (rIdx + 1) % roles.length; }
-  setTimeout(typeRole, removing ? 38 : 75);
-}
-typeRole();
-
-function refreshClock(){
-  const clk = document.getElementById("slTime");
-  const act = document.getElementById("liveActivity");
+function tickOS(){
+  const clk = document.getElementById("menuClock");
+  const act = document.getElementById("osActivity");
   const now = new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Colombo"}));
   const hr = now.getHours();
-  clk.textContent = now.toLocaleTimeString("en-LK",{timeZone:"Asia/Colombo",hour:"2-digit",minute:"2-digit",second:"2-digit"}) + " SL";
+  if(clk) clk.textContent = now.toLocaleTimeString("en-LK",{timeZone:"Asia/Colombo",hour:"2-digit",minute:"2-digit",second:"2-digit"}) + " SL";
+  if(!act) return;
   if(hr<5) act.textContent = "😴 Coding late or sleeping";
-  else if(hr<7) act.textContent = "🌅 Waking up & starting the day";
-  else if(hr<10) act.textContent = "📚 Studying & learning";
-  else if(hr<13) act.textContent = "💻 Studying & building projects";
+  else if(hr<7) act.textContent = "🌅 Waking up";
+  else if(hr<10) act.textContent = "📚 Studying";
+  else if(hr<13) act.textContent = "💻 Studying & building";
   else if(hr<14) act.textContent = "🍛 Lunch break";
-  else if(hr<17) act.textContent = "💻 Practising code & projects";
-  else if(hr<19) act.textContent = "🌇 Evening break & planning";
-  else if(hr<22) act.textContent = "💻 Coding & learning AI";
-  else act.textContent = "🌙 Winding down, thinking in code";
+  else if(hr<17) act.textContent = "💻 Practising code";
+  else if(hr<19) act.textContent = "🌇 Evening break";
+  else if(hr<22) act.textContent = "💻 Coding & AI";
+  else act.textContent = "🌙 Winding down";
 }
-setInterval(refreshClock, 1000);
-refreshClock();
+setInterval(tickOS, 1000);
+tickOS();
 
-const cmds = ["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];
-let cmdI = 0, chI = 0;
-function runCmd(){
-  const line = cmds[cmdI];
-  document.getElementById("cmdLine").textContent = line.slice(0,++chI);
-  if(chI >= line.length){ setTimeout(()=>{ cmdI=(cmdI+1)%cmds.length; chI=0; }, 1200); }
-  setTimeout(runCmd, 55);
+// Live Terminal & Quotes
+const osCmds = ["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];
+let cLine = 0, cChar = 0;
+function typeTerm(){
+  const line = osCmds[cLine];
+  const el = document.getElementById("osTerm");
+  if(el) el.textContent = line.slice(0,++cChar);
+  if(cChar >= line.length){ setTimeout(()=>{ cLine=(cLine+1)%osCmds.length; cChar=0; }, 1200); }
+  setTimeout(typeTerm, 55);
 }
-runCmd();
+typeTerm();
 
-const thoughts = [
+const osNotes = [
   "\"First, try to understand the problem. Then, try to solve it.\"",
   "\"I'm still learning. Every day, a little more.\"",
   "\"Mistakes teach me more than success.\"",
   "\"From Valaichenai, learning step by step.\"",
   "\"I'm still learning, and I want to do my best.\""
 ];
-let thI = 0;
-function rotateThought(){
-  document.getElementById("thoughtBox").textContent = thoughts[thI];
-  thI = (thI + 1) % thoughts.length;
+let nIdx = 0;
+function nextNote(){
+  const qb = document.getElementById("osQuote");
+  if(qb){ qb.textContent = osNotes[nIdx]; nIdx = (nIdx + 1) % osNotes.length; }
 }
-rotateThought();
-setInterval(rotateThought, 5000);
+nextNote();
+setInterval(nextNote, 5000);
 
-function tapAvatar(){ warpBoost = 7; alert("Hey! Thanks for visiting my site 😊"); }
-function greetVisitor(){ const n = prompt("What's your name?"); if(n) alert("Welcome " + n + "! Thanks for visiting ❤️"); }
-function openCollab(){ alert("Thank you! Reach Shakeeb on WhatsApp or Email — he'll reply soon 😊"); }
-
-// 6. Streaming Portfolio AI
-function answerShakeeb(raw){
+// Streaming Portfolio AI
+function replyAI(raw){
   const q = raw.toLowerCase();
   if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes("school")||q.includes("cased")||q.includes("ousl")||q.includes("diploma")||q.includes("degree")||q.includes("chem")||q.includes("phys")){
     return {
@@ -601,40 +514,40 @@ function answerShakeeb(raw){
   };
 }
 
-function askPreset(topic){ document.getElementById("aiInput").value = topic; sendQuestion(); }
+function presetQ(t){ document.getElementById("osInput").value = t; runAI(); }
 
-function sendQuestion(){
-  const inp = document.getElementById("aiInput");
-  const text = inp.value.trim();
-  if(!text) return;
-  const log = document.getElementById("aiLog");
-  const chipsBox = document.getElementById("nextChips");
+function runAI(){
+  const inp = document.getElementById("osInput");
+  const q = inp.value.trim();
+  if(!q) return;
+  const chat = document.getElementById("osChat");
+  const fBox = document.getElementById("osFollow");
 
-  const userB = document.createElement("div");
-  userB.className = "bubble b-user";
-  userB.textContent = text;
-  log.appendChild(userB);
+  const me = document.createElement("div");
+  me.className = "m m-me";
+  me.textContent = q;
+  chat.appendChild(me);
   inp.value = "";
 
-  const reply = answerShakeeb(text);
-  const aiB = document.createElement("div");
-  aiB.className = "bubble b-ai";
-  aiB.textContent = "🤖 ";
-  log.appendChild(aiB);
+  const ans = replyAI(q);
+  const bot = document.createElement("div");
+  bot.className = "m m-ai";
+  bot.textContent = "🤖 ";
+  chat.appendChild(bot);
 
-  const words = reply.text.split(" ");
-  let idx = 0;
-  const t = setInterval(() => {
-    aiB.textContent += (idx === 0 ? "" : " ") + words[idx++];
-    log.scrollTop = log.scrollHeight;
-    if(idx >= words.length){
-      clearInterval(t);
-      chipsBox.innerHTML = "";
-      reply.chips.forEach(([label, query]) => {
-        const btn = document.createElement("button");
-        btn.textContent = label;
-        btn.onclick = () => askPreset(query);
-        chipsBox.appendChild(btn);
+  const words = ans.text.split(" ");
+  let i = 0;
+  const timer = setInterval(() => {
+    bot.textContent += (i === 0 ? "" : " ") + words[i++];
+    chat.scrollTop = chat.scrollHeight;
+    if(i >= words.length){
+      clearInterval(timer);
+      fBox.innerHTML = "";
+      ans.chips.forEach(([label, query]) => {
+        const b = document.createElement("button");
+        b.textContent = label;
+        b.onclick = () => presetQ(query);
+        fBox.appendChild(b);
       });
     }
   }, 26);
@@ -642,3 +555,4 @@ function sendQuestion(){
 </script>
 </body>
 </html>
+
