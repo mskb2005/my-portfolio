@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>ShakeebOS | Muhammad Shakeeb</title>
+<title>Muhammad Shakeeb | Portfolio</title>
 <style>
 :root{
   --wall1:#0f172a;
@@ -12,66 +12,50 @@
   --violet:#c084fc;
   --amber:#facc15;
   --mint:#4ade80;
-  --winBg:rgba(15,23,42,.92);
-  --winBorder:rgba(148,163,184,.25);
-  --spring:cubic-bezier(0.18, 0.9, 0.32, 1.15);
+  --cardBg:rgba(15,23,42,.82);
+  --cardBorder:rgba(148,163,184,.24);
   --smooth:cubic-bezier(0.22, 1, 0.36, 1);
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;height:100%;overflow:hidden;color:#f8fafc;background:radial-gradient(circle at 20% 20%,#1d4ed833,transparent 45%),radial-gradient(circle at 80% 75%,#9333ea33,transparent 45%),linear-gradient(145deg,var(--wall1),var(--wall2))}
+html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;background:radial-gradient(circle at 20% 20%,#1d4ed833,transparent 45%),radial-gradient(circle at 80% 75%,#9333ea33,transparent 45%),linear-gradient(145deg,var(--wall1),var(--wall2))}
 
-/* Subtle Dot Grid Wallpaper */
 .wallpaper{position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.11) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
 
-/* Top OS Menu Bar */
-.menubar{position:fixed;top:0;left:0;right:0;height:38px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(2,6,23,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);font-size:12.5px}
-.os-name{font-weight:800;color:var(--cyan);display:flex;align-items:center;gap:6px;cursor:pointer}
-.os-clock{font-family:monospace;color:#e2e8f0;font-weight:700}
+/* Top Bar */
+.topbar{position:sticky;top:0;z-index:40;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(2,6,23,.84);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);font-size:13px}
+.brand{font-weight:800;color:var(--cyan);display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:none;font-size:13.5px}
+.clock{font-family:monospace;color:#e2e8f0;font-weight:700;font-size:12px}
 
-/* Desktop App Icons Grid */
-.desktop{position:relative;z-index:2;height:100dvh;padding:50px 14px 78px;overflow-y:auto}
-.profile-strip{display:flex;align-items:center;gap:14px;background:rgba(15,23,42,.72);border:1px solid var(--winBorder);border-radius:20px;padding:12px 16px;margin-bottom:16px;backdrop-filter:blur(12px)}
-.profile-strip img{width:62px;height:62px;border-radius:16px;object-fit:cover;border:2px solid var(--cyan);cursor:pointer}
-.profile-strip h1{font-size:19px;line-height:1.15;color:#fff}
-.profile-strip p{font-size:12.5px;color:var(--amber);font-weight:700;margin-top:3px;min-height:18px}
-.loc-tag{font-size:11.5px;color:#cbd5e1;margin-top:3px}
+/* Home View */
+.view{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:16px 14px 42px;animation:fadeView .22s var(--smooth)}
+@keyframes fadeView{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:12px;max-width:680px;margin:0 auto}
-.app-icon{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid transparent;cursor:pointer;transition:transform .25s var(--spring),background .2s ease,border-color .2s ease}
-.app-icon:hover{background:rgba(255,255,255,.09);border-color:rgba(56,189,248,.35)}
-.app-icon:active{transform:scale(.9)}
-.glyph{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:22px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
-.app-icon span{font-size:11.5px;font-weight:700;color:#f1f5f9;line-height:1.2}
+.profile-card{display:flex;align-items:center;gap:14px;background:var(--cardBg);border:1px solid var(--cardBorder);border-radius:20px;padding:14px 16px;margin-bottom:16px;backdrop-filter:blur(12px)}
+.profile-card img{width:64px;height:64px;border-radius:16px;object-fit:cover;border:2px solid var(--cyan);cursor:pointer;flex-shrink:0}
+.profile-card h1{font-size:19px;line-height:1.15;color:#fff}
+.profile-card p{font-size:12.5px;color:var(--amber);font-weight:700;margin-top:3px;min-height:18px}
+.loc-tag{font-size:11.5px;color:#cbd5e1;margin-top:4px}
 
-/* Draggable / Pop-Up OS Window */
-.win{
-  position:fixed;top:48px;left:10px;right:10px;bottom:70px;
-  max-width:760px;margin:0 auto;z-index:30;
-  background:var(--winBg);backdrop-filter:blur(20px);
-  border:1px solid var(--winBorder);border-radius:22px;
-  box-shadow:0 26px 65px rgba(0,0,0,.65);
-  display:flex;flex-direction:column;overflow:hidden;
-  opacity:0;visibility:hidden;
-  transform:translate3d(0,36px,0) scale(.86);
-  transition:transform .44s var(--spring),opacity .28s ease,visibility 0s linear .44s;
-}
-.win.open{
-  opacity:1;visibility:visible;
-  transform:translate3d(var(--wx,0px),var(--wy,0px),0) scale(1);
-  transition:transform .44s var(--spring),opacity .28s ease,visibility 0s;
-}
-.win.dragging{transition:none !important}
+.section-menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:11px}
+.menu-item{display:flex;align-items:center;gap:11px;text-align:left;padding:12px 13px;border-radius:16px;background:var(--cardBg);border:1px solid rgba(148,163,184,.2);color:#f8fafc;cursor:pointer;transition:transform .16s ease,border-color .18s ease,background .18s ease}
+.menu-item:hover{background:rgba(30,41,59,.92);border-color:rgba(56,189,248,.45)}
+.menu-item:active{transform:scale(.97)}
+.glyph{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.menu-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.menu-txt strong{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-txt small{font-size:11px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-.win-bar{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(2,6,23,.75);border-bottom:1px solid rgba(255,255,255,.1);cursor:grab;touch-action:none}
-.win-bar:active{cursor:grabbing}
-.win-title{font-size:13.5px;font-weight:800;color:var(--cyan)}
-.win-controls{display:flex;gap:7px}
-.win-btn{border:none;border-radius:999px;padding:5px 11px;font-size:11.5px;font-weight:800;cursor:pointer}
-.min-btn{background:#334155;color:#f8fafc}
-.close-btn{background:#ef4444;color:#fff}
+/* Dedicated Section Screen */
+.screen{display:none}
+.screen.active{display:block}
+.screen-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.back-btn{background:#1e293b;color:#f8fafc;border:1px solid rgba(148,163,184,.32);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:transform .16s ease,background .18s ease}
+.back-btn:active{transform:scale(.96)}
+.screen-tag{font-size:12px;color:var(--cyan);font-weight:800}
 
-.win-body{padding:18px;overflow-y:auto;flex:1;line-height:1.65;font-size:14.5px;color:#e2e8f0}
-.win-body h2{color:var(--amber);font-size:20px;margin-bottom:10px}
+.panel{background:var(--cardBg);border:1px solid var(--cardBorder);border-radius:20px;padding:18px;line-height:1.65;font-size:14.5px;color:#e2e8f0;backdrop-filter:blur(14px)}
+.panel h2{color:var(--amber);font-size:20px;margin-bottom:10px}
+
 .edu-box{border-left:3px solid var(--cyan);padding-left:12px;margin:12px 0}
 .edu-box b{color:var(--mint);font-size:15.5px}
 .link-pill{display:inline-block;margin-top:8px;margin-right:8px;padding:7px 13px;border-radius:999px;text-decoration:none;font-size:12px;font-weight:700;background:#0f172a;border:1px solid var(--cyan);color:#7dd3fc}
@@ -80,18 +64,39 @@ html,body{width:100%;height:100%;overflow:hidden;color:#f8fafc;background:radial
 .s-row{margin:11px 0}
 .s-top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px}
 .s-track{height:10px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
-.s-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .85s var(--smooth)}
+.s-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .75s var(--smooth)}
 
 .p-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-top:12px}
 .p-box b{color:var(--amber);font-size:15.5px;display:block;margin-bottom:4px}
 
+/* Graphs */
+.graph-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
+.graph-tab{background:#1e293b;color:#cbd5e1;border:1px solid rgba(148,163,184,.28);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+.graph-tab.active{background:linear-gradient(90deg,#0284c7,#9333ea);color:#fff;border-color:transparent}
+.graph-panel{background:rgba(2,6,23,.72);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;margin-top:8px}
+.graph-panel h3{font-size:15px;color:#f8fafc;margin-bottom:4px}
+.graph-panel p.g-sub{font-size:12.5px;color:#94a3b8;margin-bottom:14px}
+.bar-chart{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:150px;padding:10px 4px 6px;border-bottom:1px solid rgba(255,255,255,.14)}
+.bar-col{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:6px}
+.bar-val{font-size:11px;font-family:monospace;color:var(--amber);font-weight:700}
+.bar-stem{width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--cyan),var(--violet))}
+.bar-day{font-size:11px;color:#cbd5e1;font-weight:700;margin-top:6px;text-align:center}
+.stage-list,.mix-list{display:flex;flex-direction:column;gap:11px}
+.stage-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px}
+.stage-top,.mix-meta{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:700;margin-bottom:6px}
+.stage-top span:last-child{color:var(--mint);font-family:monospace}
+.mix-meta span:last-child{color:var(--amber);font-family:monospace}
+.stage-track,.mix-track{height:9px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.stage-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--cyan))}
+.mix-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--amber),#ec4899)}
+
 .term-box{background:#020617;border:1px solid var(--mint);border-radius:14px;padding:14px;font-family:monospace;font-size:13px;color:var(--mint);min-height:84px}
 .note-box{margin-top:12px;padding:12px;border-radius:14px;background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.4);color:#fef08a;font-style:italic;text-align:center}
 
-/* Portfolio AI inside Window */
+/* Portfolio AI */
 .ai-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .ai-chips button{background:#1e293b;color:#7dd3fc;border:1px solid var(--violet);padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
-.chat-box{height:195px;overflow-y:auto;background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:7px;margin-top:8px}
+.chat-box{height:210px;overflow-y:auto;background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:7px;margin-top:8px}
 .m{padding:8px 12px;border-radius:12px;font-size:13px;max-width:88%;animation:pop .22s var(--smooth)}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .m-ai{background:#1e293b;color:#bae6fd;align-self:flex-start}
@@ -104,91 +109,29 @@ html,body{width:100%;height:100%;overflow:hidden;color:#f8fafc;background:radial
 
 .c-list a{display:block;text-align:center;padding:12px;border-radius:14px;margin-top:9px;text-decoration:none;font-weight:800;color:#fff;font-size:13.5px}
 
-/* Bottom Taskbar */
-.taskbar{position:fixed;bottom:10px;left:10px;right:10px;z-index:50;display:flex;justify-content:center;pointer-events:none}
-.taskbar-inner{pointer-events:auto;display:flex;gap:6px;padding:7px 10px;border-radius:999px;background:rgba(2,6,23,.84);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);max-width:100%;overflow-x:auto;scrollbar-width:none}
-.taskbar-inner::-webkit-scrollbar{display:none}
-.tb-item{background:rgba(255,255,255,.07);border:1px solid transparent;color:#e2e8f0;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.tb-item.focused{background:linear-gradient(90deg,#0284c7,#9333ea);color:#fff}
-/* Smooth OS motion & zero-gap layout polish */
-html, body{
-  min-height:100dvh;
-  overflow-x:hidden;
-}
-
-.win{
-  transition:opacity .22s cubic-bezier(.22,1,.36,1), transform .24s cubic-bezier(.22,1,.36,1), box-shadow .2s ease;
-}
-
-.win:not(.open){
-  opacity:0;
-  pointer-events:none;
-  transform:translate(var(--wx, 0px), calc(var(--wy, 0px) + 14px)) scale(.96);
-}
-
-.win.open{
-  opacity:1;
-  transform:translate(var(--wx, 0px), var(--wy, 0px)) scale(1);
-}
-
-.win[data-focused="1"]{
-  box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(56,189,248,.35);
-}
-
-.icon-btn, .link-pill, .win-btn, .ai-chips button{
-  transition:transform .16s ease, background .18s ease, border-color .18s ease, opacity .18s ease;
-}
-
-.icon-btn:active, .link-pill:active, .ai-chips button:active{
-  transform:scale(.96);
-}
-
-/* Fill wide screens evenly without dead space */
 @media (min-width:900px){
-  .desktop{
-    max-width:1180px;
-    margin:0 auto;
-    width:100%;
-  }
-  .icon-grid{
-    max-width:1120px;
-    grid-template-columns:repeat(4, minmax(150px, 1fr));
-    gap:16px;
-  }
-  .desktop-tip{
-    max-width:1120px;
-  }
+  .view{padding:22px 20px 48px}
+  .section-menu{grid-template-columns:repeat(3,minmax(190px,1fr));gap:14px}
 }
-
-/* Smooth bottom-sheet feel on mobile screens */
 @media (max-width:640px){
-  .win{
-    width:calc(100% - 16px) !important;
-    max-height:78dvh;
-    border-radius:18px 18px 14px 14px;
-  }
-  .win:not(.open){
-    transform:translateY(28px) scale(.98);
-  }
-  .win.open{
-    transform:translateY(0) scale(1);
-  }
+  .bar-chart{gap:5px}
+  .bar-val,.bar-day{font-size:10px}
 }
-
 </style>
 </head>
 <body>
 
 <div class="wallpaper"></div>
 
-<header class="menubar">
-  <div class="os-name" onclick="minimizeAll()">🖥️ ShakeebOS v2.6</div>
-  <div class="os-clock" id="menuClock">--:--:-- SL</div>
+<header class="topbar">
+  <button class="brand" onclick="showScreen('home')">🏠 Muhammad Shakeeb</button>
+  <div class="clock" id="menuClock">--:--:-- SL</div>
 </header>
 
-<main class="desktop" id="desktop">
-  <div class="profile-strip" onclick="openWin('about')">
-    <img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb" onclick="event.stopPropagation();alert('Hey! Thanks for visiting ShakeebOS 😊')">
+<!-- HOME VIEW -->
+<main class="view screen active" id="screen-home">
+  <div class="profile-card" onclick="showScreen('about')">
+    <img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb" onclick="event.stopPropagation();alert('Hey! Thanks for visiting 😊')">
     <div>
       <h1>Muhammad Shakeeb</h1>
       <p id="subRole"></p>
@@ -196,58 +139,68 @@ html, body{
     </div>
   </div>
 
-  <div class="icon-grid">
-    <div class="app-icon" onclick="openWin('about')">
+  <div class="section-menu">
+    <button class="menu-item" onclick="showScreen('about')">
       <div class="glyph" style="background:linear-gradient(135deg,#2563eb,#38bdf8)">👨‍💻</div>
-      <span>About.app</span>
-    </div>
-    <div class="app-icon" onclick="openWin('ai')">
+      <div class="menu-txt"><strong>About</strong><small>Who I am & how I learn</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('ai')">
       <div class="glyph" style="background:linear-gradient(135deg,#9333ea,#ec4899)">🤖</div>
-      <span>Portfolio AI</span>
-    </div>
-    <div class="app-icon" onclick="openWin('live')">
+      <div class="menu-txt"><strong>Portfolio AI</strong><small>Ask about my profile</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('live')">
       <div class="glyph" style="background:linear-gradient(135deg,#059669,#34d399)">🔴</div>
-      <span>Live Feed</span>
-    </div>
-    <div class="app-icon" onclick="openWin('edu')">
+      <div class="menu-txt"><strong>Live Feed</strong><small>Focus mode & logic check</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('edu')">
       <div class="glyph" style="background:linear-gradient(135deg,#0284c7,#6366f1)">🎓</div>
-      <span>Education</span>
-    </div>
-    <div class="app-icon" onclick="openWin('skills')">
+      <div class="menu-txt"><strong>Education</strong><small>OUSL, CASED & school</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('skills')">
       <div class="glyph" style="background:linear-gradient(135deg,#d97706,#facc15)">📊</div>
-      <span>Skills.exe</span>
-    </div>
-    <div class="app-icon" onclick="openWin('projects')">
+      <div class="menu-txt"><strong>Skills</strong><small>Languages & current pace</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('projects')">
       <div class="glyph" style="background:linear-gradient(135deg,#7c3aed,#22d3ee)">🚀</div>
-      <span>Projects</span>
-    </div>
-    <div class="app-icon" onclick="openWin('cv')">
+      <div class="menu-txt"><strong>Projects</strong><small>3D Globe, portfolio & builds</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('graphs')">
+      <div class="glyph" style="background:linear-gradient(135deg,#0ea5e9,#10b981)">📈</div>
+      <div class="menu-txt"><strong>Graphs</strong><small>Rhythm, growth & focus mix</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('cv')">
       <div class="glyph" style="background:linear-gradient(135deg,#ea580c,#fbbf24)">📄</div>
-      <span>CV.pdf</span>
-    </div>
-    <div class="app-icon" onclick="openWin('contact')">
+      <div class="menu-txt"><strong>CV</strong><small>Summary & full CV request</small></div>
+    </button>
+    <button class="menu-item" onclick="showScreen('contact')">
       <div class="glyph" style="background:linear-gradient(135deg,#0d9488,#38bdf8)">📩</div>
-      <span>Connect</span>
-    </div>
-  </div><button class="link-pill" style="cursor:pointer" onclick="startPortfolioTour()">▶ 60s Tour</button>
+      <div class="menu-txt"><strong>Connect</strong><small>WhatsApp, email & links</small></div>
+    </button>
+  </div>
 </main>
 
-<!-- WINDOW 1: ABOUT -->
-<div class="win" id="win-about" data-id="about">
-  <div class="win-bar"><div class="win-title">👨‍💻 About.app</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('about')">_</button><button class="win-btn close-btn" onclick="closeWin('about')">✕</button></div></div>
-  <div class="win-body">
+<!-- ABOUT -->
+<section class="view screen" id="screen-about">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">👨‍💻 About</span>
+  </div>
+  <div class="panel">
     <h2>About Muhammad Shakeeb</h2>
     <p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
     <p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
     <p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
     <p style="color:var(--cyan);font-style:italic;text-align:center">"I'm still learning, and I want to do my best."</p>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 2: PORTFOLIO AI -->
-<div class="win" id="win-ai" data-id="ai">
-  <div class="win-bar"><div class="win-title">🤖 Portfolio AI — Shakeeb Only</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('ai')">_</button><button class="win-btn close-btn" onclick="closeWin('ai')">✕</button></div></div>
-  <div class="win-body">
+<!-- PORTFOLIO AI -->
+<section class="view screen" id="screen-ai">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">🤖 Portfolio AI</span>
+  </div>
+  <div class="panel">
     <h2>Ask Portfolio AI</h2>
     <p style="font-size:13px;color:#cbd5e1">Answers only about <b style="color:var(--amber)">Shakeeb's education, skills, projects, and contact</b>.</p>
     <div class="ai-chips">
@@ -257,7 +210,7 @@ html, body{
       <button onclick="presetQ('contact')">📩 Contact</button>
     </div>
     <div class="chat-box" id="osChat">
-      <div class="m m-ai">👋 Hi! I'm Portfolio AI inside ShakeebOS. Ask about Shakeeb's education, skills, projects, or contact.</div>
+      <div class="m m-ai">👋 Hi! I'm Portfolio AI. Ask about Shakeeb's education, skills, projects, or contact.</div>
     </div>
     <div class="follow-row" id="osFollow">
       <button onclick="presetQ('education')">🎓 OUSL & CASED</button>
@@ -269,14 +222,17 @@ html, body{
       <button onclick="runAI()">Ask</button>
     </div>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 3: LIVE -->
-<div class="win" id="win-live" data-id="live">
-  <div class="win-bar"><div class="win-title">🔴 Live Feed</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('live')">_</button><button class="win-btn close-btn" onclick="closeWin('live')">✕</button></div></div>
-  <div class="win-body">
+<!-- LIVE FEED -->
+<section class="view screen" id="screen-live">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">🔴 Live Feed</span>
+  </div>
+  <div class="panel">
     <h2>Live Mode & Logic</h2>
-    <div class="term-box">$ shakeeb@os:~$ <span id="osTerm"></span><span>▌</span></div>
+    <div class="term-box">$ shakeeb@dev:~$ <span id="osTerm"></span><span>▌</span></div>
 
     <div class="p-box">
       <b>Daily Focus Mode <span id="focusSlotTag" style="font-size:12px;color:#7dd3fc"></span></b>
@@ -300,23 +256,29 @@ html, body{
 
     <div class="note-box" id="osQuote">Loading...</div>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 4: EDUCATION -->
-<div class="win" id="win-edu" data-id="edu">
-  <div class="win-bar"><div class="win-title">🎓 Education</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('edu')">_</button><button class="win-btn close-btn" onclick="closeWin('edu')">✕</button></div></div>
-  <div class="win-body">
+<!-- EDUCATION -->
+<section class="view screen" id="screen-edu">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">🎓 Education</span>
+  </div>
+  <div class="panel">
     <h2>Education Journey</h2>
     <div class="edu-box"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL) — Major in CS with Chemistry & Physics</span><br><a class="link-pill" href="https://ou.ac.lk" target="_blank">🌐 Official OUSL → ou.ac.lk</a></div>
     <div class="edu-box"><b>Completed (2026) — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="link-pill" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Official CASED →</a></div>
     <div class="edu-box"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 5: SKILLS -->
-<div class="win" id="win-skills" data-id="skills">
-  <div class="win-bar"><div class="win-title">📊 Skills.exe</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('skills')">_</button><button class="win-btn close-btn" onclick="closeWin('skills')">✕</button></div></div>
-  <div class="win-body">
+<!-- SKILLS -->
+<section class="view screen" id="screen-skills">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">📊 Skills</span>
+  </div>
+  <div class="panel">
     <h2>What I'm Learning</h2>
     <p style="font-size:12.5px;color:#94a3b8">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
     <div class="s-row"><div class="s-top"><span>C (Strongest)</span><span>90%</span></div><div class="s-track"><div class="s-fill" data-w="90%"></div></div></div>
@@ -326,12 +288,15 @@ html, body{
     <div class="s-row"><div class="s-top"><span>AI & Machine Learning</span><span>65%</span></div><div class="s-track"><div class="s-fill" data-w="65%"></div></div></div>
     <div class="s-row"><div class="s-top"><span>JavaScript</span><span>60%</span></div><div class="s-track"><div class="s-fill" data-w="60%"></div></div></div>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 6: PROJECTS -->
-<div class="win" id="win-projects" data-id="projects">
-  <div class="win-bar"><div class="win-title">🚀 Projects</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('projects')">_</button><button class="win-btn close-btn" onclick="closeWin('projects')">✕</button></div></div>
-  <div class="win-body">
+<!-- PROJECTS -->
+<section class="view screen" id="screen-projects">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">🚀 Projects</span>
+  </div>
+  <div class="panel">
     <h2>My Projects</h2>
     <div class="p-box">
       <b>1. 3D Interactive World Globe</b>
@@ -341,7 +306,7 @@ html, body{
     </div>
     <div class="p-box">
       <b>2. This Portfolio Website</b>
-      <p>Built from my phone as a desktop-window OS interface with Portfolio AI.</p>
+      <p>Built from my phone as an interactive portfolio with Portfolio AI.</p>
       <a class="link-pill" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 Source Code →</a>
     </div>
     <div class="p-box">
@@ -350,12 +315,93 @@ html, body{
       <a class="link-pill" href="https://github.com/mskb2005" target="_blank">💻 View GitHub →</a>
     </div>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 7: CV -->
-<div class="win" id="win-cv" data-id="cv">
-  <div class="win-bar"><div class="win-title">📄 CV.pdf</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('cv')">_</button><button class="win-btn close-btn" onclick="closeWin('cv')">✕</button></div></div>
-  <div class="win-body">
+<!-- GRAPHS -->
+<section class="view screen" id="screen-graphs">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">📈 Graphs</span>
+  </div>
+  <div class="panel">
+    <h2>Visual Progress & Focus Graphs</h2>
+    <p style="font-size:12.5px;color:#94a3b8">Separate from language percentages in Skills—shows weekly study rhythm, learning milestones, and internship focus.</p>
+
+    <div class="graph-tabs">
+      <button class="graph-tab active" id="gtab-rhythm" onclick="switchGraph('rhythm')">📅 Weekly Rhythm</button>
+      <button class="graph-tab" id="gtab-milestones" onclick="switchGraph('milestones')">🧭 Milestone Stages</button></button>
+      <button class="graph-tab" id="gtab-focus" onclick="switchGraph('focus')">💼 Internship Focus</button>
+    </div>
+
+    <div class="graph-panel" id="gpanel-rhythm">
+      <h3>Weekly Study & Practice Rhythm</h3>
+      <p class="g-sub">Typical daily hours spent on university coursework, problem solving, and mobile builds.</p>
+      <div class="bar-chart">
+        <div class="bar-col"><span class="bar-val">4.5h</span><div class="bar-stem" style="height:75%"></div><span class="bar-day">Mon</span></div>
+        <div class="bar-col"><span class="bar-val">4.0h</span><div class="bar-stem" style="height:67%"></div><span class="bar-day">Tue</span></div>
+        <div class="bar-col"><span class="bar-val">5.0h</span><div class="bar-stem" style="height:83%"></div><span class="bar-day">Wed</span></div>
+        <div class="bar-col"><span class="bar-val">4.5h</span><div class="bar-stem" style="height:75%"></div><span class="bar-day">Thu</span></div>
+        <div class="bar-col"><span class="bar-val">3.5h</span><div class="bar-stem" style="height:58%"></div><span class="bar-day">Fri</span></div>
+        <div class="bar-col"><span class="bar-val">6.0h</span><div class="bar-stem" style="height:100%"></div><span class="bar-day">Sat</span></div>
+        <div class="bar-col"><span class="bar-val">5.5h</span><div class="bar-stem" style="height:92%"></div><span class="bar-day">Sun</span></div>
+      </div>
+    </div>
+
+    <div class="graph-panel" id="gpanel-milestones" style="display:none">
+      <h3>Learning & Milestone Progression</h3>
+      <p class="g-sub">How foundation building progressed from school in Valaichenai to university and AI study.</p>
+      <div class="stage-list">
+        <div class="stage-item">
+          <div class="stage-top"><span>1. Annoor National School (Valaichenai)</span><span>Foundation</span></div>
+          <div class="stage-track"><div class="stage-fill" style="width:35%"></div></div>
+        </div>
+        <div class="stage-item">
+          <div class="stage-top"><span>2. OUSL BSc CS + Chemistry & Physics</span><span>In Progress</span></div>
+          <div class="stage-track"><div class="stage-fill" style="width:65%"></div></div>
+        </div>
+        <div class="stage-item">
+          <div class="stage-top"><span>3. CASED Diploma in IT & AI (2026)</span><span>Completed</span></div>
+          <div class="stage-track"><div class="stage-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stage-item">
+          <div class="stage-top"><span>4. Live Web & Interactive Builds</span><span>Active</span></div>
+          <div class="stage-track"><div class="stage-fill" style="width:95%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="graph-panel" id="gpanel-focus" style="display:none">
+      <h3>Internship & Role Focus Mix</h3>
+      <p class="g-sub">Focus split across target internship tracks • Available Remote or Hybrid (Batticaloa / Colombo).</p>
+      <div class="mix-list">
+        <div class="mix-row">
+          <div class="mix-meta"><span>Full Stack Development Intern</span><span>30%</span></div>
+          <div class="mix-track"><div class="mix-fill" style="width:30%"></div></div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-meta"><span>Quality Assurance (QA) Intern</span><span>25%</span></div>
+          <div class="mix-track"><div class="mix-fill" style="width:25%"></div></div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-meta"><span>Quantitative Development Intern</span><span>20%</span></div>
+          <div class="mix-track"><div class="mix-fill" style="width:20%"></div></div>
+        </div>
+        <div class="mix-row">
+          <div class="mix-meta"><span>AI & CS / Knowledge Mgmt Intern</span><span>25%</span></div>
+          <div class="mix-track"><div class="mix-fill" style="width:25%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section class="view screen" id="screen-cv">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">📄 CV</span>
+  </div>
+  <div class="panel">
     <h2>CV Summary</h2>
     <p><b>Name:</b> Muhammad Shakeeb<br>
     <b>Education:</b> BSc Computer Science (Major) + Chemistry & Physics — OUSL<br>
@@ -365,12 +411,15 @@ html, body{
     <b>Email:</b> mgmshakeeb2005@gmail.com</p>
     <a class="link-pill green" href="https://wa.me/94726958015" target="_blank" style="margin-top:14px">📩 Request Full CV on WhatsApp →</a>
   </div>
-</div>
+</section>
 
-<!-- WINDOW 8: CONTACT -->
-<div class="win" id="win-contact" data-id="contact">
-  <div class="win-bar"><div class="win-title">📩 Connect</div><div class="win-controls"><button class="win-btn min-btn" onclick="closeWin('contact')">_</button><button class="win-btn close-btn" onclick="closeWin('contact')">✕</button></div></div>
-  <div class="win-body">
+<!-- CONTACT -->
+<section class="view screen" id="screen-contact">
+  <div class="screen-head">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">📩 Connect</span>
+  </div>
+  <div class="panel">
     <h2>Let's Connect!</h2>
     <p style="font-size:13px;color:#cbd5e1">Available in Valaichenai, Batticaloa & Maradana, Colombo.</p>
     <div class="c-list">
@@ -381,29 +430,9 @@ html, body{
       <a style="background:#0284c7" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
     </div>
   </div>
-</div>
-
-<div class="taskbar">
-  <div class="taskbar-inner" id="taskbarInner">
-    <button class="tb-item" onclick="minimizeAll()">🖥️ Desktop</button>
-  </div>
-</div>
+</section>
 
 <script>
-const titles = {
-  about: "👨‍💻 About",
-  ai: "🤖 AI",
-  live: "🔴 Live",
-  edu: "🎓 Edu",
-  skills: "📊 Skills",
-  projects: "🚀 Projects",
-  cv: "📄 CV",
-  contact: "📩 Connect"
-};
-
-let zTop = 32;
-const openSet = new Set();
-
 function animateSkillBars(){
   document.querySelectorAll(".s-fill").forEach(el => {
     el.style.width = "0";
@@ -411,97 +440,24 @@ function animateSkillBars(){
   });
 }
 
-function renderTaskbar(){
-  const bar = document.getElementById("taskbarInner");
-  bar.innerHTML = '<button class="tb-item" onclick="minimizeAll()">🖥️ Desktop</button>';
-  openSet.forEach(id => {
-    const win = document.getElementById("win-" + id);
-    const btn = document.createElement("button");
-    btn.className = "tb-item" + (win && win.dataset.focused === "1" ? " focused" : "");
-    btn.textContent = titles[id] || id;
-    btn.onclick = () => openWin(id);
-    bar.appendChild(btn);
+function showScreen(name){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  const target = document.getElementById("screen-" + name) || document.getElementById("screen-home");
+  target.classList.add("active");
+  window.scrollTo({top: 0, behavior: "instant"});
+  if(name === "skills") animateSkillBars();
+}
+
+function switchGraph(key){
+  ["rhythm", "milestones", "focus"].forEach(k => {
+    const tab = document.getElementById("gtab-" + k);
+    const panel = document.getElementById("gpanel-" + k);
+    if(tab) tab.classList.toggle("active", k === key);
+    if(panel) panel.style.display = (k === key) ? "block" : "none";
   });
 }
 
-function focusWin(id){
-  document.querySelectorAll(".win").forEach(w => { w.dataset.focused = "0"; });
-  const win = document.getElementById("win-" + id);
-  if(!win) return;
-  zTop += 1;
-  win.style.zIndex = zTop;
-  win.dataset.focused = "1";
-  renderTaskbar();
-}
-
-function openWin(id){
-  const win = document.getElementById("win-" + id);
-  if(!win) return;
-  openSet.add(id);
-  if(!win.style.getPropertyValue("--wx")){
-    win.style.setProperty("--wx", "0px");
-    win.style.setProperty("--wy", "0px");
-  }
-  win.classList.add("open");
-  focusWin(id);
-  if(id === "skills") animateSkillBars();
-}
-
-function closeWin(id){
-  const win = document.getElementById("win-" + id);
-  if(!win) return;
-  win.classList.remove("open");
-  win.dataset.focused = "0";
-  openSet.delete(id);
-  renderTaskbar();
-}
-
-function minimizeAll(){
-  document.querySelectorAll(".win").forEach(w => {
-    w.classList.remove("open");
-    w.dataset.focused = "0";
-  });
-  renderTaskbar();
-}
-
-// Draggable Window Title Bars (Touch + Mouse)
-document.querySelectorAll(".win").forEach(win => {
-  const id = win.dataset.id;
-  const bar = win.querySelector(".win-bar");
-  win.addEventListener("pointerdown", () => focusWin(id), {passive:true});
-
-  let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
-
-  bar.addEventListener("pointerdown", e => {
-    if(e.target.closest("button")) return;
-    dragging = true;
-    win.classList.add("dragging");
-    ox = parseFloat(win.style.getPropertyValue("--wx")) || 0;
-    oy = parseFloat(win.style.getPropertyValue("--wy")) || 0;
-    sx = e.clientX;
-    sy = e.clientY;
-    bar.setPointerCapture(e.pointerId);
-    focusWin(id);
-  });
-
-  bar.addEventListener("pointermove", e => {
-    if(!dragging) return;
-    const nx = Math.max(-140, Math.min(140, ox + (e.clientX - sx)));
-    const ny = Math.max(-24, Math.min(180, oy + (e.clientY - sy)));
-    win.style.setProperty("--wx", nx + "px");
-    win.style.setProperty("--wy", ny + "px");
-  });
-
-  function endDrag(){
-    if(!dragging) return;
-    dragging = false;
-    win.classList.remove("dragging");
-  }
-  bar.addEventListener("pointerup", endDrag);
-  bar.addEventListener("pointercancel", endDrag);
-});
-
-// Sub-role Typing & Sri Lanka Menu Clock
+// Sub-role Typing & Sri Lanka Clock
 const subRoles = ["BSc CS Student (OUSL)","Diploma IT & AI (CASED)","C • HTML/CSS • Python • Java"];
 let srI = 0, scI = 0, sDel = false;
 function typeSubRole(){
@@ -637,6 +593,7 @@ function runAI(){
     }
   }, 26);
 }
+
 const focusModes = [
   { label: "Deep Focus", text: "Studying core concepts and practising clean logic without distractions." },
   { label: "Build & Debug", text: "Testing small ideas, tracing errors step by step, and improving code." },
@@ -708,40 +665,7 @@ function syncTwentyMinFeed(){
 }
 
 syncTwentyMinFeed();
-setInterval(syncTwentyMinFeed, 30000)
-// Smooth guided tour across windows without repeating window content
-let tourTimer = null;
-const tourStops = ["about", "skills", "projects", "cv", "connect"];
-
-function startPortfolioTour(){
-  stopPortfolioTour();
-  let step = 0;
-
-  const runStep = () => {
-    if(step >= tourStops.length){
-      stopPortfolioTour();
-      return;
-    }
-    const id = tourStops[step];
-    if(typeof openWin === "function") openWin(id);
-    step += 1;
-    tourTimer = setTimeout(runStep, 2200);
-  };
-
-  runStep();
-}
-
-function stopPortfolioTour(){
-  if(tourTimer){
-    clearTimeout(tourTimer);
-    tourTimer = null;
-  }
-}
-
-document.addEventListener("keydown", e => {
-  if(e.key === "Escape") stopPortfolioTour();
-});
+setInterval(syncTwentyMinFeed, 30000);
 </script>
 </body>
 </html>
-
