@@ -28,7 +28,8 @@ section{max-width:900px;margin:30px auto;padding:0 20px;position:relative;z-inde
 .card p{line-height:1.7;color:#e2e8f0;font-size:17px}
 .edu{border-left:4px solid #22d3ee;padding-left:16px;margin:18px 0}
 .edu b{color:#facc15;font-size:18px}.edu span{color:#cbd5e1}
-.official{display:inline-block;margin-top:8px;background:#111827;border:1px solid #22d3ee;color:#67e8f9;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700}
+.official{display:inline-block;margin-top:10px;margin-right:8px;background:#111827;border:1px solid #22d3ee;color:#67e8f9;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700}
+.official-live{border-color:#22c55e;color:#86efac}
 .bar-bg{background:rgba(255,255,255,.1);border-radius:999px;height:14px;margin:8px 0 16px;overflow:hidden}
 .bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#a855f7,#22d3ee);width:0;transition:1.5s}
 .project{background:rgba(255,255,255,.06);border-radius:18px;padding:18px;margin-top:14px}
@@ -49,7 +50,7 @@ footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:rela
 </head>
 <body>
 <div class="orb o1"></div><div class="orb o2"></div>
-<nav><a href="#about">About</a><a href="#ai">Portfolio AI</a><a href="#live">LIVE</a><a href="#edu">Education</a><a href="#skills">Skills</a><a href="#cv">CV</a><a href="#contact">Contact</a></nav>
+<nav><a href="#about">About</a><a href="#ai">Portfolio AI</a><a href="#live">LIVE</a><a href="#edu">Education</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#cv">CV</a><a href="#contact">Contact</a></nav>
 <div class="hero">
 <div class="photo-wrap" onclick="tapPhoto()"><img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb"></div>
 <h1>Hi,<br>I'm Shakeeb 👋</h1>
@@ -87,7 +88,8 @@ footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:rela
 <h2>🔴 LIVE — What I'm Doing</h2>
 <div class="terminal" id="terminal">$ shakeeb@portfolio:~$ <span id="termText"></span><span>▌</span></div>
 <div class="quote-box" id="quoteBox">Loading...</div>
-</div></section><section id="edu"><div class="card">
+</div></section>
+<section id="edu"><div class="card">
 <h2>🎓 Education Journey</h2>
 <div class="edu"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL)<br>Also studying Chemistry & Physics</span><br><a class="official" href="https://ou.ac.lk" target="_blank">🌐 Visit Official OUSL Website → ou.ac.lk</a></div>
 <div class="edu"><b>Completed — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="official" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Visit Official CASED Website →</a></div>
@@ -100,15 +102,27 @@ footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:rela
 <p>HTML & CSS</p><div class="bar-bg"><div class="bar" data-w="85%"></div></div>
 <p>Python</p><div class="bar-bg"><div class="bar" data-w="75%"></div></div>
 <p>Java</p><div class="bar-bg"><div class="bar" data-w="70%"></div></div>
-<p>JavaScript</p><div
-class="bar-bg"><div class="bar" data-w="60%"></div></div>
+<p>JavaScript</p><div class="bar-bg"><div class="bar" data-w="60%"></div></div>
 <p>AI & Machine Learning — Learning</p><div class="bar-bg"><div class="bar" data-w="65%"></div></div>
 </div></section>
 <section id="projects"><div class="card">
 <h2>🚀 My Projects</h2>
-<div class="project"><b>1. This Website</b><p>You are seeing it right now. Built from my phone, while learning.</p></div>
-<div class="project"><b>2. AI Learning Projects</b><p>Small experiments while learning AI and coding.</p></div>
-<div class="project"><b>3. Next Project — Coming Soon...</b><p>I'm planning something new. I'll share it when it's ready.</p></div>
+<div class="project">
+<b>1. 3D Interactive World Globe</b>
+<p>An interactive 3D orthographic globe built with HTML, CSS, and JavaScript featuring all 197 countries and capitals, smooth touch spin/zoom, map modes, and distance measurement.</p>
+<a class="official" href="https://github.com/mskb2005/easing-playground" target="_blank">💻 View Source Code →</a>
+<a class="official official-live" href="https://mskb2005.github.io/easing-playground/" target="_blank">🌐 Live Demo →</a>
+</div>
+<div class="project">
+<b>2. This Portfolio Website</b>
+<p>You are seeing it right now. Built from my phone using HTML, CSS, and JavaScript while learning.</p>
+<a class="official" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 View Source Code →</a>
+</div>
+<div class="project">
+<b>3. AI Learning Projects</b>
+<p>Small experiments while learning AI and coding.</p>
+<a class="official" href="https://github.com/mskb2005" target="_blank">💻 View on GitHub →</a>
+</div>
 </div></section>
 <section id="cv"><div class="card" style="text-align:center;border:2px solid #facc15">
 <h2>📄 My CV</h2>
@@ -131,7 +145,7 @@ class="bar-bg"><div class="bar" data-w="60%"></div></div>
 <div class="contact">
 <a style="background:white;color:black" href="https://wa.me/94726958015" target="_blank">💬 WhatsApp Me</a>
 <a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
-<a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/" target="_blank">💼 LinkedIn</a>
+<a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank">💼 LinkedIn</a>
 <a style="background:#14b8a6" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
 <a style="background:#14b8a6" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
 </div>
@@ -151,7 +165,7 @@ function getAnswer(q){
 q=q.toLowerCase();
 if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes("school")||q.includes("cased")||q.includes("ousl")||q.includes("diploma")||q.includes("degree")) return "📚 Shakeeb's Education: 1) Now: BSc in Computer Science at Open University of Sri Lanka (OUSL) - also studying Chemistry & Physics. 2) Completed: Diploma in IT & AI from CASED Institute. 3) School: BT/BC Annoor National School, Valaichenai.";
 if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("java")||q.includes("can you")||q.includes("do")) return "💻 Shakeeb's Skills: C - he knows a little more in this one than the others. Also HTML & CSS, Python, Java, and AI / Machine Learning basics. He is still learning and improving every day.";
-if(q.includes("project")) return "🚀 Shakeeb's Projects: 1) This website - built from his phone while learning. 2) Small AI learning projects. 3) Next project coming soon.";
+if(q.includes("project")||q.includes("globe")) return "🚀 Shakeeb's Projects: 1) 3D Interactive World Globe (all 197 countries & capitals) — source code at github.com/mskb2005/easing-playground. 2) This portfolio website built from his phone. 3) Small AI learning projects.";
 if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")) return "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp via the button below, GitHub mskb2005. He is in Valaichenai, Batticaloa & Maradana, Colombo.";
 if(q.includes("who")||q.includes("about")||q.includes("name")) return "👋 He is Muhammad Shakeeb from Valaichenai, Batticaloa. A Computer Science student at OUSL, still learning coding and AI.";
 if(q.includes("where")||q.includes("live")||q.includes("from")) return "📍 Shakeeb is from Valaichenai, Batticaloa, Sri Lanka. Also available in Maradana, Colombo.";
