@@ -2,110 +2,124 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Muhammad Shakeeb | Portfolio</title>
 <style>
 :root{
-  --wall1:#0f172a;
-  --wall2:#1e1b4b;
-  --cyan:#38bdf8;
-  --violet:#c084fc;
-  --amber:#facc15;
-  --mint:#4ade80;
-  --cardBg:rgba(15,23,42,.82);
-  --cardBorder:rgba(148,163,184,.24);
+  --bg-top:#0b1120;
+  --bg-bottom:#17193b;
+  --accent:#38bdf8;
+  --accent-soft:rgba(56,189,248,.16);
+  --highlight:#facc15;
+  --ok:#4ade80;
+  --surface:rgba(15,23,42,.86);
+  --surface-2:rgba(30,41,59,.75);
+  --border:rgba(148,163,184,.22);
+  --text:#f8fafc;
+  --muted:#cbd5e1;
+  --dim:#94a3b8;
   --smooth:cubic-bezier(0.22, 1, 0.36, 1);
 }
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;background:radial-gradient(circle at 20% 20%,#1d4ed833,transparent 45%),radial-gradient(circle at 80% 75%,#9333ea33,transparent 45%),linear-gradient(145deg,var(--wall1),var(--wall2))}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:var(--text);background:radial-gradient(circle at 18% 15%,rgba(56,189,248,.14),transparent 42%),radial-gradient(circle at 85% 80%,rgba(250,204,21,.08),transparent 45%),linear-gradient(155deg,var(--bg-top),var(--bg-bottom))}
 
-.wallpaper{position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.11) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
+.wallpaper{position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.09) 1px,transparent 1px);background-size:24px 24px;pointer-events:none;z-index:0}
 
 /* Top Bar */
-.topbar{position:sticky;top:0;z-index:40;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:rgba(2,6,23,.84);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.1);font-size:13px}
-.brand{font-weight:800;color:var(--cyan);display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:none;font-size:13.5px}
-.clock{font-family:monospace;color:#e2e8f0;font-weight:700;font-size:12px}
-
+.topbar{position:sticky;top:0;z-index:40;height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:rgba(2,6,23,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.09);font-size:13px}
+.brand{font-weight:800;color:var(--accent);display:inline-flex;align-items:center;gap:8px;cursor:pointer;background:none;border:none;font-size:13.5px;padding:4px 6px;border-radius:10px;transition:background .18s ease}
+.brand:hover{background:var(--accent-soft)}
+.clock{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:var(--muted);font-weight:700;font-size:12px}
 /* Home View */
-.view{position:relative;z-index:2;max-width:860px;margin:0 auto;padding:16px 14px 42px;animation:fadeView .22s var(--smooth)}
+.view{position:relative;z-index:2;max-width:880px;margin:0 auto;padding:18px 14px 48px;animation:fadeView .22s var(--smooth)}
 @keyframes fadeView{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-.profile-card{display:flex;align-items:center;gap:14px;background:var(--cardBg);border:1px solid var(--cardBorder);border-radius:20px;padding:14px 16px;margin-bottom:16px;backdrop-filter:blur(12px)}
-.profile-card img{width:64px;height:64px;border-radius:16px;object-fit:cover;border:2px solid var(--cyan);cursor:pointer;flex-shrink:0}
-.profile-card h1{font-size:19px;line-height:1.15;color:#fff}
-.profile-card p{font-size:12.5px;color:var(--amber);font-weight:700;margin-top:3px;min-height:18px}
-.loc-tag{font-size:11.5px;color:#cbd5e1;margin-top:4px}
+.profile-card{display:flex;align-items:flex-start;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:16px;margin-bottom:16px;backdrop-filter:blur(12px)}
+.profile-card img{width:68px;height:68px;border-radius:16px;object-fit:cover;border:2px solid var(--accent);cursor:pointer;flex-shrink:0}
+.profile-meta{min-width:0;flex:1}
+.profile-card h1{font-size:20px;line-height:1.15;color:#fff}
+.profile-role{font-size:13px;color:var(--highlight);font-weight:700;margin-top:4px;min-height:18px}
+.profile-goal{font-size:12.5px;color:#e2e8f0;margin-top:6px;line-height:1.45}
+.loc-tag{font-size:11.5px;color:var(--muted);margin-top:6px;line-height:1.4}
 
-.section-menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:11px}
-.menu-item{display:flex;align-items:center;gap:11px;text-align:left;padding:12px 13px;border-radius:16px;background:var(--cardBg);border:1px solid rgba(148,163,184,.2);color:#f8fafc;cursor:pointer;transition:transform .16s ease,border-color .18s ease,background .18s ease}
-.menu-item:hover{background:rgba(30,41,59,.92);border-color:rgba(56,189,248,.45)}
+.section-menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:11px}
+.menu-item{display:flex;align-items:center;gap:11px;text-align:left;padding:12px 13px;border-radius:16px;background:var(--surface);border:1px solid var(--border);color:var(--text);cursor:pointer;transition:transform .16s ease,border-color .18s ease,background .18s ease}
+.menu-item:hover{background:var(--surface-2);border-color:rgba(56,189,248,.48)}
 .menu-item:active{transform:scale(.97)}
-.glyph{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;flex-shrink:0}
+.glyph{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:19px;flex-shrink:0;background:var(--accent-soft);border:1px solid rgba(56,189,248,.28)}
 .menu-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
 .menu-txt strong{font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.menu-txt small{font-size:11px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu-txt small{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Dedicated Section Screen */
 .screen{display:none}
 .screen.active{display:block}
 .screen-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
-.back-btn{background:#1e293b;color:#f8fafc;border:1px solid rgba(148,163,184,.32);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:transform .16s ease,background .18s ease}
+.back-btn{background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:transform .16s ease,background .18s ease,border-color .18s ease}
+.back-btn:hover{border-color:rgba(56,189,248,.45)}
 .back-btn:active{transform:scale(.96)}
-.screen-tag{font-size:12px;color:var(--cyan);font-weight:800}
+.screen-tag{font-size:12px;color:var(--accent);font-weight:800}
 
-.panel{background:var(--cardBg);border:1px solid var(--cardBorder);border-radius:20px;padding:18px;line-height:1.65;font-size:14.5px;color:#e2e8f0;backdrop-filter:blur(14px)}
-.panel h2{color:var(--amber);font-size:20px;margin-bottom:10px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;line-height:1.65;font-size:14.5px;color:#e2e8f0;backdrop-filter:blur(14px)}
+.panel h2{color:var(--highlight);font-size:20px;margin-bottom:10px}
+.panel p + p{margin-top:10px}
 
-.edu-box{border-left:3px solid var(--cyan);padding-left:12px;margin:12px 0}
-.edu-box b{color:var(--mint);font-size:15.5px}
-.link-pill{display:inline-block;margin-top:8px;margin-right:8px;padding:7px 13px;border-radius:999px;text-decoration:none;font-size:12px;font-weight:700;background:#0f172a;border:1px solid var(--cyan);color:#7dd3fc}
-.link-pill.green{border-color:var(--mint);color:#86efac}
+.edu-box{border-left:3px solid var(--accent);padding-left:12px;margin:14px 0}
+.edu-box b{color:var(--ok);font-size:15.5px}
+.link-pill{display:inline-block;margin-top:8px;margin-right:8px;padding:7px 13px;border-radius:999px;text-decoration:none;font-size:12px;font-weight:700;background:#090f1d;border:1px solid var(--accent);color:#bae6fd;transition:transform .16s ease,background .18s ease}
+.link-pill:hover{background:var(--accent-soft)}
+.link-pill:active{transform:scale(.96)}
+.link-pill.green{border-color:var(--ok);color:#bbf7d0}
 
-.s-row{margin:11px 0}
-.s-top{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px}
-.s-track{height:10px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
-.s-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .75s var(--smooth)}
+/* Skills List (Level Badge + Practical Context) */
+.skill-item{background:rgba(2,6,23,.55);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 14px;margin-top:10px}
+.skill-head{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:14px;font-weight:800;color:#fff}
+.skill-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:#bae6fd;border:1px solid rgba(56,189,248,.3)}
+.skill-badge.top{background:rgba(74,222,128,.14);color:#bbf7d0;border-color:rgba(74,222,128,.35)}
+.skill-note{font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.45}
 
-.p-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-top:12px}
-.p-box b{color:var(--amber);font-size:15.5px;display:block;margin-bottom:4px}
+.p-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:14px;margin-top:12px}
+.p-box b{color:var(--highlight);font-size:15.5px;display:block;margin-bottom:4px}
 
 /* Graphs */
+.graph-note{font-size:12px;color:var(--dim);margin-bottom:8px}
 .graph-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 14px}
-.graph-tab{background:#1e293b;color:#cbd5e1;border:1px solid rgba(148,163,184,.28);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
-.graph-tab.active{background:linear-gradient(90deg,#0284c7,#9333ea);color:#fff;border-color:transparent}
-.graph-panel{background:rgba(2,6,23,.72);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;margin-top:8px}
+.graph-tab{background:#1e293b;color:var(--muted);border:1px solid var(--border);padding:7px 12px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer;transition:background .18s ease,color .18s ease}
+.graph-tab.active{background:var(--accent);color:#061021;border-color:var(--accent);font-weight:800}
+.graph-panel{background:rgba(2,6,23,.72);border:1px solid rgba(255,255,255,.11);border-radius:16px;padding:14px;margin-top:8px}
 .graph-panel h3{font-size:15px;color:#f8fafc;margin-bottom:4px}
-.graph-panel p.g-sub{font-size:12.5px;color:#94a3b8;margin-bottom:14px}
+.graph-panel p.g-sub{font-size:12.5px;color:var(--dim);margin-bottom:14px}
 .bar-chart{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:150px;padding:10px 4px 6px;border-bottom:1px solid rgba(255,255,255,.14)}
 .bar-col{display:flex;flex-direction:column;align-items:center;height:100%;justify-content:flex-end;gap:6px}
-.bar-val{font-size:11px;font-family:monospace;color:var(--amber);font-weight:700}
-.bar-stem{width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--cyan),var(--violet))}
-.bar-day{font-size:11px;color:#cbd5e1;font-weight:700;margin-top:6px;text-align:center}
+.bar-val{font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;color:var(--highlight);font-weight:700}
+.bar-stem{width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--accent),#2563eb)}
+.bar-day{font-size:11px;color:var(--muted);font-weight:700;margin-top:6px;text-align:center}
+
 .stage-list,.mix-list{display:flex;flex-direction:column;gap:11px}
 .stage-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px}
-.stage-top,.mix-meta{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:700;margin-bottom:6px}
-.stage-top span:last-child{color:var(--mint);font-family:monospace}
-.mix-meta span:last-child{color:var(--amber);font-family:monospace}
+.stage-top,.mix-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12.5px;font-weight:700;margin-bottom:6px}
+.stage-pill{font-size:11px;padding:2px 8px;border-radius:999px;background:rgba(74,222,128,.14);color:#bbf7d0;border:1px solid rgba(74,222,128,.3)}
+.mix-meta span:last-child{color:var(--highlight);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
 .stage-track,.mix-track{height:9px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
-.stage-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),var(--cyan))}
-.mix-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--amber),#ec4899)}
+.stage-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ok),var(--accent))}
+.mix-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--highlight))}
 
-.term-box{background:#020617;border:1px solid var(--mint);border-radius:14px;padding:14px;font-family:monospace;font-size:13px;color:var(--mint);min-height:84px}
-.note-box{margin-top:12px;padding:12px;border-radius:14px;background:rgba(250,204,21,.12);border:1px solid rgba(250,204,21,.4);color:#fef08a;font-style:italic;text-align:center}
+.term-box{background:#020617;border:1px solid rgba(74,222,128,.65);border-radius:14px;padding:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:13px;color:var(--ok);min-height:84px}
+.note-box{margin-top:12px;padding:12px;border-radius:14px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.35);color:#fef08a;font-style:italic;text-align:center}
 
 /* Portfolio AI */
 .ai-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.ai-chips button{background:#1e293b;color:#7dd3fc;border:1px solid var(--violet);padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+.ai-chips button{background:#1e293b;color:#bae6fd;border:1px solid rgba(56,189,248,.4);padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
 .chat-box{height:210px;overflow-y:auto;background:#020617;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:7px;margin-top:8px}
 .m{padding:8px 12px;border-radius:12px;font-size:13px;max-width:88%;animation:pop .22s var(--smooth)}
 @keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .m-ai{background:#1e293b;color:#bae6fd;align-self:flex-start}
 .m-me{background:#0284c7;color:#fff;align-self:flex-end}
 .follow-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.follow-row button{background:rgba(74,222,128,.14);color:#86efac;border:1px solid rgba(74,222,128,.45);padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:700;cursor:pointer}
+.follow-row button{background:rgba(74,222,128,.14);color:#bbf7d0;border:1px solid rgba(74,222,128,.4);padding:5px 10px;border-radius:999px;font-size:11.5px;font-weight:700;cursor:pointer}
 .send-row{display:flex;gap:7px;margin-top:9px}
 .send-row input{flex:1;padding:10px 14px;border-radius:999px;border:1px solid #475569;background:#020617;color:#fff;outline:none;font-size:13.5px}
-.send-row button{padding:10px 16px;border-radius:999px;border:none;background:var(--amber);color:#05070f;font-weight:800;cursor:pointer}
+.send-row button{padding:10px 16px;border-radius:999px;border:none;background:var(--highlight);color:#05070f;font-weight:800;cursor:pointer}
 
 .c-list a{display:block;text-align:center;padding:12px;border-radius:14px;margin-top:9px;text-decoration:none;font-weight:800;color:#fff;font-size:13.5px}
 
@@ -124,57 +138,58 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
 <div class="wallpaper"></div>
 
 <header class="topbar">
-  <button class="brand" onclick="showScreen('home')">🏠 Muhammad Shakeeb</button>
+  <button class="brand" type="button" onclick="showScreen('home')">🏠 Muhammad Shakeeb</button>
   <div class="clock" id="menuClock">--:--:-- SL</div>
 </header>
 
 <!-- HOME VIEW -->
 <main class="view screen active" id="screen-home">
   <div class="profile-card" onclick="showScreen('about')">
-    <img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb" onclick="event.stopPropagation();alert('Hey! Thanks for visiting 😊')">
-    <div>
+    <img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb" onclick="event.stopPropagation();alert('Thanks for stopping by!')">
+    <div class="profile-meta">
       <h1>Muhammad Shakeeb</h1>
-      <p id="subRole"></p>
-      <div class="loc-tag">📍 Valaichenai, Batticaloa & Maradana, Colombo • <span id="osActivity">Loading...</span></div>
+      <p class="profile-role" id="subRole"></p>
+      <p class="profile-goal">Seeking entry-level internships in Full Stack, QA, Quantitative Dev, or CS/AI • Remote or Hybrid (Batticaloa / Colombo).</p>
+      <div class="loc-tag">📍 Valaichenai, Batticaloa &amp; Maradana, Colombo • <span id="osActivity">Loading...</span></div>
     </div>
   </div>
 
   <div class="section-menu">
-    <button class="menu-item" onclick="showScreen('about')">
-      <div class="glyph" style="background:linear-gradient(135deg,#2563eb,#38bdf8)">👨‍💻</div>
-      <div class="menu-txt"><strong>About</strong><small>Who I am & how I learn</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('about')">
+      <div class="glyph">👨‍💻</div>
+      <div class="menu-txt"><strong>About</strong><small>Background &amp; work approach</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('ai')">
-      <div class="glyph" style="background:linear-gradient(135deg,#9333ea,#ec4899)">🤖</div>
+    <button class="menu-item" type="button" onclick="showScreen('ai')">
+      <div class="glyph">🤖</div>
       <div class="menu-txt"><strong>Portfolio AI</strong><small>Ask about my profile</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('live')">
-      <div class="glyph" style="background:linear-gradient(135deg,#059669,#34d399)">🔴</div>
-      <div class="menu-txt"><strong>Live Feed</strong><small>Focus mode & logic check</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('live')">
+      <div class="glyph">🔴</div>
+      <div class="menu-txt"><strong>Live Feed</strong><small>Focus mode &amp; logic check</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('edu')">
-      <div class="glyph" style="background:linear-gradient(135deg,#0284c7,#6366f1)">🎓</div>
-      <div class="menu-txt"><strong>Education</strong><small>OUSL, CASED & school</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('edu')">
+      <div class="glyph">🎓</div>
+      <div class="menu-txt"><strong>Education</strong><small>OUSL, CASED &amp; school</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('skills')">
-      <div class="glyph" style="background:linear-gradient(135deg,#d97706,#facc15)">📊</div>
-      <div class="menu-txt"><strong>Skills</strong><small>Languages & current pace</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('skills')">
+      <div class="glyph">🛠️</div>
+      <div class="menu-txt"><strong>Skills</strong><small>Languages &amp; practical use</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('projects')">
-      <div class="glyph" style="background:linear-gradient(135deg,#7c3aed,#22d3ee)">🚀</div>
-      <div class="menu-txt"><strong>Projects</strong><small>3D Globe, portfolio & builds</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('projects')">
+      <div class="glyph">🚀</div>
+      <div class="menu-txt"><strong>Projects</strong><small>3D Globe, portfolio &amp; builds</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('graphs')">
-      <div class="glyph" style="background:linear-gradient(135deg,#0ea5e9,#10b981)">📈</div>
-      <div class="menu-txt"><strong>Graphs</strong><small>Rhythm, growth & focus mix</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('graphs')">
+      <div class="glyph">📈</div>
+      <div class="menu-txt"><strong>Graphs</strong><small>Rhythm, growth &amp; focus mix</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('cv')">
-      <div class="glyph" style="background:linear-gradient(135deg,#ea580c,#fbbf24)">📄</div>
-      <div class="menu-txt"><strong>CV</strong><small>Summary & full CV request</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('cv')">
+      <div class="glyph">📄</div>
+      <div class="menu-txt"><strong>CV</strong><small>Summary &amp; full CV request</small></div>
     </button>
-    <button class="menu-item" onclick="showScreen('contact')">
-      <div class="glyph" style="background:linear-gradient(135deg,#0d9488,#38bdf8)">📩</div>
-      <div class="menu-txt"><strong>Connect</strong><small>WhatsApp, email & links</small></div>
+    <button class="menu-item" type="button" onclick="showScreen('contact')">
+      <div class="glyph">📩</div>
+      <div class="menu-txt"><strong>Connect</strong><small>WhatsApp, email &amp; links</small></div>
     </button>
   </div>
 </main>
@@ -182,44 +197,44 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
 <!-- ABOUT -->
 <section class="view screen" id="screen-about">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">👨‍💻 About</span>
   </div>
   <div class="panel">
     <h2>About Muhammad Shakeeb</h2>
-    <p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
-    <p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
-    <p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
-    <p style="color:var(--cyan);font-style:italic;text-align:center">"I'm still learning, and I want to do my best."</p>
+    <p>I am a Computer Science undergraduate from Valaichenai studying at the Open University of Sri Lanka (OUSL), alongside Chemistry and Physics, and I completed a Diploma in IT and AI at CASED Institute in 2026.</p>
+    <p>I build hands-on web and programming projects directly from my phone and laptop, focusing on C, HTML/CSS, Python, Java, and AI fundamentals while learning through real trial and error.</p>
+    <p>I am looking for practical internship opportunities—remote or hybrid in Batticaloa or Colombo—where I can contribute, learn from experienced engineers, and grow steadily.</p>
+    <p style="color:var(--accent);font-style:italic;text-align:center">"Understand the problem first, build thoughtfully, and keep improving every day."</p>
   </div>
 </section>
 
 <!-- PORTFOLIO AI -->
 <section class="view screen" id="screen-ai">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">🤖 Portfolio AI</span>
   </div>
   <div class="panel">
     <h2>Ask Portfolio AI</h2>
-    <p style="font-size:13px;color:#cbd5e1">Answers only about <b style="color:var(--amber)">Shakeeb's education, skills, projects, and contact</b>.</p>
+    <p style="font-size:13px;color:var(--muted)">Answers strictly about <b style="color:var(--highlight)">Shakeeb's education, skills, projects, availability, and contact</b>.</p>
     <div class="ai-chips">
-      <button onclick="presetQ('education')">🎓 Education</button>
-      <button onclick="presetQ('skills')">💻 Skills</button>
-      <button onclick="presetQ('projects')">🚀 Projects</button>
-      <button onclick="presetQ('contact')">📩 Contact</button>
+      <button type="button" onclick="presetQ('education')">🎓 Education</button>
+      <button type="button" onclick="presetQ('skills')">🛠️ Skills</button>
+      <button type="button" onclick="presetQ('projects')">🚀 Projects</button>
+      <button type="button" onclick="presetQ('contact')">📩 Contact</button>
     </div>
     <div class="chat-box" id="osChat">
-      <div class="m m-ai">👋 Hi! I'm Portfolio AI. Ask about Shakeeb's education, skills, projects, or contact.</div>
+      <div class="m m-ai">👋 Hi! Ask me about Shakeeb's education, skills, projects, internship availability, or contact details.</div>
     </div>
     <div class="follow-row" id="osFollow">
-      <button onclick="presetQ('education')">🎓 OUSL & CASED</button>
-      <button onclick="presetQ('projects')">🌍 3D Globe Repo</button>
-      <button onclick="presetQ('skills')">⚡ Strongest Skill</button>
+      <button type="button" onclick="presetQ('education')">🎓 OUSL &amp; CASED</button>
+      <button type="button" onclick="presetQ('projects')">🌍 3D Globe Repo</button>
+      <button type="button" onclick="presetQ('skills')">⚡ Strongest Language</button>
     </div>
     <div class="send-row">
-      <input id="osInput" placeholder="Type your question..." onkeypress="if(event.key==='Enter') runAI()">
-      <button onclick="runAI()">Ask</button>
+      <input id="osInput" type="text" placeholder="Type your question..." onkeypress="if(event.key==='Enter') runAI()">
+      <button type="button" onclick="runAI()">Ask</button>
     </div>
   </div>
 </section>
@@ -227,31 +242,31 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
 <!-- LIVE FEED -->
 <section class="view screen" id="screen-live">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">🔴 Live Feed</span>
   </div>
   <div class="panel">
-    <h2>Live Mode & Logic</h2>
+    <h2>Live Mode &amp; Logic</h2>
     <div class="term-box">$ shakeeb@dev:~$ <span id="osTerm"></span><span>▌</span></div>
 
     <div class="p-box">
-      <b>Daily Focus Mode <span id="focusSlotTag" style="font-size:12px;color:#7dd3fc"></span></b>
+      <b>Daily Focus Mode <span id="focusSlotTag" style="font-size:12px;color:var(--accent)"></span></b>
       <div class="ai-chips" style="margin-top:8px">
-        <button onclick="setFocusMode(0, true)">🎯 Deep Focus</button>
-        <button onclick="setFocusMode(1, true)">🛠️ Build & Debug</button>
-        <button onclick="setFocusMode(2, true)">💼 Remote / Hybrid</button>
+        <button type="button" onclick="setFocusMode(0, true)">🎯 Deep Focus</button>
+        <button type="button" onclick="setFocusMode(1, true)">🛠️ Build &amp; Debug</button>
+        <button type="button" onclick="setFocusMode(2, true)">💼 Remote / Hybrid</button>
       </div>
       <p id="focusDesc" style="margin-top:6px">Loading focus mode...</p>
     </div>
 
     <div class="p-box">
       <b>Mini Logic Challenge (Auto-rotates every 20m)</b>
-      <p id="logicQ" style="margin-top:6px;color:#fef08a;font-family:monospace">Loading challenge...</p>
+      <p id="logicQ" style="margin-top:6px;color:#fef08a;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">Loading challenge...</p>
       <div style="margin-top:8px">
-        <button class="link-pill green" style="cursor:pointer" onclick="toggleLogicAns()">💡 Show / Hide Answer</button>
-        <button class="link-pill" style="cursor:pointer" onclick="nextLogicManual()">↻ Next Puzzle</button>
+        <button class="link-pill green" type="button" style="cursor:pointer" onclick="toggleLogicAns()">💡 Show / Hide Answer</button>
+        <button class="link-pill" type="button" style="cursor:pointer" onclick="nextLogicManual()">↻ Next Puzzle</button>
       </div>
-      <p id="logicA" style="display:none;margin-top:8px;color:#86efac;font-size:13.5px"></p>
+      <p id="logicA" style="display:none;margin-top:8px;color:#bbf7d0;font-size:13.5px"></p>
     </div>
 
     <div class="note-box" id="osQuote">Loading...</div>
@@ -261,58 +276,73 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
 <!-- EDUCATION -->
 <section class="view screen" id="screen-edu">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">🎓 Education</span>
   </div>
   <div class="panel">
     <h2>Education Journey</h2>
-    <div class="edu-box"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL) — Major in CS with Chemistry & Physics</span><br><a class="link-pill" href="https://ou.ac.lk" target="_blank">🌐 Official OUSL → ou.ac.lk</a></div>
-    <div class="edu-box"><b>Completed (2026) — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="link-pill" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Official CASED →</a></div>
-    <div class="edu-box"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
+    <div class="edu-box"><b>Current — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL) — CS Major with Chemistry &amp; Physics</span><br><a class="link-pill" href="https://ou.ac.lk" target="_blank" rel="noopener noreferrer">🌐 Official OUSL → ou.ac.lk</a></div>
+    <div class="edu-box"><b>Completed (2026) — Diploma in IT &amp; AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="link-pill" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank" rel="noopener noreferrer">🌐 Official CASED →</a></div>
+    <div class="edu-box"><b>Secondary School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa</span></div>
   </div>
 </section>
 
 <!-- SKILLS -->
 <section class="view screen" id="screen-skills">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
-    <span class="screen-tag">📊 Skills</span>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
+    <span class="screen-tag">🛠️ Skills</span>
   </div>
   <div class="panel">
-    <h2>What I'm Learning</h2>
-    <p style="font-size:12.5px;color:#94a3b8">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
-    <div class="s-row"><div class="s-top"><span>C (Strongest)</span><span>90%</span></div><div class="s-track"><div class="s-fill" data-w="90%"></div></div></div>
-    <div class="s-row"><div class="s-top"><span>HTML & CSS</span><span>85%</span></div><div class="s-track"><div class="s-fill" data-w="85%"></div></div></div>
-    <div class="s-row"><div class="s-top"><span>Python</span><span>75%</span></div><div class="s-track"><div class="s-fill" data-w="75%"></div></div></div>
-    <div class="s-row"><div class="s-top"><span>Java</span><span>70%</span></div><div class="s-track"><div class="s-fill" data-w="70%"></div></div></div>
-    <div class="s-row"><div class="s-top"><span>AI & Machine Learning</span><span>65%</span></div><div class="s-track"><div class="s-fill" data-w="65%"></div></div></div>
-    <div class="s-row"><div class="s-top"><span>JavaScript</span><span>60%</span></div><div class="s-track"><div class="s-fill" data-w="60%"></div></div></div>
+    <h2>Technical Skills &amp; Practical Focus</h2>
+    <p style="font-size:13px;color:var(--muted)">Grounded in coursework, diploma training, and self-driven builds rather than artificial scores.</p>
+
+    <div class="skill-item">
+      <div class="skill-head"><span>C Programming</span><span class="skill-badge top">Strongest Foundation</span></div>
+      <p class="skill-note">Core control flow, loops, functions, pointers, and step-by-step logic problem solving.</p>
+    </div>
+    <div class="skill-item">
+      <div class="skill-head"><span>HTML &amp; CSS</span><span class="skill-badge top">Hands-On Builds</span></div>
+      <p class="skill-note">Responsive layouts, multi-screen interfaces, animations, and deploying static sites on GitHub Pages and Netlify.</p>
+    </div>
+    <div class="skill-item">
+      <div class="skill-head"><span>Python</span><span class="skill-badge">Active Practice</span></div>
+      <p class="skill-note">Scripting, data structures, and experimenting with AI and automation workflows.</p>
+    </div>
+    <div class="skill-item">
+      <div class="skill-head"><span>Java &amp; JavaScript</span><span class="skill-badge">Active Practice</span></div>
+      <p class="skill-note">Object-oriented programming concepts in Java and interactive DOM/UI behavior in JavaScript.</p>
+    </div>
+    <div class="skill-item">
+      <div class="skill-head"><span>IT &amp; AI Fundamentals</span><span class="skill-badge">2026 Diploma</span></div>
+      <p class="skill-note">Foundational concepts from CASED Institute paired with analytical habits from CS, Physics, and Chemistry.</p>
+    </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section class="view screen" id="screen-projects">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">🚀 Projects</span>
   </div>
   <div class="panel">
-    <h2>My Projects</h2>
+    <h2>Projects</h2>
     <div class="p-box">
       <b>1. 3D Interactive World Globe</b>
-      <p>Interactive 3D globe with 197 countries & capitals, touch spin/zoom, map modes, and distance measurement.</p>
-      <a class="link-pill" href="https://github.com/mskb2005/easing-playground" target="_blank">💻 Source Code →</a>
-      <a class="link-pill green" href="https://mskb2005.github.io/easing-playground/" target="_blank">🌐 Live Demo →</a>
+      <p>Interactive 3D globe covering 197 countries and capitals with touch spin/zoom, map modes, and distance measurement.</p>
+      <a class="link-pill" href="https://github.com/mskb2005/easing-playground" target="_blank" rel="noopener noreferrer">💻 Source Code →</a>
+      <a class="link-pill green" href="https://mskb2005.github.io/easing-playground/" target="_blank" rel="noopener noreferrer">🌐 Live Demo →</a>
     </div>
     <div class="p-box">
-      <b>2. This Portfolio Website</b>
-      <p>Built from my phone as an interactive portfolio with Portfolio AI.</p>
-      <a class="link-pill" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 Source Code →</a>
+      <b>2. Personal Portfolio &amp; Multi-Screen Hub</b>
+      <p>Custom-coded HTML/CSS/JS portfolio featuring dedicated section views, visual graphs, live focus/logic tools, and Portfolio AI.</p>
+      <a class="link-pill" href="https://github.com/mskb2005/my-portfolio" target="_blank" rel="noopener noreferrer">💻 Source Code →</a>
     </div>
     <div class="p-box">
-      <b>3. AI & Coding Experiments</b>
-      <p>Small projects while learning C, Python, and AI step by step.</p>
-      <a class="link-pill" href="https://github.com/mskb2005" target="_blank">💻 View GitHub →</a>
+      <b>3. C, Python &amp; AI Practice Repositories</b>
+      <p>Ongoing exercises and small experiments focused on clean logic, debugging, and practical problem solving.</p>
+      <a class="link-pill" href="https://github.com/mskb2005" target="_blank" rel="noopener noreferrer">💻 View GitHub →</a>
     </div>
   </div>
 </section>
@@ -320,22 +350,22 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
 <!-- GRAPHS -->
 <section class="view screen" id="screen-graphs">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">📈 Graphs</span>
   </div>
   <div class="panel">
-    <h2>Visual Progress & Focus Graphs</h2>
-    <p style="font-size:12.5px;color:#94a3b8">Separate from language percentages in Skills—shows weekly study rhythm, learning milestones, and internship focus.</p>
+    <h2>Visual Rhythm &amp; Focus Graphs</h2>
+    <p class="graph-note">Personal self-tracking estimates of weekly study routine, education stages, and target internship focus (not official grades or external metrics).</p>
 
     <div class="graph-tabs">
-      <button class="graph-tab active" id="gtab-rhythm" onclick="switchGraph('rhythm')">📅 Weekly Rhythm</button>
-      <button class="graph-tab" id="gtab-milestones" onclick="switchGraph('milestones')">🧭 Milestone Stages</button></button>
-      <button class="graph-tab" id="gtab-focus" onclick="switchGraph('focus')">💼 Internship Focus</button>
+      <button class="graph-tab active" type="button" id="gtab-rhythm" onclick="switchGraph('rhythm')">📅 Weekly Rhythm</button>
+      <button class="graph-tab" type="button" id="gtab-milestones" onclick="switchGraph('milestones')">🧭 Milestone Stages</button>
+      <button class="graph-tab" type="button" id="gtab-focus" onclick="switchGraph('focus')">💼 Internship Focus</button>
     </div>
 
     <div class="graph-panel" id="gpanel-rhythm">
-      <h3>Weekly Study & Practice Rhythm</h3>
-      <p class="g-sub">Typical daily hours spent on university coursework, problem solving, and mobile builds.</p>
+      <h3>Weekly Study &amp; Practice Rhythm</h3>
+      <p class="g-sub">Typical weekly hours across coursework, coding practice, and project building.</p>
       <div class="bar-chart">
         <div class="bar-col"><span class="bar-val">4.5h</span><div class="bar-stem" style="height:75%"></div><span class="bar-day">Mon</span></div>
         <div class="bar-col"><span class="bar-val">4.0h</span><div class="bar-stem" style="height:67%"></div><span class="bar-day">Tue</span></div>
@@ -348,31 +378,31 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
     </div>
 
     <div class="graph-panel" id="gpanel-milestones" style="display:none">
-      <h3>Learning & Milestone Progression</h3>
-      <p class="g-sub">How foundation building progressed from school in Valaichenai to university and AI study.</p>
+      <h3>Academic &amp; Build Progression</h3>
+      <p class="g-sub">Progression from secondary school in Valaichenai to OUSL, CASED (2026), and live builds.</p>
       <div class="stage-list">
         <div class="stage-item">
-          <div class="stage-top"><span>1. Annoor National School (Valaichenai)</span><span>Foundation</span></div>
+          <div class="stage-top"><span>1. Annoor National School (Valaichenai)</span><span class="stage-pill">Foundation</span></div>
           <div class="stage-track"><div class="stage-fill" style="width:35%"></div></div>
         </div>
         <div class="stage-item">
-          <div class="stage-top"><span>2. OUSL BSc CS + Chemistry & Physics</span><span>In Progress</span></div>
+          <div class="stage-top"><span>2. OUSL BSc CS + Chemistry &amp; Physics</span><span class="stage-pill">In Progress</span></div>
           <div class="stage-track"><div class="stage-fill" style="width:65%"></div></div>
         </div>
         <div class="stage-item">
-          <div class="stage-top"><span>3. CASED Diploma in IT & AI (2026)</span><span>Completed</span></div>
+          <div class="stage-top"><span>3. CASED Diploma in IT &amp; AI (2026)</span><span class="stage-pill">Completed</span></div>
           <div class="stage-track"><div class="stage-fill" style="width:85%"></div></div>
         </div>
         <div class="stage-item">
-          <div class="stage-top"><span>4. Live Web & Interactive Builds</span><span>Active</span></div>
+          <div class="stage-top"><span>4. Live Web &amp; Interactive Builds</span><span class="stage-pill">Active</span></div>
           <div class="stage-track"><div class="stage-fill" style="width:95%"></div></div>
         </div>
       </div>
     </div>
 
     <div class="graph-panel" id="gpanel-focus" style="display:none">
-      <h3>Internship & Role Focus Mix</h3>
-      <p class="g-sub">Focus split across target internship tracks • Available Remote or Hybrid (Batticaloa / Colombo).</p>
+      <h3>Personal Internship Focus Split</h3>
+      <p class="g-sub">How interest is split across target internship tracks • Open to Remote or Hybrid (Batticaloa / Colombo).</p>
       <div class="mix-list">
         <div class="mix-row">
           <div class="mix-meta"><span>Full Stack Development Intern</span><span>30%</span></div>
@@ -383,12 +413,12 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
           <div class="mix-track"><div class="mix-fill" style="width:25%"></div></div>
         </div>
         <div class="mix-row">
-          <div class="mix-meta"><span>Quantitative Development Intern</span><span>20%</span></div>
-          <div class="mix-track"><div class="mix-fill" style="width:20%"></div></div>
+          <div class="mix-meta"><span>AI &amp; CS / Knowledge Mgmt Intern</span><span>25%</span></div>
+          <div class="mix-track"><div class="mix-fill" style="width:25%"></div></div>
         </div>
         <div class="mix-row">
-          <div class="mix-meta"><span>AI & CS / Knowledge Mgmt Intern</span><span>25%</span></div>
-          <div class="mix-track"><div class="mix-fill" style="width:25%"></div></div>
+          <div class="mix-meta"><span>Quantitative Development Intern</span><span>20%</span></div>
+          <div class="mix-track"><div class="mix-fill" style="width:20%"></div></div>
         </div>
       </div>
     </div>
@@ -398,54 +428,45 @@ html,body{width:100%;min-height:100dvh;overflow-x:hidden;color:#f8fafc;backgroun
 <!-- CV -->
 <section class="view screen" id="screen-cv">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">📄 CV</span>
   </div>
   <div class="panel">
     <h2>CV Summary</h2>
     <p><b>Name:</b> Muhammad Shakeeb<br>
-    <b>Education:</b> BSc Computer Science (Major) + Chemistry & Physics — OUSL<br>
-    <b>Diploma:</b> Diploma in IT & AI — CASED Institute (2026)<br>
-    <b>Skills:</b> C (Strongest), HTML & CSS, Python, Java, AI Basics<br>
-    <b>Location:</b> Valaichenai, Batticaloa & Maradana, Colombo<br>
+    <b>Education:</b> BSc Computer Science (Major) + Chemistry &amp; Physics — Open University of Sri Lanka (OUSL)<br>
+    <b>Diploma:</b> Diploma in IT &amp; AI — CASED Institute (2026)<br>
+    <b>Core Languages &amp; Areas:</b> C, HTML &amp; CSS, Python, Java, JavaScript, AI Fundamentals<br>
+    <b>Availability:</b> Remote or Hybrid (Batticaloa / Colombo)<br>
     <b>Email:</b> mgmshakeeb2005@gmail.com</p>
-    <a class="link-pill green" href="https://wa.me/94726958015" target="_blank" style="margin-top:14px">📩 Request Full CV on WhatsApp →</a>
+    <a class="link-pill green" href="https://wa.me/94726958015" target="_blank" rel="noopener noreferrer" style="margin-top:14px">📩 Request Full CV on WhatsApp →</a>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="view screen" id="screen-contact">
   <div class="screen-head">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+    <button class="back-btn" type="button" onclick="showScreen('home')">← Back</button>
     <span class="screen-tag">📩 Connect</span>
   </div>
   <div class="panel">
-    <h2>Let's Connect!</h2>
-    <p style="font-size:13px;color:#cbd5e1">Available in Valaichenai, Batticaloa & Maradana, Colombo.</p>
+    <h2>Let's Connect</h2>
+    <p style="font-size:13px;color:var(--muted)">Based around Valaichenai &amp; Batticaloa, with availability for remote or hybrid roles in Batticaloa or Colombo.</p>
     <div class="c-list">
-      <a style="background:#f8fafc;color:#05070f" href="https://wa.me/94726958015" target="_blank">💬 WhatsApp Me</a>
+      <a style="background:#f8fafc;color:#05070f" href="https://wa.me/94726958015" target="_blank" rel="noopener noreferrer">💬 WhatsApp (+94 72 695 8015)</a>
       <a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
-      <a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank">💼 LinkedIn</a>
-      <a style="background:#0d9488" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
-      <a style="background:#0284c7" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
+      <a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank" rel="noopener noreferrer">💼 LinkedIn</a>
+      <a style="background:#0d9488" href="https://x.com/" target="_blank" rel="noopener noreferrer">𝕏 Twitter / X</a>
+      <a style="background:#0284c7" href="https://github.com/mskb2005" target="_blank" rel="noopener noreferrer">💻 GitHub — mskb2005</a>
     </div>
   </div>
 </section>
-
 <script>
-function animateSkillBars(){
-  document.querySelectorAll(".s-fill").forEach(el => {
-    el.style.width = "0";
-    requestAnimationFrame(() => requestAnimationFrame(() => { el.style.width = el.dataset.w; }));
-  });
-}
-
 function showScreen(name){
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   const target = document.getElementById("screen-" + name) || document.getElementById("screen-home");
   target.classList.add("active");
   window.scrollTo({top: 0, behavior: "instant"});
-  if(name === "skills") animateSkillBars();
 }
 
 function switchGraph(key){
@@ -461,36 +482,56 @@ function switchGraph(key){
 const subRoles = ["BSc CS Student (OUSL)","Diploma IT & AI (CASED)","C • HTML/CSS • Python • Java"];
 let srI = 0, scI = 0, sDel = false;
 function typeSubRole(){
+  const el = document.getElementById("subRole");
+  if(!el) return;
   const txt = subRoles[srI];
-  document.getElementById("subRole").textContent = sDel ? txt.slice(0,--scI) : txt.slice(0,++scI);
+  el.textContent = sDel ? txt.slice(0,--scI) : txt.slice(0,++scI);
   if(!sDel && scI === txt.length){ sDel = true; setTimeout(typeSubRole, 1200); return; }
   if(sDel && scI === 0){ sDel = false; srI = (srI + 1) % subRoles.length; }
   setTimeout(typeSubRole, sDel ? 38 : 75);
 }
 typeSubRole();
 
+const slClockFmt = new Intl.DateTimeFormat("en-LK",{
+  timeZone:"Asia/Colombo",
+  hour:"2-digit",
+  minute:"2-digit",
+  second:"2-digit",
+  hour12:false
+});
+const slHourFmt = new Intl.DateTimeFormat("en-US",{
+  timeZone:"Asia/Colombo",
+  hour:"numeric",
+  hour12:false
+});
+
 function tickOS(){
   const clk = document.getElementById("menuClock");
   const act = document.getElementById("osActivity");
-  const now = new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Colombo"}));
-  const hr = now.getHours();
-  if(clk) clk.textContent = now.toLocaleTimeString("en-LK",{timeZone:"Asia/Colombo",hour:"2-digit",minute:"2-digit",second:"2-digit"}) + " SL";
+  const now = new Date();
+  if(clk) clk.textContent = slClockFmt.format(now) + " SL";
   if(!act) return;
-  if(hr<5) act.textContent = "😴 Coding late or sleeping";
-  else if(hr<7) act.textContent = "🌅 Waking up";
-  else if(hr<10) act.textContent = "📚 Studying";
-  else if(hr<13) act.textContent = "💻 Studying & building";
-  else if(hr<14) act.textContent = "🍛 Lunch break";
-  else if(hr<17) act.textContent = "💻 Practising code";
-  else if(hr<19) act.textContent = "🌇 Evening break";
-  else if(hr<22) act.textContent = "💻 Coding & AI";
-  else act.textContent = "🌙 Winding down";
+  const hr = parseInt(slHourFmt.format(now), 10);
+  if(hr<5) act.textContent = "😴 Late night rest";
+  else if(hr<7) act.textContent = "🌅 Morning start";
+  else if(hr<10) act.textContent = "📚 Coursework & study";
+  else if(hr<13) act.textContent = "💻 Building & learning";
+  else if(hr<14) act.textContent = "🍛 Midday break";
+  else if(hr<17) act.textContent = "💻 Coding practice";
+  else if(hr<19) act.textContent = "🌇 Afternoon break";
+  else if(hr<22) act.textContent = "💻 Projects & AI";
+  else act.textContent = "🌙 Wrapping up";
 }
 setInterval(tickOS, 1000);
 tickOS();
 
 // Live Terminal & Quotes
-const osCmds = ["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];
+const osCmds = [
+  "git add . && git status",
+  "git commit -m 'refine mobile portfolio'",
+  "python practice.py --check",
+  "/* clean logic, steady progress */"
+];
 let cLine = 0, cChar = 0;
 function typeTerm(){
   const line = osCmds[cLine];
@@ -502,11 +543,11 @@ function typeTerm(){
 typeTerm();
 
 const osNotes = [
-  "\"First, try to understand the problem. Then, try to solve it.\"",
-  "\"I'm still learning. Every day, a little more.\"",
-  "\"Mistakes teach me more than success.\"",
-  "\"From Valaichenai, learning step by step.\"",
-  "\"I'm still learning, and I want to do my best.\""
+  "\"Understand the problem first, then write clean steps to solve it.\"",
+  "\"Consistent daily practice beats rushing.\"",
+  "\"Every bug traced teaches something practical.\"",
+  "\"From Valaichenai, building step by step.\"",
+  "\"Open to remote or hybrid internships in Batticaloa or Colombo.\""
 ];
 let nIdx = 0;
 function nextNote(){
@@ -516,42 +557,47 @@ function nextNote(){
 nextNote();
 setInterval(nextNote, 5000);
 
-// Streaming Portfolio AI
+// Portfolio AI
+function mentionsC(q){
+  const words = q.replace(/[^a-z0-9\s]/g, " ").trim().split(/\s+/);
+  return words.includes("c");
+}
+
 function replyAI(raw){
-  const q = raw.toLowerCase();
+  const q = raw.toLowerCase().trim();
   if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes("school")||q.includes("cased")||q.includes("ousl")||q.includes("diploma")||q.includes("degree")||q.includes("chem")||q.includes("phys")){
     return {
-      text: "📚 Shakeeb's Education: Studying BSc in Computer Science (major) alongside Chemistry & Physics at Open University of Sri Lanka (OUSL), completed Diploma in IT & AI at CASED Institute (2026), and studied at BT/BC Annoor National School, Valaichenai.",
-      chips: [["💻 Skills","skills"],["🚀 Projects","projects"],["📩 Contact","contact"]]
+      text: "📚 Shakeeb's Education: BSc in Computer Science (major) with Chemistry & Physics at Open University of Sri Lanka (OUSL), Diploma in IT & AI at CASED Institute (2026), and secondary school at BT/BC Annoor National School, Valaichenai.",
+      chips: [["🛠️ Skills","skills"],["🚀 Projects","projects"],["📩 Contact","contact"]]
     };
   }
-  if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("java")||q.includes("c ")||q.includes("can you")||q.includes("do")){
+  if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("css")||q.includes("java")||mentionsC(q)||q.includes("intern")){
     return {
-      text: "💻 Shakeeb's Skills: C is his strongest so far. He is also learning HTML & CSS, Python, Java, JavaScript, and AI / Machine Learning step by step.",
+      text: "🛠️ Shakeeb's Skills & Focus: Strongest foundation in C, hands-on HTML & CSS builds, active practice in Python, Java, and JavaScript, plus IT & AI fundamentals from CASED. Seeking internships in Full Stack, QA, Quantitative Dev, or CS/AI (remote or hybrid in Batticaloa / Colombo).",
       chips: [["🚀 Projects","projects"],["🎓 Education","education"],["📩 Contact","contact"]]
     };
   }
-  if(q.includes("project")||q.includes("globe")||q.includes("repo")||q.includes("github")){
+  if(q.includes("project")||q.includes("globe")||q.includes("repo")||q.includes("github")||q.includes("portfolio")){
     return {
-      text: "🚀 Shakeeb's Projects: 1) 3D Interactive World Globe (197 countries & capitals) at github.com/mskb2005/easing-playground. 2) This portfolio site at github.com/mskb2005/my-portfolio. 3) Small AI & coding practice experiments.",
-      chips: [["💻 Skills","skills"],["📩 Contact","contact"],["🎓 Education","education"]]
+      text: "🚀 Shakeeb's Projects: 1) 3D Interactive World Globe (197 countries & capitals) at github.com/mskb2005/easing-playground. 2) Personal multi-screen portfolio at github.com/mskb2005/my-portfolio. 3) Ongoing C, Python, and AI practice repositories.",
+      chips: [["🛠️ Skills","skills"],["📩 Contact","contact"],["🎓 Education","education"]]
     };
   }
-  if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")){
+  if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")||q.includes("colombo")||q.includes("batticaloa")||q.includes("valaichenai")){
     return {
-      text: "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp +94 72 695 8015, GitHub mskb2005. Connected with Valaichenai, Batticaloa & Maradana, Colombo.",
-      chips: [["🚀 Projects","projects"],["🎓 Education","education"],["💻 Skills","skills"]]
+      text: "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp +94 72 695 8015, GitHub github.com/mskb2005, LinkedIn linkedin.com/in/muhammad-shakeeb-41a12b44b. Based around Valaichenai & Batticaloa; open to remote or hybrid work in Batticaloa or Colombo.",
+      chips: [["🚀 Projects","projects"],["🎓 Education","education"],["🛠️ Skills","skills"]]
     };
   }
   if(q.includes("who")||q.includes("about")||q.includes("name")||q.includes("where")||q.includes("live")||q.includes("from")){
     return {
-      text: "👋 Muhammad Shakeeb is a BSc Computer Science student at OUSL from Valaichenai, Batticaloa, also connected with Maradana, Colombo.",
-      chips: [["🎓 Education","education"],["💻 Skills","skills"],["🚀 Projects","projects"]]
+      text: "👋 Muhammad Shakeeb is a BSc Computer Science student at OUSL from Valaichenai, Batticaloa, also connected with Maradana, Colombo, building web and programming projects.",
+      chips: [["🎓 Education","education"],["🛠️ Skills","skills"],["🚀 Projects","projects"]]
     };
   }
   return {
-    text: "I'm Portfolio AI and only answer about Shakeeb. Ask about his Education, Skills, Projects, or Contact.",
-    chips: [["🎓 Education","education"],["💻 Skills","skills"],["🚀 Projects","projects"],["📩 Contact","contact"]]
+    text: "I only answer questions about Shakeeb. Ask about his Education, Skills, Projects, Internship availability, or Contact details.",
+    chips: [["🎓 Education","education"],["🛠️ Skills","skills"],["🚀 Projects","projects"],["📩 Contact","contact"]]
   };
 }
 
@@ -586,36 +632,37 @@ function runAI(){
       fBox.innerHTML = "";
       ans.chips.forEach(([label, query]) => {
         const b = document.createElement("button");
+        b.type = "button";
         b.textContent = label;
         b.onclick = () => presetQ(query);
         fBox.appendChild(b);
       });
     }
-  }, 26);
+  }, 24);
 }
 
 const focusModes = [
-  { label: "Deep Focus", text: "Studying core concepts and practising clean logic without distractions." },
-  { label: "Build & Debug", text: "Testing small ideas, tracing errors step by step, and improving code." },
-  { label: "Remote / Hybrid Ready", text: "Open to remote internships as well as hybrid work in Batticaloa or Colombo." }
+  { label: "Deep Focus", text: "Working through core concepts and logic problems without distractions." },
+  { label: "Build & Debug", text: "Testing ideas, tracing bugs carefully, and refining interfaces." },
+  { label: "Remote / Hybrid Ready", text: "Available for remote internships as well as hybrid roles in Batticaloa or Colombo." }
 ];
 
 const logicChallenges = [
   {
     q: "What prints in C? int x = 5; printf(\"%d\", x++ + 2);",
-    a: "Prints 7 — x++ uses 5 first in the expression (5 + 2 = 7), then increments x to 6 afterward."
+    a: "Prints 7 — postfix x++ uses 5 in the expression (5 + 2 = 7), then increments x to 6 afterward."
   },
   {
     q: "Logic check: If A is true and B is false, what is !(A && B) || B?",
     a: "True — A && B is false, !(false) is true, and true || false evaluates to true."
   },
   {
-    q: "Python / list thinking: What is the length of [1, [2, 3], 4]?",
-    a: "3 — the inner list [2, 3] counts as a single element inside the outer list."
+    q: "Python list length: what is len([1, [2, 3], 4])?",
+    a: "3 — the nested list [2, 3] is one item inside the outer list."
   },
   {
-    q: "Loop trace: A loop runs from i = 0 while i < 4, adding i to sum (starts at 0). Final sum?",
-    a: "6 — i takes values 0, 1, 2, 3, and 0 + 1 + 2 + 3 = 6."
+    q: "Loop trace: int sum = 0; for(int i = 0; i < 4; i++) sum += i; Final sum?",
+    a: "6 — i runs for 0, 1, 2, 3, and 0 + 1 + 2 + 3 = 6."
   }
 ];
 
@@ -669,3 +716,4 @@ setInterval(syncTwentyMinFeed, 30000);
 </script>
 </body>
 </html>
+
