@@ -2,179 +2,567 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Muhammad Shakeeb | Portfolio</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:#05010f;color:white;overflow-x:hidden}
-.orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.55;z-index:0}
-.o1{width:300px;height:300px;background:#7c3aed;top:-50px;left:-50px}
-.o2{width:280px;height:280px;background:#06b6d4;bottom:10%;right:-80px}
-nav{position:fixed;top:0;width:100%;z-index:99;display:flex;justify-content:center;gap:14px;padding:14px;background:rgba(0,0,0,.65);backdrop-filter:blur(12px);flex-wrap:wrap}
-nav a{color:#5eead4;text-decoration:none;font-weight:700;font-size:13px}
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:95px 20px 40px;position:relative;z-index:1}
-.photo-wrap{width:210px;height:210px;border-radius:50%;padding:6px;background:linear-gradient(45deg,#a855f7,#06b6d4,#ec4899,#facc15);background-size:300% 300%;cursor:pointer}
+:root{
+  --bg:#05010f;
+  --accent1:#7c3aed;
+  --accent2:#06b6d4;
+  --gold:#facc15;
+  --mint:#5eead4;
+  --card:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.14);
+  --ease:cubic-bezier(0.22, 1, 0.36, 1);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:#fff;overflow:hidden}
+
+/* Living Mesh Backdrop */
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(85px);opacity:.48;transition:transform 1.1s var(--ease),background 1.1s var(--ease)}
+.b1{width:340px;height:340px;background:#7c3aed;top:-80px;left:-70px}
+.b2{width:320px;height:320px;background:#06b6d4;bottom:40px;right:-80px}
+.b3{width:240px;height:240px;background:#ec4899;top:42%;left:45%;opacity:.22}
+
+/* Top Bar */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:rgba(5,1,15,.65);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.brand{font-weight:800;font-size:15px;letter-spacing:.3px;background:linear-gradient(90deg,#fff,var(--mint));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+.stage-indicator{font-size:12px;color:#cbd5e1;background:rgba(255,255,255,.08);padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12)}
+
+/* Stage Viewport */
+.deck{position:relative;width:100%;height:100dvh;padding:64px 16px 86px;overflow:hidden;z-index:2}
+.stage{
+  position:absolute;
+  top:64px;left:16px;right:16px;bottom:86px;
+  max-width:880px;margin:0 auto;
+  overflow-y:auto;
+  padding:10px 4px 28px;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(28px) scale(.965);
+  filter:blur(6px);
+  transition:opacity .46s var(--ease),transform .54s var(--ease),filter .46s var(--ease),visibility 0s linear .54s;
+  scrollbar-width:none;
+}
+.stage::-webkit-scrollbar{display:none}
+.stage.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+  transition:opacity .46s var(--ease),transform .54s var(--ease),filter .46s var(--ease),visibility 0s;
+}
+
+/* Stagger Entrance */
+.stage .anim{opacity:0;transform:translateY(16px);transition:opacity .45s var(--ease),transform .5s var(--ease)}
+.stage.active .anim{opacity:1;transform:translateY(0)}
+.stage.active .anim:nth-child(1){transition-delay:.04s}
+.stage.active .anim:nth-child(2){transition-delay:.1s}
+.stage.active .anim:nth-child(3){transition-delay:.16s}
+.stage.active .anim:nth-child(4){transition-delay:.22s}
+.stage.active .anim:nth-child(5){transition-delay:.28s}
+
+/* Hero Stage */
+.hero-box{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px 8px}
+.photo-wrap{width:176px;height:176px;border-radius:50%;padding:5px;background:linear-gradient(135deg,#a855f7,#06b6d4,#ec4899,#facc15);cursor:pointer;transition:transform .35s var(--ease)}
+.photo-wrap:active{transform:scale(.94)}
 .photo-wrap img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid #05010f}
-h1{font-size:50px;line-height:1.05;margin:20px 0 8px;background:linear-gradient(90deg,#fff,#a78bfa,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.typing{color:#facc15;font-size:20px;font-weight:700;min-height:28px}
-.badge{margin-top:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:10px 18px;border-radius:999px;font-size:14px}
-.live-dot{display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;margin-right:6px}
-.btns{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;justify-content:center}
-.btn{padding:13px 24px;border-radius:999px;text-decoration:none;font-weight:800;border:none;cursor:pointer;font-size:15px}
-.btn-w{background:white;color:black}.btn-b{background:#0ea5e9;color:white}.btn-y{background:#facc15;color:black}
-section{max-width:900px;margin:30px auto;padding:0 20px;position:relative;z-index:1}
-.card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:28px;margin-bottom:24px;backdrop-filter:blur(10px)}
-.card h2{color:#5eead4;font-size:28px;margin-bottom:14px}
-.card p{line-height:1.7;color:#e2e8f0;font-size:17px}
-.edu{border-left:4px solid #22d3ee;padding-left:16px;margin:18px 0}
-.edu b{color:#facc15;font-size:18px}.edu span{color:#cbd5e1}
-.official{display:inline-block;margin-top:10px;margin-right:8px;background:#111827;border:1px solid #22d3ee;color:#67e8f9;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:13px;font-weight:700}
+h1{font-size:clamp(34px,8vw,52px);line-height:1.06;margin:16px 0 8px;background:linear-gradient(90deg,#fff,#c4b5fd,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.typing{color:var(--gold);font-size:18px;font-weight:700;min-height:26px}
+.badge{margin-top:10px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);padding:8px 15px;border-radius:999px;font-size:13px;display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
+.live-dot{width:9px;height:9px;background:#22c55e;border-radius:50%;box-shadow:0 0 10px #22c55e}
+.btns{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center}
+.btn{padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:800;border:none;cursor:pointer;font-size:14px;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.btn:active{transform:scale(.95)}
+.btn-w{background:#fff;color:#05010f}.btn-b{background:#0ea5e9;color:#fff}.btn-y{background:var(--gold);color:#05010f}.btn-p{background:linear-gradient(90deg,#a855f7,#06b6d4);color:#fff}
+
+/* Spotlight & 3D Tilt Cards */
+.card{
+  --mx:50%;--my:50%;--rx:0deg;--ry:0deg;
+  position:relative;
+  background:radial-gradient(420px circle at var(--mx) var(--my),rgba(103,232,249,.14),transparent 65%),var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:24px;
+  margin-bottom:16px;
+  backdrop-filter:blur(14px);
+  transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition:transform .2s var(--ease),border-color .25s ease;
+}
+.card:hover{border-color:rgba(94,234,212,.38)}
+.card h2{color:var(--mint);font-size:24px;margin-bottom:12px}
+.card p{line-height:1.68;color:#e2e8f0;font-size:15.5px}
+
+.edu{border-left:3px solid var(--accent2);padding-left:14px;margin:14px 0}
+.edu b{color:var(--gold);font-size:17px}.edu span{color:#cbd5e1;font-size:14.5px}
+.official{display:inline-block;margin-top:10px;margin-right:8px;background:#111827;border:1px solid var(--accent2);color:#67e8f9;padding:8px 14px;border-radius:999px;text-decoration:none;font-size:12.5px;font-weight:700;transition:transform .2s var(--ease)}
+.official:active{transform:scale(.95)}
 .official-live{border-color:#22c55e;color:#86efac}
-.bar-bg{background:rgba(255,255,255,.1);border-radius:999px;height:14px;margin:8px 0 16px;overflow:hidden}
-.bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#a855f7,#22d3ee);width:0;transition:1.5s}
-.project{background:rgba(255,255,255,.06);border-radius:18px;padding:18px;margin-top:14px}
-.project b{color:#facc15;font-size:18px}
-.terminal{background:#000;border:1px solid #22c55e;border-radius:16px;padding:18px;text-align:left;font-family:monospace;font-size:14px;line-height:1.6;min-height:130px;color:#4ade80}
-.quote-box{margin-top:14px;background:rgba(250,204,21,.1);border:1px solid #facc15;border-radius:16px;padding:16px;text-align:center;color:#fde68a;font-style:italic;font-size:17px;min-height:60px}
-.ai-card{border:2px solid #a855f7 !important;background:rgba(168,85,247,.12) !important}
-.quick{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.quick button{background:#1e293b;color:#a5f3fc;border:1px solid #a855f7;padding:9px 14px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer}
-.chat{background:#0f172a;border-radius:16px;padding:14px;margin-top:14px;max-height:260px;overflow-y:auto;text-align:left}
-.msg{padding:9px 12px;border-radius:14px;margin:8px 0;font-size:14px;line-height:1.5}
-.ai{background:#1e293b;color:#a5f3fc}
-.you{background:#2563eb;color:white;text-align:right}
-input{width:100%;padding:13px;border-radius:999px;border:1px solid #475569;background:#020617;color:white;outline:none;margin-top:10px}
-.contact a{display:block;text-align:center;padding:15px;border-radius:16px;margin-top:12px;text-decoration:none;font-weight:800;color:white}
-footer{text-align:center;padding:30px;color:#94a3b8;font-size:13px;position:relative;z-index:1}
+
+.bar-bg{background:rgba(255,255,255,.1);border-radius:999px;height:12px;margin:6px 0 14px;overflow:hidden}
+.bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#a855f7,#22d3ee);width:0;transition:width .9s var(--ease)}
+
+.project{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:16px;margin-top:12px}
+.project b{color:var(--gold);font-size:17px;display:block;margin-bottom:4px}
+
+.terminal{background:#020617;border:1px solid #22c55e;border-radius:16px;padding:16px;font-family:monospace;font-size:13.5px;line-height:1.6;min-height:110px;color:#4ade80}
+.quote-box{margin-top:12px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.5);border-radius:16px;padding:14px;text-align:center;color:#fde68a;font-style:italic;font-size:15.5px;transition:opacity .35s ease}
+
+/* Portfolio AI */
+.ai-card{border:1.5px solid rgba(168,85,247,.7) !important;background:radial-gradient(450px circle at var(--mx) var(--my),rgba(168,85,247,.2),transparent 65%),rgba(15,10,30,.72) !important}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.quick button{background:#1e293b;color:#a5f3fc;border:1px solid rgba(168,85,247,.7);padding:8px 13px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;transition:transform .2s var(--ease)}
+.quick button:active{transform:scale(.94)}
+.chat{background:#050b18;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px;margin-top:10px;height:230px;overflow-y:auto;display:flex;flex-direction:column;gap:8px}
+.msg{padding:9px 13px;border-radius:14px;font-size:13.5px;line-height:1.5;max-width:90%;animation:popIn .28s var(--ease)}
+@keyframes popIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.ai{background:#1e293b;color:#a5f3fc;align-self:flex-start}
+.you{background:#2563eb;color:#fff;align-self:flex-end}
+.followups{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.followups button{background:rgba(94,234,212,.12);color:var(--mint);border:1px solid rgba(94,234,212,.4);padding:6px 11px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+.chat-row{display:flex;gap:8px;margin-top:10px}
+.chat-row input{flex:1;padding:12px 16px;border-radius:999px;border:1px solid #475569;background:#020617;color:#fff;outline:none;font-size:14px}
+
+.contact a{display:block;text-align:center;padding:14px;border-radius:16px;margin-top:10px;text-decoration:none;font-weight:800;color:#fff;transition:transform .2s var(--ease)}
+.contact a:active{transform:scale(.97)}
+
+/* Floating Bottom Dock */
+.dock-wrap{position:fixed;bottom:12px;left:12px;right:12px;z-index:40;display:flex;justify-content:center;pointer-events:none}
+.dock{
+  pointer-events:auto;
+  display:flex;gap:6px;padding:8px 10px;
+  border-radius:999px;
+  background:rgba(10,8,24,.82);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.15);
+  max-width:100%;overflow-x:auto;scrollbar-width:none;
+  box-shadow:0 14px 36px rgba(0,0,0,.55);
+}
+.dock::-webkit-scrollbar{display:none}
+.dock button{
+  background:transparent;border:none;color:#cbd5e1;
+  padding:8px 12px;border-radius:999px;font-size:12.5px;font-weight:700;
+  cursor:pointer;white-space:nowrap;
+  transition:background .28s var(--ease),color .28s var(--ease),transform .22s var(--ease);
+}
+.dock button.active{background:linear-gradient(90deg,#7c3aed,#06b6d4);color:#fff;transform:translateY(-1px)}
+
+/* Quick Floating AI Button */
+.fab-ai{
+  position:fixed;right:16px;bottom:76px;z-index:35;
+  background:linear-gradient(135deg,#a855f7,#06b6d4);
+  color:#fff;border:none;border-radius:999px;
+  padding:10px 15px;font-size:12.5px;font-weight:800;
+  cursor:pointer;box-shadow:0 8px 24px rgba(124,58,237,.45);
+  transition:transform .25s var(--ease),opacity .25s ease;
+}
+.fab-ai:active{transform:scale(.93)}
+.fab-ai.hidden{opacity:0;pointer-events:none;transform:translateY(10px)}
 </style>
 </head>
 <body>
-<div class="orb o1"></div><div class="orb o2"></div>
-<nav><a href="#about">About</a><a href="#ai">Portfolio AI</a><a href="#live">LIVE</a><a href="#edu">Education</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#cv">CV</a><a href="#contact">Contact</a></nav>
-<div class="hero">
-<div class="photo-wrap" onclick="tapPhoto()"><img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb"></div>
-<h1>Hi,<br>I'm Shakeeb 👋</h1>
-<div class="typing" id="typing"></div>
-<div class="badge">📍 Valaichenai, Batticaloa & Maradana, Colombo — Sri Lanka</div>
-<div class="badge" style="border-color:#22c55e;color:#86efac"><span class="live-dot"></span><span id="liveStatus">Loading...</span> • <span id="slClock">--:--:--</span></div>
-<div class="btns">
-<button class="btn btn-y" onclick="askName()">👋 Tell Me Your Name</button>
-<button class="btn btn-w" onclick="hireMe()">🤝 Work With Me</button>
-<a class="btn btn-b" href="https://github.com/mskb2005" target="_blank">GitHub ↗</a>
+
+<div class="mesh">
+  <div class="blob b1" id="b1"></div>
+  <div class="blob b2" id="b2"></div>
+  <div class="blob b3" id="b3"></div>
 </div>
-</div>
-<section id="about"><div class="card">
-<h2>👨‍💻 About Me</h2>
-<p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
-<p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
-<p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
-<p style="color:#5eead4;font-style:italic;font-size:20px;text-align:center">"I'm still learning, and I want to do my best."</p>
-</div></section>
-<section id="ai"><div class="card ai-card">
-<h2>🤖 Ask Portfolio AI — About Me Only</h2>
-<p>This AI only answers about <b style="color:#facc15">my education, my skills, my projects, and how to contact me.</b> Tap a button or type your question:</p>
-<div class="quick">
-<button onclick="quickAsk('education')">🎓 My Education?</button>
-<button onclick="quickAsk('skills')">💻 My Skills?</button>
-<button onclick="quickAsk('projects')">🚀 My Projects?</button>
-<button onclick="quickAsk('contact')">📩 How to contact?</button>
-</div>
-<div class="chat" id="chat"><div class="msg ai">👋 Hi! I'm Portfolio AI. I can only tell you about Shakeeb's education, skills, projects, and contact. Try tapping a button above 👆</div></div>
-<input id="qInput" placeholder="Type here... e.g. what is your education?" onkeypress="if(event.key==='Enter') askAI()">
-<button class="btn btn-b" style="width:100%;margin-top:10px" onclick="askAI()">Ask AI →</button>
-<p style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center">This AI is only for information about Shakeeb. For other topics, please ask Shakeeb directly.</p>
-</div></section>
-<section id="live"><div class="card">
-<h2>🔴 LIVE — What I'm Doing</h2>
-<div class="terminal" id="terminal">$ shakeeb@portfolio:~$ <span id="termText"></span><span>▌</span></div>
-<div class="quote-box" id="quoteBox">Loading...</div>
-</div></section>
-<section id="edu"><div class="card">
-<h2>🎓 Education Journey</h2>
-<div class="edu"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL)<br>Also studying Chemistry & Physics</span><br><a class="official" href="https://ou.ac.lk" target="_blank">🌐 Visit Official OUSL Website → ou.ac.lk</a></div>
-<div class="edu"><b>Completed — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="official" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Visit Official CASED Website →</a></div>
-<div class="edu"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
-</div></section>
-<section id="skills"><div class="card">
-<h2>📊 What I'm Learning</h2>
-<p style="font-size:14px;color:#94a3b8;margin-bottom:12px">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
-<p>C — My Strongest, I know a little more in this one</p><div class="bar-bg"><div class="bar" data-w="90%"></div></div>
-<p>HTML & CSS</p><div class="bar-bg"><div class="bar" data-w="85%"></div></div>
-<p>Python</p><div class="bar-bg"><div class="bar" data-w="75%"></div></div>
-<p>Java</p><div class="bar-bg"><div class="bar" data-w="70%"></div></div>
-<p>JavaScript</p><div class="bar-bg"><div class="bar" data-w="60%"></div></div>
-<p>AI & Machine Learning — Learning</p><div class="bar-bg"><div class="bar" data-w="65%"></div></div>
-</div></section>
-<section id="projects"><div class="card">
-<h2>🚀 My Projects</h2>
-<div class="project">
-<b>1. 3D Interactive World Globe</b>
-<p>An interactive 3D orthographic globe built with HTML, CSS, and JavaScript featuring all 197 countries and capitals, smooth touch spin/zoom, map modes, and distance measurement.</p>
-<a class="official" href="https://github.com/mskb2005/easing-playground" target="_blank">💻 View Source Code →</a>
-<a class="official official-live" href="https://mskb2005.github.io/easing-playground/" target="_blank">🌐 Live Demo →</a>
-</div>
-<div class="project">
-<b>2. This Portfolio Website</b>
-<p>You are seeing it right now. Built from my phone using HTML, CSS, and JavaScript while learning.</p>
-<a class="official" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 View Source Code →</a>
-</div>
-<div class="project">
-<b>3. AI Learning Projects</b>
-<p>Small experiments while learning AI and coding.</p>
-<a class="official" href="https://github.com/mskb2005" target="_blank">💻 View on GitHub →</a>
-</div>
-</div></section>
-<section id="cv"><div class="card" style="text-align:center;border:2px solid #facc15">
-<h2>📄 My CV</h2>
-<p>Want to know more about me? Here is a quick summary.</p>
-<br>
-<p style="text-align:left"><b>Name:</b> Muhammad Shakeeb<br>
-<b>Education:</b> BSc Computer Science - OUSL (Ongoing)<br>
-<b>Diploma:</b> Diploma in IT & AI - CASED Institute<br>
-<b>Skills:</b> C (Know a little more), HTML & CSS, Python, Java, AI Basics<br>
-<b>Location:</b> Valaichenai, Batticaloa & Maradana, Colombo<br>
-<b>Email:</b> mgmshakeeb2005@gmail.com</p>
-<br>
-<a class="btn btn-y" href="https://wa.me/94726958015" target="_blank" style="display:inline-block">📩 Ask Me For Full CV on WhatsApp</a>
-<br><br>
-<p style="font-size:13px;color:#94a3b8">Full PDF CV coming soon. For now, contact me and I'll send it.</p>
-</div></section>
-<section id="contact"><div class="card">
-<h2>📩 Let's Connect!</h2>
-<p>Available in Valaichenai, Batticaloa & Maradana, Colombo.</p>
-<div class="contact">
-<a style="background:white;color:black" href="https://wa.me/94726958015" target="_blank">💬 WhatsApp Me</a>
-<a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
-<a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank">💼 LinkedIn</a>
-<a style="background:#14b8a6" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
-<a style="background:#14b8a6" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
-</div>
-</div></section>
-<footer>Made with ❤️ by Muhammad Shakeeb • 2026<br>Valaichenai • Batticaloa • Colombo</footer>
+
+<header class="topbar">
+  <div class="brand" onclick="goStage('home')">Shakeeb.dev</div>
+  <div class="stage-indicator" id="stageLabel">1 / 8 • Home • Swipe ⇄</div>
+</header>
+
+<button class="fab-ai" id="fabAi" onclick="goStage('ai')">✨ Ask AI</button>
+
+<main class="deck" id="deck">
+
+  <!-- 1. HOME -->
+  <section class="stage active" data-stage="home" data-title="Home">
+    <div class="hero-box">
+      <div class="photo-wrap anim" onclick="tapPhoto()"><img src="IMG-20261120-WA0055.jpg" alt="Muhammad Shakeeb"></div>
+      <h1 class="anim">Hi,<br>I'm Shakeeb 👋</h1>
+      <div class="typing anim" id="typing"></div>
+      <div class="badge anim">📍 Valaichenai, Batticaloa & Maradana, Colombo — Sri Lanka</div>
+      <div class="badge anim" style="border-color:rgba(34,197,94,.6);color:#86efac"><span class="live-dot"></span><span id="liveStatus">Loading...</span> • <span id="slClock">--:--:--</span></div>
+      <div class="btns anim">
+        <button class="btn btn-y" onclick="askName()">👋 Tell Me Your Name</button>
+        <button class="btn btn-p" onclick="goStage('ai')">🤖 Ask Portfolio AI</button>
+        <button class="btn btn-w" onclick="hireMe()">🤝 Work With Me</button>
+        <a class="btn btn-b" href="https://github.com/mskb2005" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT -->
+  <section class="stage" data-stage="about" data-title="About">
+    <div class="card anim">
+      <h2>👨‍💻 About Me</h2>
+      <p>Hi, I'm Shakeeb. I'm a Computer Science student from Valaichenai, learning step by step.</p><br>
+      <p>I'm not an expert yet. I'm still learning — C, HTML, Python, Java, and AI. I enjoy trying to build things that work, and learning from my mistakes.</p><br>
+      <p>I started with just a phone and curiosity. Now I'm studying and building small projects, and I hope to keep improving.</p><br>
+      <p style="color:var(--mint);font-style:italic;font-size:19px;text-align:center">"I'm still learning, and I want to do my best."</p>
+    </div>
+  </section>
+
+  <!-- 3. PORTFOLIO AI -->
+  <section class="stage" data-stage="ai" data-title="Portfolio AI">
+    <div class="card ai-card anim">
+      <h2>🤖 Ask Portfolio AI — About Me Only</h2>
+      <p>This AI only answers about <b style="color:var(--gold)">my education, my skills, my projects, and how to contact me.</b></p>
+      <div class="quick">
+        <button onclick="quickAsk('education')">🎓 Education</button>
+        <button onclick="quickAsk('skills')">💻 Skills</button>
+        <button onclick="quickAsk('projects')">🚀 Projects</button>
+        <button onclick="quickAsk('contact')">📩 Contact</button>
+      </div>
+      <div class="chat" id="chat">
+        <div class="msg ai">👋 Hi! I'm Portfolio AI. Ask me about Shakeeb's education, skills, projects, or contact.</div>
+      </div>
+      <div class="followups" id="followups">
+        <button onclick="quickAsk('education')">🎓 OUSL & CASED</button>
+        <button onclick="quickAsk('projects')">🌍 3D Globe Repo</button>
+        <button onclick="quickAsk('skills')">⚡ Strongest Skill</button>
+      </div>
+      <div class="chat-row">
+        <input id="qInput" placeholder="Ask about Shakeeb..." onkeypress="if(event.key==='Enter') askAI()">
+        <button class="btn btn-b" onclick="askAI()">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. LIVE -->
+  <section class="stage" data-stage="live" data-title="Live">
+    <div class="card anim">
+      <h2>🔴 LIVE — What I'm Doing</h2>
+      <div class="terminal">$ shakeeb@portfolio:~$ <span id="termText"></span><span>▌</span></div>
+      <div class="quote-box" id="quoteBox">Loading...</div>
+    </div>
+  </section>
+
+  <!-- 5. EDUCATION -->
+  <section class="stage" data-stage="edu" data-title="Education">
+    <div class="card anim">
+      <h2>🎓 Education Journey</h2>
+      <div class="edu"><b>Now — BSc in Computer Science</b><br><span>Open University of Sri Lanka (OUSL)<br>Also studying Chemistry & Physics</span><br><a class="official" href="https://ou.ac.lk" target="_blank">🌐 Visit Official OUSL Website → ou.ac.lk</a></div>
+      <div class="edu"><b>Completed — Diploma in IT & AI</b><br><span>CASED Institute, Sri Lanka</span><br><a class="official" href="https://share.google/3Szfp0XyzKnJTM7Jy" target="_blank">🌐 Visit Official CASED Website →</a></div>
+      <div class="edu"><b>School — BT/BC Annoor National School</b><br><span>Valaichenai, Batticaloa — Where my journey started</span></div>
+    </div>
+  </section>
+
+  <!-- 6. SKILLS -->
+  <section class="stage" data-stage="skills" data-title="Skills">
+    <div class="card anim">
+      <h2>📊 What I'm Learning</h2>
+      <p style="font-size:13.5px;color:#94a3b8;margin-bottom:12px">C is the one I know a little more than the others. The rest I'm still learning and improving.</p>
+      <p>C — My Strongest</p><div class="bar-bg"><div class="bar" data-w="90%"></div></div>
+      <p>HTML & CSS</p><div class="bar-bg"><div class="bar" data-w="85%"></div></div>
+      <p>Python</p><div class="bar-bg"><div class="bar" data-w="75%"></div></div>
+      <p>Java</p><div class="bar-bg"><div class="bar" data-w="70%"></div></div>
+      <p>JavaScript</p><div class="bar-bg"><div class="bar" data-w="60%"></div></div>
+      <p>AI & Machine Learning — Learning</p><div class="bar-bg"><div class="bar" data-w="65%"></div></div>
+    </div>
+  </section>
+
+  <!-- 7. PROJECTS -->
+  <section class="stage" data-stage="projects" data-title="Projects">
+    <div class="card anim">
+      <h2>🚀 My Projects</h2>
+      <div class="project">
+        <b>1. 3D Interactive World Globe</b>
+        <p>Interactive 3D orthographic globe with 197 countries and capitals, smooth spin/zoom, map modes, and distance measurement.</p>
+        <a class="official" href="https://github.com/mskb2005/easing-playground" target="_blank">💻 View Source Code →</a>
+        <a class="official official-live" href="https://mskb2005.github.io/easing-playground/" target="_blank">🌐 Live Demo →</a>
+      </div>
+      <div class="project">
+        <b>2. This Portfolio Website</b>
+        <p>Built from my phone using HTML, CSS, and JavaScript with stage transitions and Portfolio AI.</p>
+        <a class="official" href="https://github.com/mskb2005/my-portfolio" target="_blank">💻 View Source Code →</a>
+      </div>
+      <div class="project">
+        <b>3. AI Learning Projects</b>
+        <p>Small experiments while learning AI and coding step by step.</p>
+        <a class="official" href="https://github.com/mskb2005" target="_blank">💻 View on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. CV & CONTACT -->
+  <section class="stage" data-stage="contact" data-title="CV & Contact">
+    <div class="card anim" style="border-color:rgba(250,204,21,.55)">
+      <h2>📄 My CV Summary</h2>
+      <p><b>Name:</b> Muhammad Shakeeb<br>
+      <b>Education:</b> BSc Computer Science - OUSL (Ongoing)<br>
+      <b>Diploma:</b> Diploma in IT & AI - CASED Institute<br>
+      <b>Skills:</b> C (Strongest), HTML & CSS, Python, Java, AI Basics<br>
+      <b>Location:</b> Valaichenai, Batticaloa & Maradana, Colombo<br>
+      <b>Email:</b> mgmshakeeb2005@gmail.com</p>
+      <a class="btn btn-y" href="https://wa.me/94726958015" target="_blank" style="display:inline-block;margin-top:14px">📩 Ask For Full CV on WhatsApp</a>
+    </div>
+    <div class="card anim">
+      <h2>📩 Let's Connect!</h2>
+      <div class="contact">
+        <a style="background:#fff;color:#05010f" href="https://wa.me/94726958015" target="_blank">💬 WhatsApp Me</a>
+        <a style="background:#2563eb" href="mailto:mgmshakeeb2005@gmail.com">📧 mgmshakeeb2005@gmail.com</a>
+        <a style="background:#0f172a;border:1px solid #475569" href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank">💼 LinkedIn</a>
+        <a style="background:#14b8a6" href="https://x.com/" target="_blank">𝕏 Twitter / X</a>
+        <a style="background:#14b8a6" href="https://github.com/mskb2005" target="_blank">💻 GitHub - mskb2005</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="dock-wrap">
+  <div class="dock" id="dock">
+    <button data-target="home" class="active">Home</button>
+    <button data-target="about">About</button>
+    <button data-target="ai">Portfolio AI</button>
+    <button data-target="live">Live</button>
+    <button data-target="edu">Education</button>
+    <button data-target="skills">Skills</button>
+    <button data-target="projects">Projects</button>
+    <button data-target="contact">CV & Contact</button>
+  </div>
+</nav>
+
 <script>
-const texts=["BSc Computer Science Student","Learning Tech • Coding • AI","Still Learning, Still Building"];
-let ti=0,ci=0,del=false;
-function type(){let cur=texts[ti];document.getElementById("typing").textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);if(!del&&ci==cur.length){del=true;setTimeout(type,1200);return}if(del&&ci==0){del=false;ti=(ti+1)%texts.length}setTimeout(type,del?40:80);} type();
-function updateSmartStatus(){let c=document.getElementById("slClock");let s=document.getElementById("liveStatus");if(!c||!s)return;let n=new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Colombo"}));let h=n.getHours();c.textContent=n.toLocaleTimeString("en-LK",{timeZone:"Asia/Colombo",hour:'2-digit',minute:'2-digit',second:'2-digit'})+" SL";let m="";if(h<5)m="😴 Probably coding late or sleeping";else if(h<7)m="🌅 Just woke up, starting the day";else if(h<10)m="📚 Studying & learning";else if(h<13)m="💻 Studying & building projects";else if(h<14)m="🍛 Lunch break";else if(h<17)m="💻 Working on projects / Practising coding";else if(h<19)m="🌇 Evening break, planning next step";else if(h<22)m="💻 Coding & learning AI";else m="🌙 Winding down, still thinking about code";s.textContent=m}setInterval(updateSmartStatus,1000);updateSmartStatus();
-const codeLines=["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];let li=0,char=0;function termType(){let line=codeLines[li];document.getElementById("termText").textContent=line.slice(0,++char);if(char>=line.length){setTimeout(()=>{li=(li+1)%codeLines.length;char=0},1200)}setTimeout(termType,55)}termType();
-const quotes=["\"First, try to understand the problem. Then, try to solve it.\"","\"I'm still learning. Every day, a little more.\"","\"Mistakes teach me more than success.\"","\"From Valaichenai, learning step by step.\"","\"I'm still learning, and I want to do my best.\""];let qi=0;setInterval(()=>{document.getElementById("quoteBox").textContent=quotes[qi];qi=(qi+1)%quotes.length},5000);document.getElementById("quoteBox").textContent=quotes[0];
-function askName(){let n=prompt("What's your name?");if(n){alert("Welcome "+n+"! Appreciate it,Thanks for visiting ❤️")}}
-function tapPhoto(){alert("Hey! Thanks for visiting my site 😊")}
-function hireMe(){alert("Thank you! Please contact Shakeeb on WhatsApp or Email. He will reply soon 😊")}
-function getAnswer(q){
-q=q.toLowerCase();
-if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes("school")||q.includes("cased")||q.includes("ousl")||q.includes("diploma")||q.includes("degree")) return "📚 Shakeeb's Education: 1) Now: BSc in Computer Science at Open University of Sri Lanka (OUSL) - also studying Chemistry & Physics. 2) Completed: Diploma in IT & AI from CASED Institute. 3) School: BT/BC Annoor National School, Valaichenai.";
-if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("java")||q.includes("can you")||q.includes("do")) return "💻 Shakeeb's Skills: C - he knows a little more in this one than the others. Also HTML & CSS, Python, Java, and AI / Machine Learning basics. He is still learning and improving every day.";
-if(q.includes("project")||q.includes("globe")) return "🚀 Shakeeb's Projects: 1) 3D Interactive World Globe (all 197 countries & capitals) — source code at github.com/mskb2005/easing-playground. 2) This portfolio website built from his phone. 3) Small AI learning projects.";
-if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")) return "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp via the button below, GitHub mskb2005. He is in Valaichenai, Batticaloa & Maradana, Colombo.";
-if(q.includes("who")||q.includes("about")||q.includes("name")) return "👋 He is Muhammad Shakeeb from Valaichenai, Batticaloa. A Computer Science student at OUSL, still learning coding and AI.";
-if(q.includes("where")||q.includes("live")||q.includes("from")) return "📍 Shakeeb is from Valaichenai, Batticaloa, Sri Lanka. Also available in Maradana, Colombo.";
-return "I'm Portfolio AI, and I only answer about Shakeeb. Please ask about: His Education, Skills, Projects, or Contact. Tap a button above 👆";
+const stages = Array.from(document.querySelectorAll(".stage"));
+const dockBtns = Array.from(document.querySelectorAll(".dock button"));
+const stageLabel = document.getElementById("stageLabel");
+const fabAi = document.getElementById("fabAi");
+const b1 = document.getElementById("b1"), b2 = document.getElementById("b2"), b3 = document.getElementById("b3");
+
+const palettes = {
+  home: ["#7c3aed","#06b6d4","translate(0,0)"],
+  about: ["#6366f1","#14b8a6","translate(25px,-15px)"],
+  ai: ["#a855f7","#3b82f6","translate(-20px,20px)"],
+  live: ["#10b981","#06b6d4","translate(15px,25px)"],
+  edu: ["#0ea5e9","#8b5cf6","translate(-25px,-10px)"],
+  skills: ["#8b5cf6","#22d3ee","translate(20px,10px)"],
+  projects: ["#f59e0b","#06b6d4","translate(-15px,-20px)"],
+  contact: ["#ec4899","#7c3aed","translate(10px,-25px)"]
+};
+
+let currentIdx = 0;
+
+function animateBars(){
+  document.querySelectorAll(".bar").forEach(b => {
+    b.style.width = "0";
+    requestAnimationFrame(() => requestAnimationFrame(() => { b.style.width = b.dataset.w; }));
+  });
 }
-function quickAsk(t){document.getElementById("qInput").value=t;askAI();}
-function askAI(){let inp=document.getElementById("qInput");let q=inp.value;if(!q) return;let chat=document.getElementById("chat");chat.innerHTML+="<div class='msg you'>"+q+"</div>";chat.innerHTML+="<div class='msg ai'>🤖 "+getAnswer(q)+"</div>";chat.scrollTop=chat.scrollHeight;inp.value="";}
-window.addEventListener("scroll",()=>{document.querySelectorAll(".bar").forEach(b=>{let r=b.getBoundingClientRect();if(r.top<window.innerHeight) b.style.width=b.dataset.w})});
-setTimeout(()=>{document.querySelectorAll(".bar").forEach(b=>b.style.width=b.dataset.w)},800);
+
+function goStage(name){
+  const idx = stages.findIndex(s => s.dataset.stage === name);
+  if(idx === -1) return;
+  currentIdx = idx;
+
+  stages.forEach((s, i) => {
+    s.classList.toggle("active", i === idx);
+    if(i === idx) s.scrollTop = 0;
+  });
+
+  dockBtns.forEach((btn, i) => {
+    const active = i === idx;
+    btn.classList.toggle("active", active);
+    if(active) btn.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"});
+  });
+
+  stageLabel.textContent = `${idx + 1} / ${stages.length} • ${stages[idx].dataset.title} • Swipe ⇄`;
+  fabAi.classList.toggle("hidden", name === "ai");
+
+  const p = palettes[name] || palettes.home;
+  b1.style.background = p[0];
+    b2.style.background = p[1];
+  b3.style.transform = p[2];
+
+  if(name === "skills") animateBars();
+}
+
+dockBtns.forEach(btn => btn.addEventListener("click", () => goStage(btn.dataset.target)));
+
+// Touch Swipe Left / Right between stages
+let sx = 0, sy = 0;
+const deck = document.getElementById("deck");
+deck.addEventListener("touchstart", e => {
+  if(e.touches.length !== 1) return;
+  sx = e.touches[0].clientX;
+  sy = e.touches[0].clientY;
+}, {passive:true});
+
+deck.addEventListener("touchend", e => {
+  if(!e.changedTouches.length) return;
+  const dx = e.changedTouches[0].clientX - sx;
+  const dy = e.changedTouches[0].clientY - sy;
+  if(Math.abs(dx) > 65 && Math.abs(dx) > Math.abs(dy) * 1.45){
+    if(dx < 0 && currentIdx < stages.length - 1) goStage(stages[currentIdx + 1].dataset.stage);
+    if(dx > 0 && currentIdx > 0) goStage(stages[currentIdx - 1].dataset.stage);
+  }
+}, {passive:true});
+
+// Spotlight & 3D Tilt on Cards
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("pointermove", e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const rx = ((y / r.height) - 0.5) * -5;
+    const ry = ((x / r.width) - 0.5) * 5;
+    card.style.setProperty("--mx", `${x}px`);
+    card.style.setProperty("--my", `${y}px`);
+    card.style.setProperty("--rx", `${rx.toFixed(2)}deg`);
+    card.style.setProperty("--ry", `${ry.toFixed(2)}deg`);
+  });
+  card.addEventListener("pointerleave", () => {
+    card.style.setProperty("--rx", "0deg");
+    card.style.setProperty("--ry", "0deg");
+  });
+});
+
+// Typing & Sri Lanka Live Status
+const texts = ["BSc Computer Science Student","Learning Tech • Coding • AI","Still Learning, Still Building"];
+let ti=0, ci=0, del=false;
+function type(){
+  const cur = texts[ti];
+  document.getElementById("typing").textContent = del ? cur.slice(0,--ci) : cur.slice(0,++ci);
+  if(!del && ci === cur.length){ del = true; setTimeout(type,1200); return; }
+  if(del && ci === 0){ del = false; ti = (ti+1) % texts.length; }
+  setTimeout(type, del ? 40 : 80);
+}
+type();
+
+function updateSmartStatus(){
+  const c = document.getElementById("slClock");
+  const s = document.getElementById("liveStatus");
+  if(!c || !s) return;
+  const n = new Date(new Date().toLocaleString("en-US",{timeZone:"Asia/Colombo"}));
+  const h = n.getHours();
+  c.textContent = n.toLocaleTimeString("en-LK",{timeZone:"Asia/Colombo",hour:"2-digit",minute:"2-digit",second:"2-digit"}) + " SL";
+  let m = "";
+  if(h<5) m="😴 Coding late or sleeping";
+  else if(h<7) m="🌅 Waking up & starting the day";
+  else if(h<10) m="📚 Studying & learning";
+  else if(h<13) m="💻 Studying & building projects";
+  else if(h<14) m="🍛 Lunch break";
+  else if(h<17) m="💻 Practising code & projects";
+  else if(h<19) m="🌇 Evening break & planning";
+  else if(h<22) m="💻 Coding & learning AI";
+  else m="🌙 Winding down, thinking in code";
+  s.textContent = m;
+}
+setInterval(updateSmartStatus, 1000);
+updateSmartStatus();
+
+// Terminal & Quotes
+const codeLines = ["git add .","git commit -m 'learning everyday'","python ai.py -> learning...","print('still learning, trying my best')","// learning from mistakes"];
+let li=0, ch=0;
+function termType(){
+  const line = codeLines[li];
+  document.getElementById("termText").textContent = line.slice(0,++ch);
+  if(ch >= line.length){ setTimeout(()=>{ li=(li+1)%codeLines.length; ch=0; }, 1200); }
+  setTimeout(termType, 55);
+}
+termType();
+
+const quotes = [
+  "\"First, try to understand the problem. Then, try to solve it.\"",
+  "\"I'm still learning. Every day, a little more.\"",
+  "\"Mistakes teach me more than success.\"",
+  "\"From Valaichenai, learning step by step.\"",
+  "\"I'm still learning, and I want to do my best.\""
+];
+let qi = 0;
+function setQuote(){
+  const qb = document.getElementById("quoteBox");
+  qb.style.opacity = 0;
+  setTimeout(()=>{ qb.textContent = quotes[qi]; qb.style.opacity = 1; qi = (qi+1) % quotes.length; }, 220);
+}
+setQuote();
+setInterval(setQuote, 5000);
+
+function askName(){ const n = prompt("What's your name?"); if(n) alert("Welcome " + n + "! Thanks for visiting ❤️"); }
+function tapPhoto(){ alert("Hey! Thanks for visiting my site 😊"); }
+function hireMe(){ alert("Thank you! Reach Shakeeb on WhatsApp or Email — he'll reply soon 😊"); }
+
+// Streaming Portfolio AI
+function getAnswer(q){
+  q = q.toLowerCase();
+  if(q.includes("edu")||q.includes("study")||q.includes("university")||q.includes("school")||q.includes("cased")||q.includes("ousl")||q.includes("diploma")||q.includes("degree")){
+    return {
+      text: "📚 Shakeeb's Education: 1) Now: BSc in Computer Science at Open University of Sri Lanka (OUSL), also studying Chemistry & Physics. 2) Completed: Diploma in IT & AI from CASED Institute. 3) School: BT/BC Annoor National School, Valaichenai.",
+      next: [["💻 His Skills","skills"],["🚀 His Projects","projects"],["📩 Contact","contact"]]
+    };
+  }
+  if(q.includes("skill")||q.includes("code")||q.includes("python")||q.includes("html")||q.includes("java")||q.includes("c ")||q.includes("can you")||q.includes("do")){
+    return {
+      text: "💻 Shakeeb's Skills: C is his strongest so far. He is also learning HTML & CSS, Python, Java, JavaScript, and AI / Machine Learning step by step.",
+      next: [["🚀 See Projects","projects"],["🎓 Education","education"],["📩 Contact","contact"]]
+    };
+  }
+  if(q.includes("project")||q.includes("globe")||q.includes("repo")||q.includes("github")){
+    return {
+      text: "🚀 Shakeeb's Projects: 1) 3D Interactive World Globe (197 countries & capitals) — github.com/mskb2005/easing-playground. 2) This portfolio site (github.com/mskb2005/my-portfolio). 3) Small AI & coding practice experiments.",
+      next: [["💻 His Skills","skills"],["📩 Contact","contact"],["🎓 Education","education"]]
+    };
+  }
+  if(q.includes("contact")||q.includes("whatsapp")||q.includes("email")||q.includes("phone")||q.includes("linkedin")||q.includes("reach")){
+    return {
+      text: "📩 Contact Shakeeb: Email mgmshakeeb2005@gmail.com, WhatsApp +94 72 695 8015, GitHub mskb2005. Available in Valaichenai, Batticaloa & Maradana, Colombo.",
+      next: [["🚀 Projects","projects"],["🎓 Education","education"],["💻 Skills","skills"]]
+    };
+  }
+  if(q.includes("who")||q.includes("about")||q.includes("name")||q.includes("where")||q.includes("live")||q.includes("from")){
+    return {
+      text: "👋 Muhammad Shakeeb is a BSc Computer Science student at OUSL from Valaichenai, Batticaloa, also connected with Maradana, Colombo.",
+      next: [["🎓 Education","education"],["💻 Skills","skills"],["🚀 Projects","projects"]]
+    };
+  }
+  return {
+    text: "I'm Portfolio AI and only answer about Shakeeb. Ask about his Education, Skills, Projects, or Contact.",
+    next: [["🎓 Education","education"],["💻 Skills","skills"],["🚀 Projects","projects"],["📩 Contact","contact"]]
+  };
+}
+
+function quickAsk(t){ document.getElementById("qInput").value = t; askAI(); }
+
+function askAI(){
+  const inp = document.getElementById("qInput");
+  const q = inp.value.trim();
+  if(!q) return;
+  const chat = document.getElementById("chat");
+  const fups = document.getElementById("followups");
+
+  const youEl = document.createElement("div");
+  youEl.className = "msg you";
+  youEl.textContent = q;
+  chat.appendChild(youEl);
+  inp.value = "";
+
+  const res = getAnswer(q);
+  const aiEl = document.createElement("div");
+  aiEl.className = "msg ai";
+  aiEl.textContent = "🤖 ";
+  chat.appendChild(aiEl);
+
+  const words = res.text.split(" ");
+  let wIdx = 0;
+  const timer = setInterval(() => {
+    aiEl.textContent += (wIdx === 0 ? "" : " ") + words[wIdx++];
+    chat.scrollTop = chat.scrollHeight;
+    if(wIdx >= words.length){
+      clearInterval(timer);
+      fups.innerHTML = "";
+      res.next.forEach(([label, query]) => {
+        const b = document.createElement("button");
+        b.textContent = label;
+        b.onclick = () => quickAsk(query);
+        fups.appendChild(b);
+      });
+    }
+  }, 28);
+}
 </script>
 </body>
 </html>
