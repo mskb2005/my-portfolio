@@ -44,13 +44,38 @@
       margin: 0 auto;
     }
 
-    /* Compact Top Nav */
+    /* Real-time transition bar & animated panels */
+    #transition-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+      z-index: 60;
+      transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .rt-panel {
+      opacity: 0;
+      transform: translateY(18px) scale(0.99);
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .rt-panel.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Compact Single-Row Top Nav */
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 30;
       backdrop-filter: blur(12px);
-      background: rgba(9, 13, 16, 0.9);
+      background: rgba(9, 13, 16, 0.92);
       border-bottom: 1px solid var(--border);
     }
 
@@ -80,21 +105,15 @@
       gap: 14px;
       font-size: 0.82rem;
       color: var(--text-muted);
-      overflow-x: auto;
-      scrollbar-width: none;
-      padding: 2px 0;
-    }
-
-    nav::-webkit-scrollbar {
-      display: none;
     }
 
     nav a {
       white-space: nowrap;
+      transition: color 0.2s ease;
     }
 
     nav a:hover {
-      color: var(--text-primary);
+      color: var(--accent);
     }
 
     .badge-pill {
@@ -105,65 +124,66 @@
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(52, 211, 153, 0.35);
-      background: rgba(52, 211, 153, 0.1);
+      background: rgba(52, 211, 153, 0.12);
       color: var(--accent);
       white-space: nowrap;
       flex-shrink: 0;
     }
     /* Hero */
     .hero {
-      padding: 40px 0 36px;
+      padding: 36px 0 32px;
       display: grid;
       grid-template-columns: 1.35fr 0.65fr;
-      gap: 28px;
+      gap: 24px;
       align-items: center;
     }
 
     .eyebrow {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent-warm);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     h1 {
-      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-size: clamp(1.95rem, 5.5vw, 3.6rem);
       line-height: 1.05;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .hero-lead {
       color: var(--text-muted);
-      font-size: 0.98rem;
+      font-size: 0.96rem;
       max-width: 58ch;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .btn-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 11px 18px;
+      padding: 10px 16px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       border: 1px solid var(--border);
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
     .btn:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     .btn-primary {
@@ -192,12 +212,12 @@
 
     .stat-num {
       font-weight: 800;
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: var(--text-primary);
     }
 
     .stat-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -242,18 +262,18 @@
 
     /* Sections */
     section {
-      padding: 48px 0;
+      padding: 44px 0;
       border-top: 1px solid var(--border);
-      scroll-margin-top: 64px;
+      scroll-margin-top: 62px;
     }
 
     .section-head {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .section-kicker {
@@ -265,12 +285,96 @@
     }
 
     h2 {
-      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      font-size: clamp(1.4rem, 3vw, 2rem);
       letter-spacing: -0.02em;
       text-transform: uppercase;
     }
 
-    /* Interactive Gesture Stage */
+    /* AI Portfolio Bot */
+    .ai-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .ai-prompts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .chip-btn {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .ai-log {
+      background: #0b1014;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      max-height: 260px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .msg {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      max-width: 90%;
+    }
+
+    .msg-bot {
+      background: var(--bg-elevated);
+      border-left: 3px solid var(--accent);
+      align-self: flex-start;
+    }
+
+    .msg-user {
+      background: rgba(245, 158, 11, 0.14);
+      border-right: 3px solid var(--accent-warm);
+      align-self: flex-end;
+    }
+
+    .ai-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .ai-input {
+      flex: 1;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      outline: none;
+    }
+
+    .ai-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* Gesture 3D Stage */
     .gesture-shell {
       background: var(--bg-surface);
       border: 1px solid var(--border);
@@ -292,33 +396,12 @@
       color: var(--text-muted);
     }
 
-    .gesture-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip-btn {
-      background: var(--bg-elevated);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 7px 13px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .chip-btn:hover {
-      border-color: var(--accent);
-    }
-
     #gesture-canvas {
       width: 100%;
-      height: 300px;
+      height: 280px;
       display: block;
       border-radius: 12px;
-      background: radial-gradient(circle at 50% 45%, rgba(52, 211, 153, 0.13), rgba(245, 158, 11, 0.06) 45%, #070a0d 85%);
+      background: radial-gradient(circle at 50% 45%, rgba(52, 211, 153, 0.14), rgba(245, 158, 11, 0.06) 45%, #070a0d 85%);
       border: 1px solid var(--border);
       touch-action: none;
       cursor: grab;
@@ -328,7 +411,7 @@
       cursor: grabbing;
     }
 
-    /* Cards & Grids */
+    /* Cards & CV Request */
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -343,24 +426,24 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
     }
 
     .card-index {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       color: var(--accent-warm);
     }
 
     .card h3 {
-      font-size: 1.12rem;
-      margin-top: 4px;
+      font-size: 1.1rem;
+      margin-top: 3px;
     }
 
     .card p {
       color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.9rem;
     }
 
     .tags {
@@ -372,12 +455,10 @@
     .tag {
       font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
       text-transform: uppercase;
       padding: 5px 10px;
       border-radius: 8px;
       background: var(--bg-elevated);
-      color: var(--text-primary);
       border: 1px solid var(--border);
     }
 
@@ -387,46 +468,51 @@
       color: var(--accent);
     }
 
-    /* Workflow Steps */
+    .cv-preview {
+      background: #0b1014;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      white-space: pre-line;
+    }
+
+    .cv-status {
+      font-size: 0.82rem;
+      color: var(--accent);
+      min-height: 20px;
+    }
+
     .workflow-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
     }
 
     .step-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 15px;
+      padding: 14px;
     }
 
     .step-num {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 800;
       color: var(--accent-warm);
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
     }
 
     .step-title {
       font-weight: 800;
-      font-size: 0.92rem;
-      margin-bottom: 4px;
+      font-size: 0.9rem;
       text-transform: uppercase;
+      margin: 3px 0;
     }
 
     .step-desc {
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-    }
-
-    /* Code & Contact */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      align-items: start;
     }
 
     pre {
@@ -449,8 +535,7 @@
 
     @media (max-width: 900px) {
       .hero,
-      .grid-2,
-      .contact-grid {
+      .grid-2 {
         grid-template-columns: 1fr;
       }
 
@@ -476,23 +561,24 @@
   </style>
 </head>
 <body>
+  <div id="transition-bar"></div>
+
   <header>
     <div class="container nav-inner">
-      <a href="#top" class="brand">MUHAMMAD <span>SHAKEEB</span></a>
+      <a href="#top" class="brand" data-rt>MUHAMMAD <span>SHAKEEB</span></a>
       <nav>
-        <a href="#interactive">Interactive</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#workflow">Workflow</a>
-        <a href="#contact">Contact</a>
+        <a href="#ai-bot" data-rt>AI Bot</a>
+        <a href="#interactive" data-rt>3D Sphere</a>
+        <a href="#projects" data-rt>Projects</a>
+        <a href="#cv-section" data-rt>CV</a>
+        <a href="#contact" data-rt>Contact</a>
       </nav>
       <span class="badge-pill">Open to Internships</span>
     </div>
   </header>
 
   <main id="top">
-    <!-- Hero -->
-    <div class="container hero">
+    <div class="container hero rt-panel">
       <div>
         <div class="eyebrow">Full Stack &amp; QA · Sri Lanka</div>
         <h1>Building Interactive &amp; Reliable Web Apps</h1>
@@ -503,9 +589,9 @@
         </p>
 
         <div class="btn-row">
-          <a href="#projects" class="btn btn-primary">View Projects</a>
-          <a href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">LinkedIn Profile</a>
-          <a href="https://mskb2005.github.io/my-portfolio/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Current Portfolio</a>
+          <a href="#ai-bot" data-rt class="btn btn-primary">Ask AI Bot</a>
+          <a href="#cv-section" data-rt class="btn btn-secondary">Request / Copy CV</a>
+          <a href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">LinkedIn</a>
         </div>
 
         <div class="stats-strip">
@@ -536,33 +622,71 @@
       </aside>
     </div>
 
-    <!-- Gesture-Interactive 3D Particle Showcase -->
-    <section id="interactive">
+    <!-- AI Portfolio Assistant Bot -->
+    <section id="ai-bot" class="rt-panel">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Interactive Assistant</div>
+            <h2>Portfolio AI Bot</h2>
+          </div>
+          <span class="badge-pill">Instant Q&amp;A</span>
+        </div>
+
+        <div class="ai-box">
+          <div class="ai-prompts">
+            <button type="button" class="chip-btn" data-q="What is your education background?">Education</button>
+            <button type="button" class="chip-btn" data-q="What internships are you looking for and where?">Internships</button>
+            <button type="button" class="chip-btn" data-q="Tell me about your projects">Projects</button>
+            <button type="button" class="chip-btn" data-q="How can I get your CV?">CV Info</button>
+          </div>
+
+          <div id="ai-log" class="ai-log" aria-live="polite">
+            <div class="msg msg-bot">
+              Hi! Ask me about Muhammad Shakeeb's studies at Open University of Sri Lanka, CASED Institute (2026), projects, internship availability, or CV.
+            </div>
+          </div>
+
+          <form id="ai-form" class="ai-form">
+            <input
+              id="ai-input"
+              class="ai-input"
+              type="text"
+              placeholder="Ask about education, QA/Full Stack, location, or CV..."
+              autocomplete="off"
+            />
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gesture 3D Sphere -->
+    <section id="interactive" class="rt-panel">
       <div class="container">
         <div class="section-head">
           <div>
             <div class="section-kicker">Interactive Showcase</div>
             <h2>Gesture 3D Particle Sphere</h2>
           </div>
-          <span class="badge-pill">Drag to Rotate · Tap / Pinch to Scale</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="chip-btn" id="btn-scatter">Scatter Pulse</button>
+            <button type="button" class="chip-btn" id="btn-reset">Reset View</button>
+          </div>
         </div>
 
         <div class="gesture-shell">
           <div class="gesture-top">
             <p class="gesture-hints">
-              Swipe or drag to orbit the 3D point cloud, tap or pinch to zoom/scatter, and tilt your phone for subtle parallax.
+              Drag/swipe to rotate, tap/pinch to scale or scatter, or tilt your phone.
             </p>
-            <div class="gesture-controls">
-              <button type="button" class="chip-btn" id="btn-scatter">Scatter Pulse</button>
-              <button type="button" class="chip-btn" id="btn-reset">Reset View</button>
-            </div>
           </div>
           <canvas id="gesture-canvas" aria-label="Interactive 3D particle sphere"></canvas>
         </div>
       </div>
     </section>
     <!-- Projects -->
-    <section id="projects">
+    <section id="projects" class="rt-panel">
       <div class="container">
         <div class="section-head">
           <div>
@@ -615,112 +739,95 @@
       </div>
     </section>
 
-    <!-- Education & Skills -->
-    <section id="education">
+    <!-- CV Request & Summary -->
+    <section id="cv-section" class="rt-panel">
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="section-kicker">Background</div>
-            <h2>Education &amp; Focus</h2>
+            <div class="section-kicker">Curriculum Vitae</div>
+            <h2>CV Summary &amp; Request</h2>
           </div>
+          <span class="badge-pill">Full Stack &amp; QA</span>
         </div>
 
         <div class="grid-2">
-          <article class="card">
+          <div class="card">
             <div>
-              <div class="card-index">ACADEMIC JOURNEY</div>
-              <h3>Open University of Sri Lanka &amp; CASED Institute</h3>
-              <p>
-                Undergraduate studying Computer Science as a major alongside Chemistry and Physics (with a
-                recorded first-year Computer Science GPA). Completed a Diploma in IT and AI at CASED Institute
-                in 2026, following secondary schooling at Annoor National School, Valaichenai.
-              </p>
+              <div class="card-index">QUICK CV SNAPSHOT</div>
+              <h3>Muhammad Shakeeb — CV Details</h3>
+              <div id="cv-text" class="cv-preview">Name: Muhammad Shakeeb
+Education: BSc CS Major (with Chemistry &amp; Physics), Open University of Sri Lanka (1st Year CS GPA); Diploma in IT &amp; AI (CASED Institute, 2026); Annoor National School, Valaichenai
+Target Roles: Full Stack Developer Intern, QA Intern
+Availability: Remote or Hybrid (Batticaloa / Colombo)
+Featured Work: 3D Orthographic Globe &amp; All 197 Capitals
+Portfolio: https://mskb2005.github.io/my-portfolio/
+LinkedIn: https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b</div>
             </div>
-          </article>
+            <div class="btn-row" style="margin-bottom:0;">
+              <button type="button" id="btn-copy-cv" class="btn btn-primary">Copy CV Summary</button>
+              <a href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Request Full CV via LinkedIn</a>
+            </div>
+            <div id="cv-status" class="cv-status"></div>
+          </div>
 
-          <article class="card">
+          <div class="card">
             <div>
-              <div class="card-index">CORE AREAS</div>
-              <h3>Full Stack &amp; QA Readiness</h3>
-              <p>
-                Focused on clean front-end structure, testing edge cases and responsiveness, and shipping
-                practical features step by step.
-              </p>
+              <div class="card-index">HOW I WORK</div>
+              <h3>5-Step Workflow</h3>
+              <div class="workflow-grid" style="margin-top:10px;">
+                <div class="step-card">
+                  <div class="step-num">01</div>
+                  <div class="step-title">Discover</div>
+                  <p class="step-desc">Clarify goals &amp; scope.</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-num">02</div>
+                  <div class="step-title">Plan</div>
+                  <p class="step-desc">Map structure &amp; tests.</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-num">03</div>
+                  <div class="step-title">Build</div>
+                  <p class="step-desc">Code clean UI &amp; logic.</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-num">04</div>
+                  <div class="step-title">Test</div>
+                  <p class="step-desc">Check mobile &amp; bugs.</p>
+                </div>
+                <div class="step-card">
+                  <div class="step-num">05</div>
+                  <div class="step-title">Ship</div>
+                  <p class="step-desc">Publish &amp; refine.</p>
+                </div>
+              </div>
             </div>
-            <div class="tags">
-              <span class="tag">HTML5</span>
-              <span class="tag">CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">QA &amp; Testing</span>
-              <span class="tag">Git / GitHub</span>
-              <span class="tag">AI &amp; IT</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- How I Work -->
-    <section id="workflow">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Process</div>
-            <h2>How I Work</h2>
-          </div>
-        </div>
-
-        <div class="workflow-grid">
-          <div class="step-card">
-            <div class="step-num">01</div>
-            <div class="step-title">Discover</div>
-            <p class="step-desc">Clarify the goal, requirements, and user flow before writing code.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">02</div>
-            <div class="step-title">Plan</div>
-            <p class="step-desc">Break features into small, testable parts and edge cases.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">03</div>
-            <div class="step-title">Build</div>
-            <p class="step-desc">Write clean, responsive HTML, CSS, and JavaScript.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">04</div>
-            <div class="step-title">Test</div>
-            <p class="step-desc">Check layout, interactions, and behavior across screen sizes.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">05</div>
-            <div class="step-title">Ship</div>
-            <p class="step-desc">Publish cleanly and iterate based on real feedback.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact & Code Block -->
-    <section id="contact">
+    <!-- Contact & Code -->
+    <section id="contact" class="rt-panel">
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="section-kicker">Get In Touch</div>
+            <div class="section-kicker">Connect</div>
             <h2>Internship Availability</h2>
           </div>
         </div>
 
-        <div class="contact-grid">
+        <div class="grid-2">
           <div class="card">
             <div>
               <div class="card-index">REMOTE · BATTICALOA · COLOMBO</div>
               <h3>Open to Full Stack &amp; QA Internships</h3>
               <p>
-                Eager to contribute to real engineering and QA workflows while learning from experienced teams.
-                Available remotely or hybrid in Batticaloa or Colombo.
+                Ready for hands-on learning and real team tasks in Full Stack Development or Quality Assurance,
+                remotely or hybrid in Batticaloa or Colombo.
               </p>
             </div>
-            <div class="btn-row" style="margin-bottom: 0;">
+            <div class="btn-row" style="margin-bottom:0;">
               <a href="https://www.linkedin.com/in/muhammad-shakeeb-41a12b44b" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Connect on LinkedIn</a>
             </div>
           </div>
@@ -747,7 +854,116 @@
     </div>
   </footer>
   <script>
-    (function initGestureSphere() {
+    (function initPortfolioFeatures() {
+      // 1. Real-time scroll & jump transitions
+      const bar = document.getElementById("transition-bar");
+      const panels = document.querySelectorAll(".rt-panel");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      panels.forEach((p) => observer.observe(p));
+
+      function pulseTransitionBar() {
+        if (!bar) return;
+        bar.style.opacity = "1";
+        bar.style.width = "75%";
+        setTimeout(() => {
+          bar.style.width = "100%";
+          setTimeout(() => {
+            bar.style.opacity = "0";
+            bar.style.width = "0%";
+          }, 260);
+        }, 180);
+      }
+
+      document.querySelectorAll("[data-rt]").forEach((link) => {
+        link.addEventListener("click", () => {
+          pulseTransitionBar();
+        });
+      });
+
+      // 2. AI Portfolio Bot
+      const aiForm = document.getElementById("ai-form");
+      const aiInput = document.getElementById("ai-input");
+      const aiLog = document.getElementById("ai-log");
+
+      function addMsg(text, sender) {
+        if (!aiLog) return;
+        const div = document.createElement("div");
+        div.className = "msg " + (sender === "user" ? "msg-user" : "msg-bot");
+        div.textContent = text;
+        aiLog.appendChild(div);
+        aiLog.scrollTop = aiLog.scrollHeight;
+      }
+
+      function replyBot(q) {
+        const text = q.toLowerCase();
+        if (text.includes("edu") || text.includes("ousl") || text.includes("cased") || text.includes("school") || text.includes("gpa")) {
+          return "Muhammad Shakeeb is studying Computer Science as a major alongside Chemistry and Physics at the Open University of Sri Lanka (1st year CS GPA), completed a Diploma in IT & AI at CASED Institute in 2026, and studied at Annoor National School, Valaichenai.";
+        }
+        if (text.includes("intern") || text.includes("qa") || text.includes("full stack") || text.includes("remote") || text.includes("colombo") || text.includes("batticaloa")) {
+          return "He is seeking Full Stack Developer and QA internships, available remotely or hybrid in Batticaloa or Colombo.";
+        }
+        if (text.includes("project") || text.includes("globe") || text.includes("capital")) {
+          return "His featured project is the interactive 3D Orthographic Globe with smooth easing and all 197 world capitals, alongside his personal portfolio.";
+        }
+        if (text.includes("cv") || text.includes("resume") || text.includes("contact") || text.includes("linkedin")) {
+          return "You can copy the CV summary in the CV section or reach out via LinkedIn (linkedin.com/in/muhammad-shakeeb-41a12b44b) to request his full CV.";
+        }
+        return "I can answer questions about Shakeeb's OUSL & CASED education, Full Stack / QA internship availability (Remote, Batticaloa, Colombo), projects, or CV.";
+      }
+
+      if (aiForm && aiInput) {
+        aiForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const val = aiInput.value.trim();
+          if (!val) return;
+          addMsg(val, "user");
+          aiInput.value = "";
+          setTimeout(() => {
+            pulseTransitionBar();
+            addMsg(replyBot(val), "bot");
+          }, 180);
+        });
+      }
+
+      document.querySelectorAll("[data-q]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const q = btn.getAttribute("data-q") || "";
+          addMsg(q, "user");
+          setTimeout(() => {
+            pulseTransitionBar();
+            addMsg(replyBot(q), "bot");
+          }, 180);
+        });
+      });
+
+      // 3. CV Copy Button
+      const copyCvBtn = document.getElementById("btn-copy-cv");
+      const cvTextEl = document.getElementById("cv-text");
+      const cvStatus = document.getElementById("cv-status");
+
+      if (copyCvBtn && cvTextEl && cvStatus) {
+        copyCvBtn.addEventListener("click", async () => {
+          const summary = cvTextEl.textContent || "";
+          try {
+            await navigator.clipboard.writeText(summary);
+            cvStatus.textContent = "CV summary copied to clipboard.";
+          } catch {
+            cvStatus.textContent = "Select the box text to copy, or connect on LinkedIn for the full CV.";
+          }
+        });
+      }
+      // 4. Gesture 3D Particle Sphere
       const canvas = document.getElementById("gesture-canvas");
       if (!canvas) return;
       const ctx = canvas.getContext("2d");
@@ -770,7 +986,7 @@
       let tiltY = 0;
 
       const points = [];
-      const count = 220;
+      const count = 200;
       const goldenAngle = Math.PI * (3 - Math.sqrt(5));
 
       for (let i = 0; i < count; i++) {
@@ -789,7 +1005,7 @@
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         const rect = canvas.getBoundingClientRect();
         width = Math.max(240, rect.width);
-        height = Math.max(220, rect.height);
+        height = Math.max(200, rect.height);
         canvas.width = Math.floor(width * dpr);
         canvas.height = Math.floor(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -809,8 +1025,8 @@
         targetScatter *= 0.92;
 
         const baseRadius = Math.min(width, height) * 0.34 * scale;
-        const cx = width * 0.5 + tiltX * 18;
-        const cy = height * 0.5 + tiltY * 18;
+        const cx = width * 0.5 + tiltX * 16;
+        const cy = height * 0.5 + tiltY * 16;
 
         const cosY = Math.cos(rotY);
         const sinY = Math.sin(rotY);
@@ -855,7 +1071,7 @@
 
         requestAnimationFrame(render);
       }
-      // Pointer drag & tap interaction
+
       let dragging = false;
       let prevX = 0;
       let prevY = 0;
@@ -921,18 +1137,22 @@
         }, { passive: true });
       }
 
-      scatterBtn.addEventListener("click", () => {
-        targetScatter = 1;
-      });
+      if (scatterBtn) {
+        scatterBtn.addEventListener("click", () => {
+          targetScatter = 1;
+        });
+      }
 
-      resetBtn.addEventListener("click", () => {
-        rotX = 0.25;
-        rotY = 0;
-        velX = 0.002;
-        velY = 0.004;
-        targetScale = 1;
-        targetScatter = 0;
-      });
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          rotX = 0.25;
+          rotY = 0;
+          velX = 0.002;
+          velY = 0.004;
+          targetScale = 1;
+          targetScatter = 0;
+        });
+      }
 
       resize();
       window.addEventListener("resize", resize);
