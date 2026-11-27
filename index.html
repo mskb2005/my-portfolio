@@ -44,13 +44,13 @@
       margin: 0 auto;
     }
 
-    /* Top Nav */
+    /* Compact Top Nav */
     header {
       position: sticky;
       top: 0;
       z-index: 20;
       backdrop-filter: blur(12px);
-      background: rgba(9, 13, 16, 0.82);
+      background: rgba(9, 13, 16, 0.9);
       border-bottom: 1px solid var(--border);
     }
 
@@ -58,15 +58,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 0;
-      gap: 16px;
+      padding: 12px 0;
+      gap: 10px;
     }
 
     .brand {
       font-weight: 800;
-      letter-spacing: 0.08em;
-      font-size: 0.92rem;
+      letter-spacing: 0.06em;
+      font-size: 0.86rem;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .brand span {
@@ -75,10 +76,21 @@
 
     nav {
       display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      font-size: 0.85rem;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.82rem;
       color: var(--text-muted);
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 2px 0;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav a {
+      white-space: nowrap;
     }
 
     nav a:hover {
@@ -86,66 +98,66 @@
     }
 
     .badge-pill {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      padding: 7px 12px;
+      padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(52, 211, 153, 0.35);
       background: rgba(52, 211, 153, 0.1);
       color: var(--accent);
       white-space: nowrap;
+      flex-shrink: 0;
     }
-
     /* Hero */
     .hero {
-      padding: 64px 0 48px;
+      padding: 40px 0 36px;
       display: grid;
       grid-template-columns: 1.35fr 0.65fr;
-      gap: 32px;
+      gap: 28px;
       align-items: center;
     }
 
     .eyebrow {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent-warm);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     h1 {
-      font-size: clamp(2.2rem, 5.5vw, 4rem);
-      line-height: 1.04;
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      line-height: 1.05;
       letter-spacing: -0.03em;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hero-lead {
       color: var(--text-muted);
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       max-width: 58ch;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .btn-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 28px;
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 20px;
+      padding: 11px 18px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       border: 1px solid var(--border);
       transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
     }
@@ -168,27 +180,27 @@
     .stats-strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     .stat-box {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 14px;
+      padding: 12px;
     }
 
     .stat-num {
       font-weight: 800;
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--text-primary);
     }
 
     .stat-label {
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }
 
     /* Profile Card */
@@ -196,7 +208,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 16px;
+      padding: 14px;
     }
 
     .profile-photo-wrap {
@@ -206,13 +218,14 @@
       overflow: hidden;
       background: var(--bg-elevated);
       border: 1px solid var(--border);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .profile-photo-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: top center;
       display: block;
     }
 
@@ -222,14 +235,16 @@
     }
 
     .profile-meta-sub {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
       margin-top: 2px;
     }
+
     /* Sections */
     section {
-      padding: 56px 0;
+      padding: 48px 0;
       border-top: 1px solid var(--border);
+      scroll-margin-top: 64px;
     }
 
     .section-head {
@@ -237,12 +252,12 @@
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     .section-kicker {
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -250,7 +265,7 @@
     }
 
     h2 {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
       letter-spacing: -0.02em;
       text-transform: uppercase;
     }
@@ -260,7 +275,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 18px;
+      padding: 16px;
     }
 
     .gesture-top {
@@ -269,7 +284,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .gesture-hints {
@@ -288,7 +303,7 @@
       color: var(--text-primary);
       border: 1px solid var(--border);
       border-radius: 999px;
-      padding: 6px 12px;
+      padding: 7px 13px;
       font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
@@ -300,10 +315,10 @@
 
     #gesture-canvas {
       width: 100%;
-      height: 320px;
+      height: 300px;
       display: block;
       border-radius: 12px;
-      background: radial-gradient(circle at 50% 45%, rgba(52, 211, 153, 0.12), rgba(245, 158, 11, 0.06) 45%, #070a0d 85%);
+      background: radial-gradient(circle at 50% 45%, rgba(52, 211, 153, 0.13), rgba(245, 158, 11, 0.06) 45%, #070a0d 85%);
       border: 1px solid var(--border);
       touch-action: none;
       cursor: grab;
@@ -317,14 +332,14 @@
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 16px;
     }
 
     .card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 22px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -332,20 +347,20 @@
     }
 
     .card-index {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       color: var(--accent-warm);
     }
 
     .card h3 {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       margin-top: 4px;
     }
 
     .card p {
       color: var(--text-muted);
-      font-size: 0.94rem;
+      font-size: 0.92rem;
     }
 
     .tags {
@@ -355,7 +370,7 @@
     }
 
     .tag {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
@@ -383,26 +398,26 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 16px;
+      padding: 15px;
     }
 
     .step-num {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       color: var(--accent-warm);
       letter-spacing: 0.1em;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .step-title {
       font-weight: 800;
-      font-size: 0.95rem;
-      margin-bottom: 6px;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
       text-transform: uppercase;
     }
 
     .step-desc {
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       color: var(--text-muted);
     }
 
@@ -410,7 +425,7 @@
     .contact-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 20px;
+      gap: 18px;
       align-items: start;
     }
 
@@ -418,17 +433,18 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
-      overflow-x: auto;
-      font-size: 0.85rem;
+      padding: 18px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 0.82rem;
       color: #d7e7e2;
     }
 
     footer {
-      padding: 28px 0 40px;
+      padding: 24px 0 36px;
       border-top: 1px solid var(--border);
       color: var(--text-muted);
-      font-size: 0.86rem;
+      font-size: 0.84rem;
     }
 
     @media (max-width: 900px) {
@@ -443,8 +459,16 @@
       }
     }
 
-    @media (max-width: 560px) {
-      .stats-strip,
+    @media (max-width: 640px) {
+      nav {
+        display: none;
+      }
+
+      .stats-strip {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
       .workflow-grid {
         grid-template-columns: 1fr;
       }
@@ -487,11 +511,11 @@
         <div class="stats-strip">
           <div class="stat-box">
             <div class="stat-num">CS Major</div>
-            <div class="stat-label">Open University · 1st Yr GPA</div>
+            <div class="stat-label">OUSL · 1st Yr GPA</div>
           </div>
           <div class="stat-box">
             <div class="stat-num">2026</div>
-            <div class="stat-label">CASED IT &amp; AI Diploma</div>
+            <div class="stat-label">CASED IT &amp; AI</div>
           </div>
           <div class="stat-box">
             <div class="stat-num">Remote / Hybrid</div>
@@ -502,8 +526,10 @@
 
       <aside class="profile-card">
         <div class="profile-photo-wrap">
-          <!-- Replace profile.jpg with your actual existing image filename or URL -->
-          <img src="profile.jpg" alt="Muhammad Shakeeb profile photo" />
+          <img
+            src="https://raw.githubusercontent.com/mskb2005/my-portfolio/main/IMG-20261120-WA0055.jpg"
+            alt="Muhammad Shakeeb profile photo"
+          />
         </div>
         <div class="profile-meta-title">Muhammad Shakeeb</div>
         <div class="profile-meta-sub">Annoor National School, Valaichenai · OUSL CS Student</div>
@@ -703,7 +729,11 @@
   role: ["Full Stack Intern", "QA Intern"],
   focus: ["HTML", "CSS", "JavaScript", "QA"],
   education: "OUSL (CS, Chem, Physics) + CASED 2026",
-  availability: ["Remote", "Batticaloa", "Colombo"],
+  availability: [
+    "Remote",
+    "Batticaloa",
+    "Colombo"
+  ],
   readyToLearn: true
 };</code></pre>
         </div>
